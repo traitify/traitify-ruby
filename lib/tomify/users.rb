@@ -12,13 +12,16 @@ module Tomify
     end
 
     def self.parse_json(user)
+      created_at = user["created_at"] ? Time.at(user["created_at"]).to_datetime : nil
+      updated_at = user["updated_at"] ? Time.at(user["updated_at"]).to_datetime : nil
+
       User.new(
         id:         user["id"],
         first_name: user["first_name"],
         last_name:  user["last_name"],
         email:      user["email"],
-        created_at: user["created_at"],
-        updated_at: user["updated_at"],
+        created_at: created_at,
+        updated_at: updated_at
       )
     end
 

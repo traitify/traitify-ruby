@@ -21,7 +21,7 @@ First it is helpful to configure Tomify, otherwise everytime you create a Tomify
 All the configuration options can be found in `lib/tomify/configuration.rb`
 
     Tomify.configure do |tom|
-      tom.api_host = "localhost:3000"
+      tom.api_host = "example.com"
       tom.api_version = "v1"
     end
 
@@ -32,7 +32,7 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
 #### Without config file:
 
-    tom = Tomify.new(api_host: "localhost:3000", api_version: "v1")
+    tom = Tomify.new(api_host: "example.com", api_version: "v1")
     tom.create_assessment
 
 ### Users

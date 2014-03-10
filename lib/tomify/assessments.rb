@@ -12,13 +12,15 @@ module Tomify
 
     def self.parse_json(assessment)
       slides = assessment["slides"].collect { |s| Slide.parse_json(s) }
+      created_at = assessment["created_at"] ? Time.at(assessment["created_at"]).to_datetime : nil
+      updated_at = assessment["updated_at"] ? Time.at(assessment["updated_at"]).to_datetime : nil
 
       Assessment.new(
         id:         assessment["id"],
         user_id:    assessment["user_id"],
         slides:     slides,
-        created_at: assessment["created_at"],
-        updated_at: assessment["updated_at"]
+        created_at: created_at,
+        updated_at: updated_at
       )
     end
 
