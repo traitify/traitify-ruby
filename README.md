@@ -21,6 +21,7 @@ First it is helpful to configure Tomify, otherwise everytime you create a Tomify
 All the configuration options can be found in `lib/tomify/configuration.rb`
 
     Tomify.configure do |tom|
+      tom.secret = "secret"
       tom.api_host = "example.com"
       tom.api_version = "v1"
       tom.deck_id = "deck-uuid"
@@ -33,7 +34,7 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
 #### Without config file:
 
-    tom = Tomify.new(api_host: "example.com", api_version: "v1", deck_id: "deck-uuid")
+    tom = Tomify.new(api_host: "example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
     tom.create_assessment
 
 ### Users

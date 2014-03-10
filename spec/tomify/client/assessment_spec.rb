@@ -3,6 +3,7 @@ require "spec_helper"
 describe Tomify::Client do
   before do
     Tomify.configure do |tom|
+      tom.secret = "secret"
       tom.api_host = "example.com"
       tom.api_version = "v1"
       tom.deck_id = "deck-uuid"
