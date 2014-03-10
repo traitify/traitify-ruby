@@ -3,7 +3,8 @@ module Tomify
     VALID_OPTIONS_KEYS = [
       :secret,
       :api_host,
-      :api_version
+      :api_version,
+      :deck_id
     ]
 
     attr_accessor(*VALID_OPTIONS_KEYS)

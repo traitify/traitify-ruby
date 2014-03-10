@@ -5,6 +5,7 @@ describe Tomify::Client do
     Tomify.configure do |tom|
       tom.api_host = "example.com"
       tom.api_version = "v1"
+      tom.deck_id = "deck-uuid"
     end
   end
 
@@ -15,7 +16,7 @@ describe Tomify::Client do
       let(:assessment) { tom.create_assessment }
 
       before(:each) do
-        stub_it(:put, "/assessments", "assessment")
+        stub_it(:put, "/assessments?deck_id=deck-uuid", "assessment")
       end
 
       it "returns an assessment" do
@@ -24,14 +25,26 @@ describe Tomify::Client do
     end
 
     context "with a user" do
-      let(:assessment) { tom.create_assessment("toms-uuid") }
+      let(:assessment) { tom.create_assessment(user_id: "toms-uuid") }
 
       before(:each) do
-        stub_it(:put, "/assessments?user_id=toms-uuid", "assessment")
+        stub_it(:put, "/assessments?deck_id=deck-uuid&user_id=toms-uuid", "assessment")
       end
 
       it "returns an assessment" do
         expect(assessment.user_id).to eq("toms-uuid")
+      end
+    end
+
+    context "with a deck" do
+      let(:assessment) { tom.create_assessment(deck_id: "other-deck-uuid") }
+
+      before(:each) do
+        stub_it(:put, "/assessments?deck_id=other-deck-uuid", "assessment")
+      end
+
+      it "returns an assessment" do
+        expect(assessment.slides.first.order).to eq(1)
       end
     end
   end

@@ -1,12 +1,11 @@
 module Tomify
   class Client
     module Assessment
-      def create_assessment(user_id = nil)
-        if user_id
-          response = put("/assessments", user_id: user_id)
-        else
-          response = put("/assessments")
-        end
+      def create_assessment(options = {})
+        assessment_params = { deck_id: self.deck_id }
+        assessment_params.merge!(deck_id: options[:deck_id]) if options[:deck_id]
+        assessment_params.merge!(user_id: options[:user_id]) if options[:user_id]
+        response = put("/assessments", assessment_params)
 
         Tomify::Assessment.parse_json(response)
       end

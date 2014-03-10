@@ -23,6 +23,7 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
     Tomify.configure do |tom|
       tom.api_host = "example.com"
       tom.api_version = "v1"
+      tom.deck_id = "deck-uuid"
     end
 
 #### With config file:
@@ -32,7 +33,7 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
 #### Without config file:
 
-    tom = Tomify.new(api_host: "example.com", api_version: "v1")
+    tom = Tomify.new(api_host: "example.com", api_version: "v1", deck_id: "deck-uuid")
     tom.create_assessment
 
 ### Users
@@ -68,7 +69,11 @@ Returns a user object as seen above
 
 You can also pass a user id to tie it to a user
 
-    assessment = tom.create_assessment("toms-uuid")
+    assessment = tom.create_assessment(user_id: "toms-uuid")
+
+You must can specify the deck in your configuration or override it here
+
+    assessment = tom.create_assessment(deck_id: "deck-uuid")
 
 Returns an assessment object:
 
