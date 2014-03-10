@@ -10,7 +10,7 @@ RSpec.configure do |config|
 end
 
 def stub_it(http_method = :any, endpoint = "/", status = 200, response)
-  url = "https://example.com#{endpoint}"
+  url = "https://example.com/v1#{endpoint}"
   stub_request(http_method, url).to_return(
     status: status,
     body: File.read(File.expand_path("../support/mocks/#{response}.json", __FILE__)),

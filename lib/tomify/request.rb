@@ -21,12 +21,13 @@ module Tomify
     end
 
     private
-    def endpoint
-      "https://#{self.api_host}/#{self.api_version}"
+    def url
+      "https://#{self.api_host}/"
     end
 
     def request(method, path, options = {})
-      connection_options = {}.merge!(:url => endpoint)
+      path = "#{self.api_version}#{path}"
+      connection_options = {}.merge!(:url => url)
 
       response = connection(connection_options).send(method) do |request|
         case method
