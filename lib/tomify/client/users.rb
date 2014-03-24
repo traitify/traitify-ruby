@@ -2,7 +2,7 @@ module Tomify
   class Client
     module User
       def create_user(user_params)
-        response = put("/users", user: user_params)
+        response = post("/users", user: user_params)
 
         Tomify::User.parse_json(response)
       end

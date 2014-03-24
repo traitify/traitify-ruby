@@ -1,0 +1,54 @@
+[
+  {
+    "id": "dd0f359c-afbd-4be5-8f96-62d8c2d18ae9",
+    "position": 1,
+    "caption": "Swimming",
+    "image_desktop": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop",
+    "image_desktop_retina": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop_retina",
+    "image_phone_landscape": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_landscape",
+    "image_phone_portrait": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_portrait",
+    "response": true,
+    "time_taken": 1000,
+    "completed_at": 1394724020890,
+    "created_at": 1394719145536
+  },
+  {
+    "id": "8fa4e615-e849-4d99-86b7-918f2a2476d3",
+    "position": 2,
+    "caption": "Swimming",
+    "image_desktop": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop",
+    "image_desktop_retina": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop_retina",
+    "image_phone_landscape": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_landscape",
+    "image_phone_portrait": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_portrait",
+    "response": true,
+    "time_taken": 1000,
+    "completed_at": 1394724020890,
+    "created_at": 1394719145536
+  },
+  {
+    "id": "c4a886ea-8855-4fd6-83b9-a7e8fa8ab047",
+    "position": 3,
+    "caption": "Swimming",
+    "image_desktop": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop",
+    "image_desktop_retina": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop_retina",
+    "image_phone_landscape": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_landscape",
+    "image_phone_portrait": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_portrait",
+    "response": true,
+    "time_taken": 1000,
+    "completed_at": 1394724020890,
+    "created_at": 1394719145536
+  },
+  {
+    "id": "00cccad0-b22b-4515-bebe-cec8c16c3c41",
+    "position": 4,
+    "caption": "Swimming",
+    "image_desktop": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop",
+    "image_desktop_retina": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/desktop_retina",
+    "image_phone_landscape": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_landscape",
+    "image_phone_portrait": "https://traitify-api.s3.amazonaws.com/slides/781acd1f-8184-482d-a3d1-e6190d0b7db5/phone_portrait",
+    "response": true,
+    "time_taken": 1000,
+    "completed_at": 1394724020890,
+    "created_at": 1394719145536
+  }
+]

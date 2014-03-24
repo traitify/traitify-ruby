@@ -28,5 +28,6 @@ module Tomify
     include Tomify::Client::Assessment
     include Tomify::Client::User
     include Tomify::Client::Result
+    include Tomify::Client::Slide
   end
 end

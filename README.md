@@ -22,7 +22,7 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
     Tomify.configure do |tom|
       tom.secret = "secret"
-      tom.api_host = "example.com"
+      tom.api_host = "http://example.com"
       tom.api_version = "v1"
       tom.deck_id = "deck-uuid"
     end
@@ -34,7 +34,7 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
 #### Without config file:
 
-    tom = Tomify.new(api_host: "example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
+    tom = Tomify.new(api_host: "http://example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
     tom.create_assessment
 
 ### Users
@@ -53,8 +53,6 @@ Returns a user object:
     user.first_name     #=> "Tom"
     user.last_name      #=> "Prats"
     user.email          #=> "tom@tomprats.com"
-    user.created_at     #=> 2014-03-07 13:13:43 -0500
-    user.updated_at     #=> 2014-03-07 13:13:43 -0500
 
 #### Finding a user:
 
@@ -80,16 +78,12 @@ Returns an assessment object:
 
     assessment.id             #=> "assessment-uuid"
     assessment.user_id        #=> "toms-uuid"
-    assessment.created_at     #=> 2014-03-07 13:13:43 -0500
-    assessment.updated_at     #=> 2014-03-07 13:13:43 -0500
 
 Which also has many slide objects in an array
 
     slide = assessment.slides.first
     slide.id             #=> "slide-uuid"
-    slide.image_url      #=> "http://example.com/slide1.jpg"
     slide.response       #=> nil
-    slide.order          #=> 1
     slide.time_taken     #=> nil
 
 #### Finding an assessment:

@@ -21,24 +21,21 @@ module Tomify
     end
 
     private
-    def url
-      "https://#{self.api_host}/"
-    end
-
     def request(method, path, options = {})
       path = "#{self.api_version}#{path}"
-      connection_options = {}.merge!(:url => url)
+      connection_options = {}.merge!(url: self.api_host)
 
       response = connection(connection_options).send(method) do |request|
+        request.body = options.to_json
         case method
         when :get
-          request.url(path, options)
+          request.url(path)
         when :post
-          request.url(path, options)
+          request.url(path)
         when :put
-          request.url(path, options)
+          request.url(path)
         when :delete
-          request.url(path, options)
+          request.url(path)
         end
       end
 

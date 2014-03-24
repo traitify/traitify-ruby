@@ -4,7 +4,7 @@ describe Tomify::Client do
   before do
     Tomify.configure do |tom|
       tom.secret = "secret"
-      tom.api_host = "example.com"
+      tom.api_host = "https://example.com"
       tom.api_version = "v1"
     end
   end
@@ -19,11 +19,7 @@ describe Tomify::Client do
     )}
 
     before(:each) do
-      stub_it(
-        :put,
-       "/users?user%5Bemail%5D=tom@tomprats.com&user%5Bfirst_name%5D=Tom&user%5Blast_name%5D=Prats",
-       "user"
-      )
+      stub_it(:post, "/users", "user")
     end
 
     it "returns a user" do
