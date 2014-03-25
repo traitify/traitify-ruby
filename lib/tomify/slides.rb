@@ -50,6 +50,14 @@ module Tomify
         created_at:            created_at
       }
     end
+
+    def to_update_params
+      {
+        id:                    id,
+        response:              response,
+        time_taken:            time_taken
+      }
+    end
   end
 
   class Slides
@@ -74,7 +82,11 @@ module Tomify
       }
     end
 
-    # Allows slides to forward all the Array methods to all
+    def to_update_params
+      all.collect { |slide| slide.to_update_params }
+    end
+
+    # Allows slides to forward Array methods to all
     def method_missing(method, *args)
       return all.send(method, *args) if all.respond_to?(method)
       super

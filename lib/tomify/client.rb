@@ -2,6 +2,8 @@
 require "tomify/connection"
 require "tomify/request"
 require "tomify/assessments"
+require "tomify/badges"
+require "tomify/personality_blends"
 require "tomify/personality_types"
 require "tomify/results"
 require "tomify/slides"

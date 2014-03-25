@@ -12,7 +12,7 @@ module Tomify
                  when 422 then Tomify::UnprocessableEntity
                  end
 
-      klass.new(response)
+        klass.new(response)
       end
     end
 
@@ -30,7 +30,9 @@ module Tomify
       message =  "#{response.env[:method].upcase} "
       message << "#{response.env[:url].to_s} | "
       message << "#{response.status}: "
-      message << "#{response.body.map{|k,v| "#{k}: #{v.first}"}.join(", ")}"
+      if response.body && response.body.respond_to?(map)
+        message << "#{response.body.map{|k,v| "#{k}: #{v.first}"}.join(", ")}"
+      end
       message
     end
   end

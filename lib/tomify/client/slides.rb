@@ -8,7 +8,7 @@ module Tomify
       end
 
       def update_slides(slides)
-        response = put("/assessments/#{slides.assessment_id}/slides", slides: slides.to_hash)
+        response = put("/assessments/#{slides.assessment_id}/slides", slides.to_update_params)
 
         Tomify::Slides.parse_json(slides.assessment_id, response)
       end
@@ -17,10 +17,7 @@ module Tomify
         if slide
           assessment_id = hash_or_assessment_id
           slide_id = slide.id
-          hash = {
-            response:   slide.response,
-            time_taken: slide.time_taken
-          }
+          hash = slide.to_update_params.tap { |s| s.delete(:id) }
         else
           assessment_id = hash_or_assessment_id[:assessment_id]
           slide_id =      hash_or_assessment_id[:slide_id]

@@ -49,10 +49,10 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
 Returns a user object:
 
-    user.id             #=> "toms-uuid"
-    user.first_name     #=> "Tom"
-    user.last_name      #=> "Prats"
-    user.email          #=> "tom@tomprats.com"
+    user.id         #=> "toms-uuid"
+    user.first_name #=> "Tom"
+    user.last_name  #=> "Prats"
+    user.email      #=> "tom@tomprats.com"
 
 #### Finding a user:
 
@@ -76,15 +76,11 @@ You must can specify the deck in your configuration or override it here
 
 Returns an assessment object:
 
-    assessment.id             #=> "assessment-uuid"
-    assessment.user_id        #=> "toms-uuid"
-
-Which also has many slide objects in an array
-
-    slide = assessment.slides.first
-    slide.id             #=> "slide-uuid"
-    slide.response       #=> nil
-    slide.time_taken     #=> nil
+    assessment.id           #=> "assessment-uuid"
+    assessment.deck_id      #=> "deck-uuid"
+    assessment.user_id      #=> "toms-uuid"
+    assessment.created_at   #=> 46197-10-17 12:29:08 -0400
+    assessment.completed_at #=> nil
 
 #### Finding an assessment:
 
@@ -94,23 +90,36 @@ Returns an assessment object as seen above
 
 #### Taking an assessment:
 
-An assessment can be taken through our javascript plugin or by iterating through an assessment's slides
+An assessment can be taken through our javascript plugin or by getting the slides and iterating through them
 
-    assessment.slides.each do |slide|
-      # 1 for me, 0 for not me
-      slide.response = 0
+#### Finding an assessment's slides:
+
+    slides = tom.find_slides("assessment_id")
+
+Returns a slides object which has the assessment id but also functions as an array
+
+    slides.assessment_id #=> "assessment-uuid"
+    slides.first         #=> Slide object
+    slides.all           #=> Array of slide objects
+
+#### Updating an assessment's slides:
+
+    slides.all.map! do |slide|
+      # true for me, false for not me
+      slide.response = true
       # Pass in the time it took to make that choice (milliseconds)
       slide.time_taken = 600
+      slide
     end
 
-    tom.update_slides(assessment)
+    tom.update_slides(slides)
 
-A single slide can be updated like so
+#### Updating a single assessment slide:
 
     slide = assessment.slides.first
-    slide.response = 0
+    slide.response = true
     slide.time_taken = 600
-    slide = tom.update_slide(assessment.id, slide)
+    slides.first = tom.update_slide(assessment.id, slide)
 
 Or with a hash
 
@@ -129,10 +138,24 @@ Or with a hash
 
 Returns a results object:
 
-    results.overview     #=> "Overview statement based on the results."
+    results.personality_blend #=> Personality blend object
+    results.personality_types #=> Array of personality type objects (with scores)
 
-Which also has two personality type objects in an array
+    personality_blend = results.personality_blend
+    personality_blend.personality_type1 #=> Personality type object (without score)
+    personality_blend.personality_type2 #=> Personality type object (without score)
+    personality_blend.name              #=> "Visionary Creator"
+    personality_blend.description       #=> "Visionary Creator description"
+    personality_blend.compliments       #=> "Visionary Creator compliments"
+    personality_blend.conflicts         #=> "Visionary Creator conflicts"
 
-    personality_type = results.personality_types.first
-    personality_type.name           #=> "Creator"
-    personality_type.description    #=> "Creator description"
+    personality_type = results.personality_types
+    personality_type.name        #=> "Creator"
+    personality_type.description #=> "Creator description"
+    personality_type.badge       #=> Badge object
+    personality_type.score       #=> 200
+
+    badge = personality_type.badge
+    badge.image_small  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/small"
+    badge.image_medium #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/medium"
+    badge.image_large  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/large"

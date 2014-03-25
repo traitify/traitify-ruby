@@ -26,7 +26,7 @@ module Tomify
       connection_options = {}.merge!(url: self.api_host)
 
       response = connection(connection_options).send(method) do |request|
-        request.body = options.to_json
+        request.body = options.to_json if options
         case method
         when :get
           request.url(path)
