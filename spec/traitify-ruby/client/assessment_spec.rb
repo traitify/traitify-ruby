@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Tomify::Client do
+describe Traitify::Client do
   before do
-    Tomify.configure do |tom|
+    Traitify.configure do |tom|
       tom.secret = "secret"
       tom.api_host = "https://example.com"
       tom.api_version = "v1"
@@ -10,7 +10,7 @@ describe Tomify::Client do
     end
   end
 
-  let(:tom) { Tomify.new }
+  let(:tom) { Traitify.new }
 
   describe ".create_assessment" do
     context "without a user" do

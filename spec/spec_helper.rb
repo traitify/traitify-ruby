@@ -1,4 +1,4 @@
-require "tomify"
+require "Traitify"
 require "webmock/rspec"
 require "pry"
 
