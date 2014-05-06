@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   class Error < StandardError
     attr_accessor :response
 
@@ -6,10 +6,10 @@ module Tomify
       status  = response.status
 
       if klass = case status
-                 when 400 then Tomify::BadRequest
-                 when 401 then Tomify::Unauthorized
-                 when 404 then Tomify::NotFound
-                 when 422 then Tomify::UnprocessableEntity
+                 when 400 then Traitify::BadRequest
+                 when 401 then Traitify::Unauthorized
+                 when 404 then Traitify::NotFound
+                 when 422 then Traitify::UnprocessableEntity
                  end
 
         klass.new(response)

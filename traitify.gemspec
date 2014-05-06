@@ -1,10 +1,10 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tomify/version'
+require 'traitify/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "tomify"
-  spec.version       = Tomify::VERSION
+  spec.name          = "traitify"
+  spec.version       = Traitify::VERSION
   spec.author        = "Tom Prats"
   spec.email         = "tom@tomprats.com"
   spec.description   = %q{Traitify Developer Gem}

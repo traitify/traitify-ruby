@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   class PersonalityType
     attr_accessor :name, :description, :badge, :score
 

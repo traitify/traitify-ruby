@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   module Configuration
     VALID_OPTIONS_KEYS = [
       :secret,

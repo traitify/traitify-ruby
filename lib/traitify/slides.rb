@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   class Slide
     attr_accessor :id, :position, :caption, :image_desktop, :image_desktop_retina, :image_phone_landscape, :image_phone_portrait, :response, :time_taken, :completed_at, :created_at
 
@@ -71,7 +71,7 @@ module Tomify
     def self.parse_json(assessment_id, slides)
       Slides.new(
         assessment_id: assessment_id,
-        all:           slides.collect { |slide| Tomify::Slide.parse_json(slide) }
+        all:           slides.collect { |slide| Traitify::Slide.parse_json(slide) }
       )
     end
 

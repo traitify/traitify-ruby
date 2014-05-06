@@ -1,16 +1,16 @@
-module Tomify
+module Traitify
   class Client
     module Slide
       def find_slides(assessment_id)
         response = get("/assessments/#{assessment_id}/slides")
 
-        Tomify::Slides.parse_json(assessment_id, response)
+        Traitify::Slides.parse_json(assessment_id, response)
       end
 
       def update_slides(slides)
         response = put("/assessments/#{slides.assessment_id}/slides", slides.to_update_params)
 
-        Tomify::Slides.parse_json(slides.assessment_id, response)
+        Traitify::Slides.parse_json(slides.assessment_id, response)
       end
 
       def update_slide(hash_or_assessment_id, slide = nil)
@@ -29,7 +29,7 @@ module Tomify
 
         response = put("/assessments/#{assessment_id}/slides/#{slide_id}", hash)
 
-        Tomify::Slide.parse_json(response)
+        Traitify::Slide.parse_json(response)
       end
     end
   end

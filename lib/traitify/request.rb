@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   module Request
     def get(path, options = {})
       request(:get, path, options)

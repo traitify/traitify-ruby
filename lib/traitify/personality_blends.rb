@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   class PersonalityBlend
     attr_accessor :personality_type1, :personality_type2, :name, :description, :compliments, :conflicts
 

@@ -1,7 +1,7 @@
 require "faraday_middleware"
-require "tomify/error"
+require "Traitify/error"
 
-module Tomify
+module Traitify
   module Connection
     def connection(options = {})
       connection ||= Faraday.new(options) do |faraday|
@@ -36,7 +36,7 @@ module Tomify
 
       def call(env)
         @app.call(env).on_complete do |e|
-          if error = Tomify::Error.from(e[:response])
+          if error = Traitify::Error.from(e[:response])
             raise error
           end
         end

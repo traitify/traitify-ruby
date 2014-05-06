@@ -1,3 +1,3 @@
-module Tomify
+module Traitify
   VERSION = "1.0.0"
 end

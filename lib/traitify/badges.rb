@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   class Badge
     attr_accessor :image_small, :image_medium, :image_large
 

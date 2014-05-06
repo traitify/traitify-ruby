@@ -1,4 +1,4 @@
-module Tomify
+module Traitify
   class Assessment
     attr_accessor :id, :deck_id, :user_id, :created_at, :completed_at
 

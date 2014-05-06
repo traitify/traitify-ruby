@@ -1,26 +1,26 @@
-# Tomify
+# Traitify
 
-Tomify is a ruby gem wrapper for the Traitify Developer's API
+Traitify is a ruby gem wrapper for the Traitify Developer's API
 
 ## Installation
 
 Add this line to your Gemfile (using bundler):
 
-    gem 'tomify'
+    gem 'Traitify'
 
 Or install it yourself with:
 
-    gem install tomify
+    gem install Traitify
 
 ## Usage
 
-First it is helpful to configure Tomify, otherwise everytime you create a Tomify object you must add the configuration
+First it is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration
 
 ### Configuration
 
-All the configuration options can be found in `lib/tomify/configuration.rb`
+All the configuration options can be found in `lib/Traitify/configuration.rb`
 
-    Tomify.configure do |tom|
+    Traitify.configure do |tom|
       tom.secret = "secret"
       tom.api_host = "http://example.com"
       tom.api_version = "v1"
@@ -29,12 +29,12 @@ All the configuration options can be found in `lib/tomify/configuration.rb`
 
 #### With config file:
 
-    tom = Tomify.new
+    tom = Traitify.new
     tom.create_assessment
 
 #### Without config file:
 
-    tom = Tomify.new(api_host: "http://example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
+    tom = Traitify.new(api_host: "http://example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
     tom.create_assessment
 
 ### Users
@@ -129,33 +129,3 @@ Or with a hash
       response:      0,
       time_taken:    600
     )
-
-### Results
-
-#### Getting an assessment's results
-
-    results = tom.find_results("assessment-uuid")
-
-Returns a results object:
-
-    results.personality_blend #=> Personality blend object
-    results.personality_types #=> Array of personality type objects (with scores)
-
-    personality_blend = results.personality_blend
-    personality_blend.personality_type1 #=> Personality type object (without score)
-    personality_blend.personality_type2 #=> Personality type object (without score)
-    personality_blend.name              #=> "Visionary Creator"
-    personality_blend.description       #=> "Visionary Creator description"
-    personality_blend.compliments       #=> "Visionary Creator compliments"
-    personality_blend.conflicts         #=> "Visionary Creator conflicts"
-
-    personality_type = results.personality_types
-    personality_type.name        #=> "Creator"
-    personality_type.description #=> "Creator description"
-    personality_type.badge       #=> Badge object
-    personality_type.score       #=> 200
-
-    badge = personality_type.badge
-    badge.image_small  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/small"
-    badge.image_medium #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/medium"
-    badge.image_large  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/large"
