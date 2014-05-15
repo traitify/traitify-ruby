@@ -5,6 +5,7 @@ require "traitify/assessments"
 require "traitify/badges"
 require "traitify/personality_blends"
 require "traitify/personality_types"
+require "traitify/results"
 require "traitify/slides"
 require "traitify/users"
 # require client modules in lib/Traitify/client
@@ -28,6 +29,7 @@ module Traitify
 
     include Traitify::Client::Assessment
     include Traitify::Client::User
+    include Traitify::Client::Result
     include Traitify::Client::Slide
   end
 end

@@ -1,0 +1,157 @@
+{
+  "personality_blend": {
+    "personality_type_1": {
+      "id": "028095da-31c7-4ef9-8067-bcfe3f1cd549",
+      "name": "Analyzer",
+      "description": "Analyzers...are inquisitive.  They delve, study and look deeply for information.  They have a keen eye and an experimental nature.  Analyzers use these capacities to figure out problems and search for the facts, often in a laboratory environment.  They excel at going beyond the surface toward uncovering information and discovery.",
+      "badge": {
+        "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analyzer/full-color/small",
+        "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/medium",
+        "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/large",
+        "font_color": "fff",
+        "color_1": "81abf7",
+        "color_2": "6ea1ea",
+        "color_3": "1761ba"
+      }
+    },
+    "personality_type_2": {
+      "id": "2c9166c8-8c70-45d6-9c7b-7c975175b1fb",
+      "name": "Planner",
+      "description": "Planners...are the detail people.  They are methodical, precise, and detail-oriented.  Planners create systems to follow, and enjoy working with data, detail, words and numbers.  Great at manipulating data, they love procedure and routine.  Often found in office settings, they excel at completing detailed work in an organized manner.",
+      "badge": {
+        "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/small",
+        "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/medium",
+        "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/large",
+        "font_color": "fff",
+        "color_1": "ffed73",
+        "color_2": "f2df72",
+        "color_3": "f7d719"
+      }
+    },
+    "name": null,
+    "description": null,
+    "compliments": null,
+    "conflicts": null
+  },
+  "personality_types": [
+    {
+      "personality_type": {
+        "id": "028095da-31c7-4ef9-8067-bcfe3f1cd549",
+        "name": "Analyzer",
+        "description": "Analyzers...are inquisitive.  They delve, study and look deeply for information.  They have a keen eye and an experimental nature.  Analyzers use these capacities to figure out problems and search for the facts, often in a laboratory environment.  They excel at going beyond the surface toward uncovering information and discovery.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analyzer/full-color/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/large",
+          "font_color": "fff",
+          "color_1": "81abf7",
+          "color_2": "6ea1ea",
+          "color_3": "1761ba"
+        }
+      },
+      "score": 67
+    },
+    {
+      "personality_type": {
+        "id": "2c9166c8-8c70-45d6-9c7b-7c975175b1fb",
+        "name": "Planner",
+        "description": "Planners...are the detail people.  They are methodical, precise, and detail-oriented.  Planners create systems to follow, and enjoy working with data, detail, words and numbers.  Great at manipulating data, they love procedure and routine.  Often found in office settings, they excel at completing detailed work in an organized manner.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/large",
+          "font_color": "fff",
+          "color_1": "ffed73",
+          "color_2": "f2df72",
+          "color_3": "f7d719"
+        }
+      },
+      "score": 67
+    },
+    {
+      "personality_type": {
+        "id": "02b7bbe5-1185-4443-9497-e916ae373a83",
+        "name": "Visionary",
+        "description": "Visionaries...are pioneers.  They are great convincers and like to work with others in a “take charge” capacity.  They love to take risks, make changes and set trends.  They tend to be   ambitious and energetic.  Visionaries are often in positions of prominence in business and the public eye and excel at taking charge and gaining the confidence of others.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/visionary/flat/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/visionary/flat/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/visionary/flat/large",
+          "font_color": "fff",
+          "color_1": "bc7def",
+          "color_2": "ac70e5",
+          "color_3": "5322a0"
+        }
+      },
+      "score": 67
+    },
+    {
+      "personality_type": {
+        "id": "f49525cc-59ba-4e2a-8dde-73ec1971d7ee",
+        "name": "Inventor",
+        "description": "Inventors...are creative.  They take a contemporary, ‘out of the box’ approach to work and life. Inventors use themselves and other medium, often various forms of the arts, to communicate and interact with the world.  Inventors excel when they are ‘lost in their work,’ completely engrossed in a project.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/inventor/full-color/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/inventor/full-color/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/inventor/full-color/large",
+          "font_color": "fff",
+          "color_1": "7ff7e3",
+          "color_2": "74edd6",
+          "color_3": "26c6a7"
+        }
+      },
+      "score": 50
+    },
+    {
+      "personality_type": {
+        "id": "36c9af67-9447-4f4a-9d03-f6fb1f788f2d",
+        "name": "Action Taker",
+        "description": "Action-Takers...are hands-on doers.  They use manual and physical skills, working with technology or machinery to complete tasks.  Often there is an athletic aspect to their work.  They are handy, practical, systematic, applied, and down-to-earth. They are drawn to jobs that involve a specific skill-set and a concrete task.  They excel at solitary, goal-oriented work and getting the job done.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/action-taker/full-color/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/action-taker/full-color/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/action-taker/full-color/large",
+          "font_color": "fff",
+          "color_1": "ffa466",
+          "color_2": "f79b5c",
+          "color_3": "ea813b"
+        }
+      },
+      "score": 17
+    },
+    {
+      "personality_type": {
+        "id": "9172e799-c971-4822-a3fe-660369eaeef5",
+        "name": "Mentor",
+        "description": "Mentors...are people-oriented.  They have great communication skills and are most fulfilled when assisting or working directly with others to improve a personal or societal situation.  Mentors are patient and compassionate and work best in a group or on a team toward a common goal.  Mentors excel at working with others to help them learn and grow.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/mentor/full-color/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/mentor/full-color/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/mentor/full-color/large",
+          "font_color": "fff",
+          "color_1": "f47171",
+          "color_2": "ea6c6c",
+          "color_3": "e24747"
+        }
+      },
+      "score": 0
+    },
+    {
+      "personality_type": {
+        "id": "9f1fd384-e321-48a4-b5f4-085b588af907",
+        "name": "Naturalist",
+        "description": "Naturalists...are attached to the natural world, frequently working with plants and animals in their  environment.  Often nature lovers, they like to experience the world outdoors.  They are committed to preserving and protecting the planet and its natural resources. Serene, earthy, efficient and solid, they excel at working as one with the natural environment.",
+        "badge": {
+          "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/naturalist/full-color/small",
+          "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/naturalist/full-color/medium",
+          "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/naturalist/full-color/large",
+          "font_color": "fff",
+          "color_1": "6ad379",
+          "color_2": "5bc467",
+          "color_3": "317239"
+        }
+      },
+      "score": -17
+    }
+  ]
+}
