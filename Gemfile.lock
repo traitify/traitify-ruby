@@ -1,11 +1,7 @@
 PATH
   remote: .
   specs:
-<<<<<<< HEAD
-    traitify (1.0.1)
-=======
     traitify (1.1.0)
->>>>>>> 710da01b5b7b9732bc72be423fcd353e5ea54bfc
       faraday (~> 0.8.0)
       faraday_middleware (~> 0.9.0)
 

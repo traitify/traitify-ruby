@@ -143,12 +143,16 @@ Returns a results object:
     results.personality_types #=> Array of personality type objects (with scores)
 
     personality_blend = results.personality_blend
-    personality_blend.personality_type1 #=> Personality type object (without score)
-    personality_blend.personality_type2 #=> Personality type object (without score)
-    personality_blend.name              #=> "Visionary Creator"
-    personality_blend.description       #=> "Visionary Creator description"
-    personality_blend.compliments       #=> "Visionary Creator compliments"
-    personality_blend.conflicts         #=> "Visionary Creator conflicts"
+    personality_blend.personality_type1                     #=> Personality type object (without score)
+    personality_blend.personality_type2                     #=> Personality type object (without score)
+    personality_blend.name                                  #=> "Visionary Creator"
+    personality_blend.description                           #=> "Visionary Creator description"
+    personality_blend.compliments                           #=> "Visionary Creator compliments"
+    personality_blend.conflicts                             #=> "Visionary Creator conflicts"
+    personality_blend.compatible_work_environment_1         #=> "Example text here"
+    personality_blend.compatible_work_environment_2         #=> "Example text here"
+    personality_blend.compatible_work_environment_3         #=> "Example text here"
+    personality_blend.compatible_work_environment_4         #=> "Example text here"
 
     personality_type = results.personality_types.first
     personality_type.name        #=> "Creator"
