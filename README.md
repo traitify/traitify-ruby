@@ -6,11 +6,11 @@ Traitify is a ruby gem wrapper for the Traitify Developer's API
 
 Add this line to your Gemfile (using bundler):
 
-    gem 'Traitify'
+    gem 'traitify'
 
 Or install it yourself with:
 
-    gem install Traitify
+    gem install traitify
 
 ## Usage
 
@@ -129,3 +129,34 @@ Or with a hash
       response:      0,
       time_taken:    600
     )
+
+
+### Results
+
+#### Getting an assessment's results
+
+    results = tom.find_results("assessment-uuid")
+
+Returns a results object:
+
+    results.personality_blend #=> Personality blend object
+    results.personality_types #=> Array of personality type objects (with scores)
+
+    personality_blend = results.personality_blend
+    personality_blend.personality_type1 #=> Personality type object (without score)
+    personality_blend.personality_type2 #=> Personality type object (without score)
+    personality_blend.name              #=> "Visionary Creator"
+    personality_blend.description       #=> "Visionary Creator description"
+    personality_blend.compliments       #=> "Visionary Creator compliments"
+    personality_blend.conflicts         #=> "Visionary Creator conflicts"
+
+    personality_type = results.personality_types.first
+    personality_type.name        #=> "Creator"
+    personality_type.description #=> "Creator description"
+    personality_type.badge       #=> Badge object
+    personality_type.score       #=> 100
+
+    badge = personality_type.badge
+    badge.image_small  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/small"
+    badge.image_medium #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/medium"
+    badge.image_large  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/large"

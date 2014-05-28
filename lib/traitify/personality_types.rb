@@ -1,8 +1,9 @@
 module Traitify
   class PersonalityType
-    attr_accessor :name, :description, :badge, :score
+    attr_accessor :id, :name, :description, :badge, :score
 
     def initialize(options = {})
+      self.id          = options[:id]
       self.name        = options[:name]
       self.description = options[:description]
       self.badge       = options[:badge]
@@ -10,18 +11,24 @@ module Traitify
     end
 
     def self.parse_json(personality_type)
-      badge = Badge.parse_json(personality_type["badge"])
+      if personality_type
+        badge = Badge.parse_json(personality_type["badge"])
 
-      PersonalityType.new(
-        name:        personality_type["name"],
-        description: personality_type["description"],
-        badge:       badge,
-        score:       personality_type["score"]
-      )
+        PersonalityType.new(
+          id:          personality_type["id"],
+          name:        personality_type["name"],
+          description: personality_type["description"],
+          badge:       badge,
+          score:       personality_type["score"]
+        )
+      else
+        nil
+      end
     end
 
     def to_hash
       {
+        id:          id,
         name:        name,
         description: description,
         badge:       badge.to_hash,
