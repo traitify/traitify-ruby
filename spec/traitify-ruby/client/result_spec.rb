@@ -30,7 +30,7 @@ describe Traitify::Client do
         let(:result) { tom.find_results("assessment-uuid") }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid/personality_types", "result")
+          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color", "result")
         end
 
         it "returns a result" do
@@ -42,7 +42,7 @@ describe Traitify::Client do
         let(:result) { tom.find_results("assessment-uuid", "full-color") }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid/personality_types", "result")
+          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color", "result")
         end
 
         it "returns a result" do
