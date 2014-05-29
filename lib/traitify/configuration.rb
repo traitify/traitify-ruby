@@ -4,7 +4,8 @@ module Traitify
       :secret,
       :api_host,
       :api_version,
-      :deck_id
+      :deck_id,
+      :image_pack
     ]
 
     attr_accessor(*VALID_OPTIONS_KEYS)

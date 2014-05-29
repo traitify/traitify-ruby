@@ -8,11 +8,11 @@ module Traitify
       request(:post, path, options)
     end
 
-    def put(path, options={})
+    def put(path, options = {})
       request(:put, path, options)
     end
 
-    def delete(path, options={})
+    def delete(path, options = {})
       request(:delete, path, options)
     end
 

@@ -21,16 +21,16 @@ module Traitify
         personality_type_2 = PersonalityType.parse_json(personality_blend["personality_type_2"])
 
       PersonalityBlend.new(
-        personality_type_1:                     personality_type_1,
-        personality_type_2:                     personality_type_2,
-        name:                                   personality_blend["name"],
-        description:                            personality_blend["description"],
-        compliments:                            personality_blend["compliments"],
-        conflicts:                              personality_blend["conflicts"],
-        compatible_work_environment_1:         personality_blend["compatible_work_environment_1"],
-        compatible_work_environment_2:         personality_blend["compatible_work_environment_2"],
-        compatible_work_environment_3:         personality_blend["compatible_work_environment_3"],
-        compatible_work_environment_4:         personality_blend["compatible_work_environment_4"]
+        personality_type_1:            personality_type_1,
+        personality_type_2:            personality_type_2,
+        name:                          personality_blend["name"],
+        description:                   personality_blend["description"],
+        compliments:                   personality_blend["compliments"],
+        conflicts:                     personality_blend["conflicts"],
+        compatible_work_environment_1: personality_blend["compatible_work_environment_1"],
+        compatible_work_environment_2: personality_blend["compatible_work_environment_2"],
+        compatible_work_environment_3: personality_blend["compatible_work_environment_3"],
+        compatible_work_environment_4: personality_blend["compatible_work_environment_4"]
       )
       else
         nil
@@ -39,12 +39,12 @@ module Traitify
 
     def to_hash
       {
-        personality_type_1:             personality_type_1.to_hash,
-        personality_type_2:             personality_type_2.to_hash,
-        name:                           name,
-        description:                    description,
-        compliments:                    compliments,
-        conflicts:                      conflicts,
+        personality_type_1:            personality_type_1.to_hash,
+        personality_type_2:            personality_type_2.to_hash,
+        name:                          name,
+        description:                   description,
+        compliments:                   compliments,
+        conflicts:                     conflicts,
         compatible_work_environment_1: compatible_work_environment_1,
         compatible_work_environment_2: compatible_work_environment_2,
         compatible_work_environment_3: compatible_work_environment_3,
