@@ -4,6 +4,7 @@ PATH
     traitify (1.1.0)
       faraday (~> 0.8.0)
       faraday_middleware (~> 0.9.0)
+      hashie
 
 GEM
   remote: https://rubygems.org/
@@ -20,6 +21,7 @@ GEM
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
+    hashie (2.1.1)
     method_source (0.8.2)
     multipart-post (1.2.0)
     pry (0.9.12.6)

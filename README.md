@@ -38,6 +38,21 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
     tom = Traitify.new(api_host: "http://example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
     tom.create_assessment
 
+### Decks
+
+#### Getting all the decks:
+
+    decks = tom.decks
+
+Returns an array of Deck objects:
+
+    deck = decks.first        #=> Deck object
+    deck.id                   #=> "deck-uuid"
+    deck.name                 #=> "Career"
+    deck.description          #=> "Description of deck"
+    deck.personality_group    #=> PersonalityGroup object
+    # And much more
+
 ### Assessments
 
 #### Creating an assessment:
