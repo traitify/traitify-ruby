@@ -27,12 +27,10 @@ module Traitify
 
     private
     def error_message
-      message =  "#{response.env[:method].upcase} "
+      message =  "#{response.env[:method].upcase} | "
       message << "#{response.env[:url].to_s} | "
-      message << "#{response.status}: "
-      if response.body && response.body.respond_to?(map)
-        message << "#{response.body.map{|k,v| "#{k}: #{v.first}"}.join(", ")}"
-      end
+      message << "#{response.status} | "
+      message << "#{response.body}"
       message
     end
   end

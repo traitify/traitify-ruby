@@ -24,7 +24,8 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
       tom.secret = "secret"
       tom.api_host = "http://example.com"
       tom.api_version = "v1"
-      tom.deck_id = "deck-uuid"
+      tom.deck_id = "deck-uuid"  # Optional
+      tom.image_pack = "image-pack-type"  # Optional
     end
 
 #### With config file:
@@ -36,29 +37,6 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
 
     tom = Traitify.new(api_host: "http://example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
     tom.create_assessment
-
-### Users
-
-#### Creating a user:
-
-    user = tom.create_user(
-      first_name: "Tom",
-      last_name: "Prats",
-      email: "tom@tomprats.com"
-    )
-
-Returns a user object:
-
-    user.id         #=> "toms-uuid"
-    user.first_name #=> "Tom"
-    user.last_name  #=> "Prats"
-    user.email      #=> "tom@tomprats.com"
-
-#### Finding a user:
-
-    tom.find_user("toms-uuid")
-
-Returns a user object as seen above
 
 ### Assessments
 
@@ -73,6 +51,10 @@ You can also pass a user id to tie it to a user
 You must can specify the deck in your configuration or override it here
 
     assessment = tom.create_assessment(deck_id: "deck-uuid")
+
+You can also specify an image pack, otherwise a default image pack associated with the secret is used
+
+    assessment = tom.create_assessment(image_pack: "full-color")
 
 Returns an assessment object:
 
