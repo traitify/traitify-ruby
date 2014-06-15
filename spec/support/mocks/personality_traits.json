@@ -1,0 +1,82 @@
+[
+  {
+    "personality_trait": {
+      "name": "Imaginative",
+      "definition": "Able to think symbolically and play with ideas.",
+      "description": ""
+    },
+    "score": 100.0
+  },
+  {
+    "personality_trait": {
+      "name": "Observant",
+      "definition": "keenly perceptive and aware of one's environment",
+      "description": ""
+    },
+    "score": 100.0
+  },
+  {
+    "personality_trait": {
+      "name": "Particular",
+      "definition": "has preferences that are exact and detailed",
+      "description": ""
+    },
+    "score": 100.0
+  },
+  {
+    "personality_trait": {
+      "name": "Superficial",
+      "definition": "likes to stay on the surface and not dig too deeply",
+      "description": ""
+    },
+    "score": 100.0
+  },
+  {
+    "personality_trait": {
+      "name": "Visionary",
+      "definition": "can imagine how actions and ideas pursued in the present will effect the future",
+      "description": ""
+    },
+    "score": 100.0
+  },
+  {
+    "personality_trait": {
+      "name": "Eclectic",
+      "definition": "Having a variety of blended interests, tastes, beliefs, style",
+      "description": ""
+    },
+    "score": 60.0
+  },
+  {
+    "personality_trait": {
+      "name": "Concrete",
+      "definition": "A style of thinking that values facts and real objects",
+      "description": ""
+    },
+    "score": 55.5556
+  },
+  {
+    "personality_trait": {
+      "name": "Focused",
+      "definition": "can concentrate one's mind, either because of a sense of drivenness, or as a result of interest or self-discipline",
+      "description": ""
+    },
+    "score": 23.0769
+  },
+  {
+    "personality_trait": {
+      "name": "Open-Minded",
+      "definition": "Having a mind receptive to new ideas or ideas contrary to one's own beliefs",
+      "description": ""
+    },
+    "score": 14.2857
+  },
+  {
+    "personality_trait": {
+      "name": "Realistic",
+      "definition": "has a real sense of what is practical and workable",
+      "description": ""
+    },
+    "score": -14.2857
+  }
+]

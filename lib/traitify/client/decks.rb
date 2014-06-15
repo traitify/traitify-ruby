@@ -6,6 +6,7 @@ module Traitify
 
         response.collect { |deck| Hashie::Mash.new(deck) }
       end
+      alias_method :find_decks, :decks
     end
   end
 end

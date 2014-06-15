@@ -1,13 +1,6 @@
 # require base modules
 require "traitify/connection"
 require "traitify/request"
-require "traitify/assessments"
-require "traitify/badges"
-require "traitify/personality_blends"
-require "traitify/personality_types"
-require "traitify/results"
-require "traitify/slides"
-require "traitify/users"
 require "hashie"
 # require client modules in lib/Traitify/client
 Dir[File.expand_path("../client/*.rb", __FILE__)].each {|f| require f }
@@ -30,8 +23,7 @@ module Traitify
 
     include Traitify::Client::Deck
     include Traitify::Client::Assessment
-    include Traitify::Client::User
-    include Traitify::Client::Result
     include Traitify::Client::Slide
+    include Traitify::Client::Result
   end
 end

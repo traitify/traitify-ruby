@@ -20,7 +20,7 @@ describe Traitify::Client do
       end
 
       it "returns a result" do
-        expect(result.personality_types.first.name).to eq("Analyzer")
+        expect(result.personality_types.first.personality_type.name).to eq("Analyzer")
       end
     end
 
@@ -49,6 +49,18 @@ describe Traitify::Client do
           expect(result.personality_blend.personality_type_1.badge.image_large).to eq("https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/large")
         end
       end
+    end
+  end
+
+  describe ".assessment_personality_type" do
+    let(:personality_traits) { tom.assessment_personality_type("assessment-uuid", "personality-type-uuid") }
+
+    before(:each) do
+      stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits", "personality_traits")
+    end
+
+    it "returns a result" do
+      expect(personality_traits.first.personality_trait.name).to eq("Imaginative")
     end
   end
 end

@@ -7,14 +7,15 @@ module Traitify
         assessment_params.merge!(user_id: options[:user_id]) if options[:user_id]
         response = post("/assessments", assessment_params)
 
-        Traitify::Assessment.parse_json(response)
+        Hashie::Mash.new(response)
       end
 
-      def find_assessment(assessment_id)
+      def assessment(assessment_id)
         response = get("/assessments/#{assessment_id}")
 
-        Traitify::Assessment.parse_json(response)
+        Hashie::Mash.new(response)
       end
+      alias_method :find_assessment, :assessment
     end
   end
 end
