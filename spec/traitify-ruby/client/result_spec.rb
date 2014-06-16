@@ -53,14 +53,28 @@ describe Traitify::Client do
   end
 
   describe ".assessment_personality_type" do
-    let(:personality_traits) { tom.assessment_personality_type("assessment-uuid", "personality-type-uuid") }
+    context "with a personality type" do
+      let(:personality_traits) { tom.assessment_personality_traits("assessment-uuid", "personality-type-uuid") }
 
-    before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits", "personality_traits")
+      before(:each) do
+        stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits", "personality_traits")
+      end
+
+      it "returns a result" do
+        expect(personality_traits.first.personality_trait.name).to eq("Imaginative")
+      end
     end
 
-    it "returns a result" do
-      expect(personality_traits.first.personality_trait.name).to eq("Imaginative")
+    context "without a personality type" do
+      let(:personality_traits) { tom.assessment_personality_traits("assessment-uuid") }
+
+      before(:each) do
+        stub_it(:get, "/assessments/assessment-uuid/personality_traits", "personality_traits")
+      end
+
+      it "returns a result" do
+        expect(personality_traits.first.personality_trait.name).to eq("Imaginative")
+      end
     end
   end
 end

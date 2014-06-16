@@ -14,12 +14,16 @@ module Traitify
       end
       alias_method :find_results, :results
 
-      def assessment_personality_type(assessment_id, personality_type_id)
-        response = get("/assessments/#{assessment_id}/personality_types/#{personality_type_id}/personality_traits")
+      def assessment_personality_traits(assessment_id, personality_type_id = nil)
+        if personality_type_id
+          response = get("/assessments/#{assessment_id}/personality_types/#{personality_type_id}/personality_traits")
+        else
+          response = get("/assessments/#{assessment_id}/personality_traits")
+        end
 
         response.collect { |personality_trait| Hashie::Mash.new(personality_trait) }
       end
-      alias_method :find_assessment_personality_type, :assessment_personality_type
+      alias_method :find_assessment_personality_traits, :assessment_personality_traits
     end
   end
 end
