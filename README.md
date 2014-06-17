@@ -6,7 +6,7 @@ Traitify is a ruby gem wrapper for the Traitify Developer's API
 
 Add this line to your Gemfile (using bundler):
 
-    gem 'traitify'
+    gem "traitify"
 
 Or install it yourself with:
 
@@ -14,74 +14,73 @@ Or install it yourself with:
 
 ## Usage
 
-First it is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration
+First, it is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration
 
 ### Configuration
 
 All the configuration options can be found in `lib/Traitify/configuration.rb`
 
-    Traitify.configure do |tom|
-      tom.secret = "secret"
-      tom.api_host = "http://example.com"
-      tom.api_version = "v1"
-      tom.deck_id = "deck-uuid"  # Optional
-      tom.image_pack = "image-pack-type"  # Optional
+    Traitify.configure do |traitify|
+      traitify.secret = "secret"
+      traitify.api_host = "http://example.com"
+      traitify.api_version = "v1"
+      traitify.deck_id = "deck-uuid"  # Optional
+      traitify.image_pack = "image-pack-type"  # Optional
     end
 
 #### With config file:
 
-    tom = Traitify.new
-    tom.create_assessment
+    traitify = Traitify.new
+    traitify.create_assessment
 
 #### Without config file:
 
-    tom = Traitify.new(api_host: "http://example.com", api_version: "v1", deck_id: "deck-uuid", secret: "secret")
-    tom.create_assessment
+    traitify = Traitify.new(
+      api_host: "http://example.com",
+      api_version: "v1",
+      deck_id: "deck-uuid",
+      secret: "secret"
+    )
+    traitify.create_assessment
 
 ### Decks
 
 #### Getting all the decks:
 
-    decks = tom.decks
+    decks = traitify.decks
 
 Returns an array of Deck objects:
 
-    deck = decks.first        #=> Deck object
+    deck = decks.first
     deck.id                   #=> "deck-uuid"
     deck.name                 #=> "Career"
     deck.description          #=> "Description of deck"
-    deck.personality_group    #=> PersonalityGroup object
-    # And much more
+    # And more
 
 ### Assessments
 
 #### Creating an assessment:
 
-    assessment = tom.create_assessment
-
-You can also pass a user id to tie it to a user
-
-    assessment = tom.create_assessment(user_id: "toms-uuid")
+    assessment = traitify.create_assessment
 
 You must can specify the deck in your configuration or override it here
 
-    assessment = tom.create_assessment(deck_id: "deck-uuid")
+    assessment = traitify.create_assessment(deck_id: "deck-uuid")
 
 You can also specify an image pack, otherwise a default image pack associated with the secret is used
 
-    assessment = tom.create_assessment(image_pack: "full-color")
+    assessment = traitify.create_assessment(image_pack: "full-color")
 
 Returns an assessment object:
 
     assessment.id           #=> "assessment-uuid"
     assessment.deck_id      #=> "deck-uuid"
-    assessment.user_id      #=> "toms-uuid"
-    assessment.created_at   #=> 46197-10-17 12:29:08 -0400
+    assessment.created_at   #=> Returns time in Epoch format
     assessment.completed_at #=> nil
 
 #### Finding an assessment:
 
-    assessment = tom.find_assessment("assessment-uuid")
+    assessment = traitify.find_assessment("assessment-uuid")
 
 Returns an assessment object as seen above
 
@@ -91,17 +90,13 @@ An assessment can be taken through our javascript plugin or by getting the slide
 
 #### Finding an assessment's slides:
 
-    slides = tom.find_slides("assessment_id")
+    slides = traitify.find_slides("assessment-uuid")
 
-Returns a slides object which has the assessment id but also functions as an array
-
-    slides.assessment_id #=> "assessment-uuid"
-    slides.first         #=> Slide object
-    slides.all           #=> Array of slide objects
+Returns an array of slides
 
 #### Updating an assessment's slides:
 
-    slides.all.map! do |slide|
+    slides.map! do |slide|
       # true for me, false for not me
       slide.response = true
       # Pass in the time it took to make that choice (milliseconds)
@@ -109,30 +104,20 @@ Returns a slides object which has the assessment id but also functions as an arr
       slide
     end
 
-    tom.update_slides(slides)
+    traitify.update_slides("assessment-uuid", slides)
 
 #### Updating a single assessment slide:
 
     slide = assessment.slides.first
     slide.response = true
     slide.time_taken = 600
-    slides.first = tom.update_slide(assessment.id, slide)
-
-Or with a hash
-
-    assessment.slides.first = tom.update_slide(
-      assessment_id: assessment.id,
-      slide_id:      assessment.slides.first.id,
-      response:      0,
-      time_taken:    600
-    )
-
+    traitify.update_slide(assessment.id, slide)
 
 ### Results
 
 #### Getting an assessment's results
 
-    results = tom.find_results("assessment-uuid")
+    results = traitify.find_results("assessment-uuid")
 
 Returns a results object:
 
@@ -140,24 +125,31 @@ Returns a results object:
     results.personality_types #=> Array of personality type objects (with scores)
 
     personality_blend = results.personality_blend
-    personality_blend.personality_type1                     #=> Personality type object (without score)
-    personality_blend.personality_type2                     #=> Personality type object (without score)
-    personality_blend.name                                  #=> "Visionary Creator"
-    personality_blend.description                           #=> "Visionary Creator description"
-    personality_blend.compliments                           #=> "Visionary Creator compliments"
-    personality_blend.conflicts                             #=> "Visionary Creator conflicts"
-    personality_blend.compatible_work_environment_1         #=> "Example text here"
-    personality_blend.compatible_work_environment_2         #=> "Example text here"
-    personality_blend.compatible_work_environment_3         #=> "Example text here"
-    personality_blend.compatible_work_environment_4         #=> "Example text here"
+    personality_blend.personality_type_1 #=> Personality type object
+    personality_blend.personality_type_2 #=> Personality type object
+    personality_blend.name               #=> "Visionary Creator"
+    personality_blend.description        #=> "Visionary Creator description"
+    personality_blend.compliments        #=> "Visionary Creator compliments"
+    personality_blend.conflicts          #=> "Visionary Creator conflicts"
 
-    personality_type = results.personality_types.first
+    type = results.personality_types.first
+    type.score                   #=> 100
+    personality_type = type.personality_type
     personality_type.name        #=> "Creator"
     personality_type.description #=> "Creator description"
     personality_type.badge       #=> Badge object
-    personality_type.score       #=> 100
 
     badge = personality_type.badge
     badge.image_small  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/small"
     badge.image_medium #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/medium"
     badge.image_large  #=> "http://s3.amazonaws.com/traitify-api/badges/creator/flat/large"
+
+#### Getting an assessment's personality traits
+
+    traits = traitify.assessment_personality_traits("assessment-uuid")
+    trait = traits.first
+    trait.score #=> 100
+    personality_trait = trait.personality_trait
+    personality_trait.name        #=> "Imaginative"
+    personality_trait.definition  #=> "Able to think symbolically and play with ideas."
+    personality_trait.description #=> "Coming Soon"

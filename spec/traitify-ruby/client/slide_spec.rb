@@ -43,21 +43,40 @@ describe Traitify::Client do
   end
 
   describe ".update_slide" do
-    let(:slides) { tom.find_slides("assessment-uuid") }
-    let(:slide) { tom.update_slide(
-      assessment_id: "assessment-uuid",
-      slide_id:      slides.first.id,
-      response:      0,
-      time_taken:    1000
-    )}
+    context "with hash" do
+      let(:slides) { tom.find_slides("assessment-uuid") }
+      let(:slide) { tom.update_slide("assessment-uuid", {
+        id:         slides.first.id,
+        response:   true,
+        time_taken: 1000
+      })}
 
-    before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
-      stub_it(:put, "/assessments/assessment-uuid/slides/slide-uuid", "slide")
+      before(:each) do
+        stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
+        stub_it(:put, "/assessments/assessment-uuid/slides/slide-uuid", "slide")
+      end
+
+      it "returns a slide" do
+        expect(slide.response).to eq(true)
+      end
     end
 
-    it "returns a slide" do
-      expect(slide.response).to eq(true)
+    context "with slide" do
+      let(:slides) { tom.find_slides("assessment-uuid") }
+      let(:slide) { slides.first }
+
+      before(:each) do
+        stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
+        stub_it(:put, "/assessments/assessment-uuid/slides/slide-uuid", "slide")
+
+        slide.response = true
+        slide.time_taken = 1000
+        tom.update_slide("assessment-uuid", slide)
+      end
+
+      it "returns a slide" do
+        expect(slide.response).to eq(true)
+      end
     end
   end
 end
