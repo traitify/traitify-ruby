@@ -36,7 +36,7 @@ module Traitify
 
       def call(env)
         @app.call(env).on_complete do |e|
-          if error = Traitify::Error.from(e[:response])
+          if error = Traitify::Error.from(e.status)
             raise error
           end
         end

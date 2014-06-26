@@ -1,3 +1,8 @@
+### 1.1.2
+
+* Features
+  * Newer version of Faraday
+
 ### 1.1.1
 
 * Features

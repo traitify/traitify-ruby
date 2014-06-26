@@ -1,10 +1,9 @@
+require "pry"
 module Traitify
   class Error < StandardError
     attr_accessor :response
 
-    def self.from(response)
-      status  = response.status
-
+    def self.from(status)
       if klass = case status
                  when 400 then Traitify::BadRequest
                  when 401 then Traitify::Unauthorized
