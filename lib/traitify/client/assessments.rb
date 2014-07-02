@@ -1,20 +1,22 @@
 module Traitify
+
   class Client
     module Assessment
       def create_assessment(options = {})
-        deck_id = options[:deck_id] || options["deck_id"] || self.deck_id
-        assessment_params = { deck_id: deck_id }
-        response = post("/assessments", assessment_params)
-
-        Hashie::Mash.new(response)
+        Hashie::Mash.new post("/assessments", { deck_id: deck_id_from(options) })
       end
 
       def assessment(assessment_id)
-        response = get("/assessments/#{assessment_id}")
-
-        Hashie::Mash.new(response)
+        Hashie::Mash.new get("/assessments/#{assessment_id}")
       end
-      alias_method :find_assessment, :assessment
+      alias :find_assessment :assessment
+
+      private
+
+      def deck_id_from(options)
+        options[:deck_id] || deck_id
+      end
+
     end
   end
 end
