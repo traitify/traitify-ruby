@@ -3,8 +3,8 @@ require "traitify/error"
 
 module Traitify
   module Connection
-    def connection(options = {})
-      connection ||= Faraday.new(options) do |faraday|
+    def conn(options = {})
+      Faraday.new(options) do |faraday|
         faraday.request :url_encoded
         faraday.request :basic_auth, self.secret, "x"
         faraday.use ContentTypeMiddleware
@@ -12,11 +12,10 @@ module Traitify
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter Faraday.default_adapter
       end
-
-      connection
     end
 
     private
+
     class ContentTypeMiddleware < Faraday::Middleware
       def initialize(app)
         @app = app

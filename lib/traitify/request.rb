@@ -9,7 +9,7 @@ module Traitify
     end
 
     def request(method, path, options = {})
-      connection(url: api_host).send(method) do |request|
+      conn(url: api_host).send(method) do |request|
         request.url [api_version, path].join
         request.body = options.to_json if options
       end.body
