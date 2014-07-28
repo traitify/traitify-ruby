@@ -1,4 +1,3 @@
-require "pry"
 module Traitify
   class Error < StandardError
     attr_accessor :response
