@@ -20,6 +20,11 @@ module Traitify
         response.collect { |personality_trait| Hashie::Mash.new(personality_trait) }
       end
       alias_method :find_assessment_personality_traits, :assessment_personality_traits
+
+      def career_matches(assessment_id, number_of_matches=10)
+        response = get("/assessments/#{assessment_id}/matches/careers?number_of_matches=#{number_of_matches}")
+        response.collect { |career| Hashie::Mash.new(career) }
+      end
     end
   end
 end

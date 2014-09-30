@@ -9,7 +9,6 @@ module Traitify
                  when 404 then Traitify::NotFound
                  when 422 then Traitify::UnprocessableEntity
                  end
-
         klass.new(response)
       end
     end

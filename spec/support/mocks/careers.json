@@ -1,0 +1,15 @@
+[
+  {
+    "id": "career-id",
+    "title": "Career Title",
+    "description": "Career Description",
+    "majors": [
+      {
+        "id": "major-id",
+        "title": "Major Title",
+        "description": "Major Description",
+        "group_id": "Major Group ID"
+      }
+    ]
+  }
+]

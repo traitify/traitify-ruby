@@ -77,4 +77,17 @@ describe Traitify::Client do
       end
     end
   end
+
+  describe ".career_matches" do
+    let(:careers) { tom.career_matches("assessment-uuid") }
+
+    before(:each) do
+      stub_it(:get, "/assessments/assessment-uuid/matches/careers?number_of_matches=10", "careers")
+    end
+
+    it "returns a result" do
+      expect(careers.first.title).to eq("Career Title")
+      expect(careers.first.majors.first.title).to eq("Major Title")
+    end
+  end
 end
