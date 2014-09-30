@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = "tom@tomprats.com"
   spec.description   = %q{Traitify Developer Gem}
   spec.summary       = spec.description
-  spec.homepage      = ""
+  spec.homepage      = "https://www.traitify.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
