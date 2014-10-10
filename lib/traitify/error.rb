@@ -2,8 +2,8 @@ module Traitify
   class Error < StandardError
     attr_accessor :response
 
-    def self.from(status)
-      if klass = case status
+    def self.from(response)
+      if klass = case response.status
                  when 400 then Traitify::BadRequest
                  when 401 then Traitify::Unauthorized
                  when 404 then Traitify::NotFound
@@ -24,10 +24,10 @@ module Traitify
 
     private
     def error_message
-      message =  "#{response.env[:method].upcase} | "
-      message << "#{response.env[:url].to_s} | "
+      message =  "#{response.method.upcase} | "
+      message << "#{response.url.to_s} | "
       message << "#{response.status} | "
-      message << "#{response.body}"
+      message << "#{response.body.first["message"]}"
       message
     end
   end
