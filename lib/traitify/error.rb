@@ -8,6 +8,7 @@ module Traitify
                  when 401 then Traitify::Unauthorized
                  when 404 then Traitify::NotFound
                  when 422 then Traitify::UnprocessableEntity
+                 when 500..505 then Traitify::ServerError
                  end
         klass.new(response)
       end
@@ -36,4 +37,5 @@ module Traitify
   class Unauthorized < Error; end
   class NotFound < Error; end
   class UnprocessableEntity < Error; end
+  class ServerError < Error; end
 end
