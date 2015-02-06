@@ -4,40 +4,6 @@
   "user_id": "toms-uuid",
   "created_at": 1392153790744,
   "completed_at": 1392153790744,
-  "personality_blend": {
-    "personality_type_1": {
-      "id": "028095da-31c7-4ef9-8067-bcfe3f1cd549",
-      "name": "Analyzer",
-      "description": "Analyzers...are inquisitive.  They delve, study and look deeply for information.  They have a keen eye and an experimental nature.  Analyzers use these capacities to figure out problems and search for the facts, often in a laboratory environment.  They excel at going beyond the surface toward uncovering information and discovery.",
-      "badge": {
-        "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analyzer/full-color/small",
-        "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/medium",
-        "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/large",
-        "font_color": "fff",
-        "color_1": "81abf7",
-        "color_2": "6ea1ea",
-        "color_3": "1761ba"
-      }
-    },
-    "personality_type_2": {
-      "id": "2c9166c8-8c70-45d6-9c7b-7c975175b1fb",
-      "name": "Planner",
-      "description": "Planners...are the detail people.  They are methodical, precise, and detail-oriented.  Planners create systems to follow, and enjoy working with data, detail, words and numbers.  Great at manipulating data, they love procedure and routine.  Often found in office settings, they excel at completing detailed work in an organized manner.",
-      "badge": {
-        "image_small": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/small",
-        "image_medium": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/medium",
-        "image_large": "https://traitify-api.s3.amazonaws.com/traitify-api/badges/planner/full-color/large",
-        "font_color": "fff",
-        "color_1": "ffed73",
-        "color_2": "f2df72",
-        "color_3": "f7d719"
-      }
-    },
-    "name": null,
-    "description": null,
-    "compliments": null,
-    "conflicts": null
-  },
   "personality_types": [
     {
       "personality_type": {

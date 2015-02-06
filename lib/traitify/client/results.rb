@@ -1,14 +1,28 @@
 module Traitify
   class Client
     module Result
-      def results(assessment_id, image_pack = nil)
+      def results(assessment_id, image_pack = nil, data = nil)
         image_pack ||= self.image_pack
+        old_results = false
+        if data.nil?
+          data = %w(types blends)
+          old_results = true
+        end
 
         response = image_pack ?
-          get("/assessments/#{assessment_id}/personality_types?image_pack=#{image_pack}") :
-          get("/assessments/#{assessment_id}/personality_types")
+          get("/assessments/#{assessment_id}?data=#{data.join(",")}&image_pack=#{image_pack}") :
+          get("/assessments/#{assessment_id}?data=#{data.join(",")}")
 
-        Hashie::Mash.new(response)
+        result = Hashie::Mash.new(response)
+
+        if old_results
+          OpenStruct.new({
+            personality_blend: result.personality_blend,
+            personality_types: result.personality_types
+          })
+        else
+          result
+        end
       end
       alias_method :find_results, :results
 
