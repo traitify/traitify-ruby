@@ -5,7 +5,7 @@ module Traitify
         image_pack ||= self.image_pack
         old_results = false
         if data.nil?
-          data = %w(types blends)
+          data = %w(types blend)
           old_results = true
         end
 
