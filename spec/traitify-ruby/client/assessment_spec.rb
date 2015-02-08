@@ -61,4 +61,17 @@ describe Traitify::Client do
       expect(assessment.id).to eq("assessment-uuid")
     end
   end
+
+  describe ".assessment_with_results" do
+    let(:result) { tom.assessment_with_results("assessment-uuid", nil, %w(traits types blend)) }
+
+    before(:each) do
+      stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend", "assessment_with_results")
+    end
+
+    it "returns an assessment with results" do
+      expect(result.personality_types.first.personality_type.name).to eq("Analyzer")
+      expect(result.personality_traits.first.personality_trait.name).to eq("Imaginative")
+    end
+  end
 end

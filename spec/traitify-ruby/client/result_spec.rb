@@ -16,24 +16,11 @@ describe Traitify::Client do
       let(:result) { tom.find_results("assessment-uuid") }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid?data=types,blends", "result")
+        stub_it(:get, "/assessments/assessment-uuid/personality_types", "result")
       end
 
       it "returns a result" do
         expect(result.personality_types.first.personality_type.name).to eq("Analyzer")
-      end
-    end
-
-    context "with data specified" do
-      let(:result) { tom.find_results("assessment-uuid", nil, %w(types traits)) }
-
-      before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid?data=types,traits", "results_types_traits")
-      end
-
-      it "returns a result" do
-        expect(result.personality_types.first.personality_type.name).to eq("Analyzer")
-        expect(result.personality_traits.first.personality_trait.name).to eq("Imaginative")
       end
     end
 
@@ -43,7 +30,7 @@ describe Traitify::Client do
         let(:result) { tom.find_results("assessment-uuid") }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid?data=types,blends&image_pack=full-color", "result")
+          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color", "result")
         end
 
         it "returns a result" do
@@ -55,7 +42,7 @@ describe Traitify::Client do
         let(:result) { tom.find_results("assessment-uuid", "full-color") }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid?data=types,blends&image_pack=full-color", "result")
+          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color", "result")
         end
 
         it "returns a result" do
