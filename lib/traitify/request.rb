@@ -10,12 +10,13 @@ module Traitify
 
     def request(method, path, options = {})
       begin
-        conn(url: api_host).send(method) do |request|
-          request.url [api_version, path].join
+        conn(url: host).send(method) do |request|
+          request.url [version, path].join
           request.body = options.to_json if options
         end.body
       rescue => e
         puts e.message
+        puts e.inspect
         { error: e.message }
       end
     end

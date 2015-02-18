@@ -5,7 +5,7 @@ require "pry"
 Dir[File.expand_path("spec/support/**/*.rb", __FILE__)].each{|f| require f}
 
 RSpec.configure do |config|
-  config.color_enabled = true
+  config.color = true
   config.order = "random"
 end
 

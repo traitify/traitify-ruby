@@ -6,7 +6,7 @@ module Traitify
     def conn(options = {})
       Faraday.new(options) do |faraday|
         faraday.request :url_encoded
-        faraday.request :basic_auth, self.secret, "x"
+        faraday.request :basic_auth, self.secret_key, "x"
         faraday.use ContentTypeMiddleware
         faraday.use ErrorMiddleware
         faraday.response :json, :content_type => /\bjson$/

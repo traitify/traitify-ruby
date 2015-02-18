@@ -1,3 +1,44 @@
+### 1.7.0
+
+* Features
+  * Updated options to be consistent with other Traitify libraries
+
+### 1.6.2
+
+* Bug Fixes
+  * Move optional results data to assessments
+
+### 1.6.1
+
+* Bug Fixes
+  * Fix backwards compatibility with results
+
+### 1.6.0
+
+* Features
+  * Update results to handle optional data
+
+### 1.5.0
+
+* Features
+  * Catch server errors
+
+### 1.4.0
+
+* Features
+  * Improved error handling
+
+### 1.3.0
+
+* Features
+  * Get raw personality traits
+
+### 1.2.0
+
+* Features
+  * Get job matching
+  * Image packs option for decks
+
 ### 1.1.2
 
 * Features
