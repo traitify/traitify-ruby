@@ -2,6 +2,7 @@
 
 * Features
   * Updated options to be consistent with other Traitify libraries
+  * Get career(s)
 
 ### 1.6.2
 

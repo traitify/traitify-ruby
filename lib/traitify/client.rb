@@ -2,7 +2,6 @@
 require "traitify/connection"
 require "traitify/request"
 require "hashie"
-require "pry"
 # require client modules in lib/Traitify/client
 Dir[File.expand_path("../client/*.rb", __FILE__)].each {|f| require f }
 
@@ -35,5 +34,6 @@ module Traitify
     include Traitify::Client::Assessment
     include Traitify::Client::Slide
     include Traitify::Client::Result
+    include Traitify::Client::Career
   end
 end

@@ -1,5 +1,4 @@
 module Traitify
-
   class Client
     module Assessment
       def create_assessment(options = {})
@@ -25,7 +24,6 @@ module Traitify
       def deck_id_from(options)
         options[:deck_id] || deck_id
       end
-
     end
   end
 end
