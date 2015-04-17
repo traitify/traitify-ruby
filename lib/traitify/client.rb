@@ -35,5 +35,6 @@ module Traitify
     include Traitify::Client::Slide
     include Traitify::Client::Result
     include Traitify::Client::Career
+    include Traitify::Client::Major
   end
 end

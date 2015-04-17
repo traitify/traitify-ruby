@@ -1,3 +1,11 @@
+### 1.8.1
+
+* Features
+  * Get major(s)
+
+* Bug Fixes
+  * Added `raw_personality_traits` method back
+
 ### 1.7.0
 
 * Features
