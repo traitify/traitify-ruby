@@ -1,3 +1,8 @@
+### 1.8.2
+
+* Bug Fixes
+  * Allowed errors to be handled better
+
 ### 1.8.1
 
 * Features
