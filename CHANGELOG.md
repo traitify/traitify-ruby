@@ -1,3 +1,9 @@
+### 1.8.3
+
+* Bug Fixes
+  * Fixed error handling bug on special cases
+  * Updated docs
+
 ### 1.8.2
 
 * Bug Fixes

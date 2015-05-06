@@ -1,5 +1,6 @@
 require "faraday_middleware"
 require "traitify/error"
+require "pry"
 
 module Traitify
   module Connection
@@ -7,7 +8,8 @@ module Traitify
       Faraday.new(options) do |faraday|
         faraday.request :url_encoded
         faraday.request :basic_auth, self.secret_key, "x"
-        faraday.use ContentTypeMiddleware
+        faraday.headers["Accept"] = "application/json"
+        faraday.headers["Content-Type"] = "application/json"
         faraday.use ErrorMiddleware
         faraday.response :json, :content_type => /\bjson$/
         faraday.adapter Faraday.default_adapter
@@ -15,19 +17,6 @@ module Traitify
     end
 
     private
-
-    class ContentTypeMiddleware < Faraday::Middleware
-      def initialize(app)
-        @app = app
-      end
-
-      def call(env)
-        env[:request_headers]["Accept"] = "application/json"
-        env[:request_headers]["Content-Type"] = "application/json"
-        @app.call(env)
-      end
-    end
-
     class ErrorMiddleware < Faraday::Middleware
       def initialize(app)
         @app = app

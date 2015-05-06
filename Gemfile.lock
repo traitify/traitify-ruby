@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    traitify (1.8.1)
+    traitify (1.8.3)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
       hashie (~> 3.0)
@@ -9,7 +9,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.7)
+    addressable (2.3.8)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     coderay (1.1.0)
@@ -39,7 +39,7 @@ GEM
     rspec-mocks (2.99.3)
     safe_yaml (1.0.4)
     slop (3.6.0)
-    webmock (1.20.4)
+    webmock (1.21.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
 

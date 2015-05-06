@@ -28,7 +28,8 @@ module Traitify
       message =  "#{response.method.upcase} | "
       message << "#{response.url.to_s} | "
       message << "#{response.status} | "
-      message << "#{response.body.first["message"]}"
+      message << (response.body.is_a?(Hash) ?
+        "#{response.body["message"]}" : "#{response.body.first["message"]}")
       message
     end
   end

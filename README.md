@@ -1,6 +1,6 @@
 # Traitify
 
-Traitify is a ruby gem wrapper for the Traitify Developer's API
+Traitify is a ruby gem wrapper for Traitify's Personality API
 
 ## Installation
 
@@ -21,9 +21,10 @@ First, it is helpful to configure Traitify, otherwise everytime you create a Tra
 All the configuration options can be found in `lib/Traitify/configuration.rb`
 
     Traitify.configure do |traitify|
-      traitify.secret = "secret"
-      traitify.api_host = "http://example.com"
-      traitify.api_version = "v1"
+      traitify.host = "https://api-sandbox.traitify.com"
+      traitify.version = "v1"
+      traitify.secret_key = "secret"
+      traitify.public_key = "public" # Optional
       traitify.deck_id = "deck-uuid"  # Optional
       traitify.image_pack = "image-pack-type"  # Optional
     end
@@ -36,10 +37,10 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
 #### Without config file:
 
     traitify = Traitify.new(
-      api_host: "http://example.com",
-      api_version: "v1",
-      deck_id: "deck-uuid",
-      secret: "secret"
+      host: "https://api-sandbox.traitify.com",
+      version: "v1",
+      secret_key: "secret",
+      deck_id: "deck-uuid"
     )
     traitify.create_assessment
 
@@ -153,3 +154,11 @@ Returns a results object:
     personality_trait.name        #=> "Imaginative"
     personality_trait.definition  #=> "Able to think symbolically and play with ideas."
     personality_trait.description #=> "Coming Soon"
+
+#### More results
+
+More API endpoints may be available. You can find more at [developer.traitify.com](http://developer.traitify.com/documentation).
+To make authenticated calls to new endpoints use the syntax below:
+
+    traitify.get("/new/endpoint")
+    traitify.post("/new/endpoint", { ready: true })
