@@ -1,3 +1,8 @@
+### 1.8.4
+
+* Bug Fixes
+  * Removed require meant for development
+
 ### 1.8.3
 
 * Bug Fixes

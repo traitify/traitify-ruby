@@ -1,6 +1,5 @@
 require "faraday_middleware"
 require "traitify/error"
-require "pry"
 
 module Traitify
   module Connection

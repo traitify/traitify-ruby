@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    traitify (1.8.3)
+    traitify (1.8.4)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
       hashie (~> 3.0)
