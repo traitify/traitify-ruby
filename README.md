@@ -147,7 +147,7 @@ Returns a results object:
 
 #### Getting an assessment's personality traits
 
-    traits = traitify.assessment_personality_traits("assessment-uuid")
+    traits = traitify.raw_personality_traits("assessment-uuid")
     trait = traits.first
     trait.score #=> 100
     personality_trait = trait.personality_trait
