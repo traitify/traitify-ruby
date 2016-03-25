@@ -1,14 +1,11 @@
 module Traitify
   class Client
     module Deck
-      def decks(image_pack = nil)
+      def decks(image_pack = nil, options = {})
         image_pack ||= self.image_pack
+        options[:image_pack] = image_pack if image_pack
 
-        response = image_pack ?
-          get("/decks?image_pack=#{image_pack}") :
-          get("/decks")
-
-        response.collect { |deck| Hashie::Mash.new(deck) }
+        get("/decks", options).collect { |deck| Hashie::Mash.new(deck) }
       end
       alias_method :find_decks, :decks
     end

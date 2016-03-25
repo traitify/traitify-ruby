@@ -36,5 +36,6 @@ module Traitify
     include Traitify::Client::Result
     include Traitify::Client::Career
     include Traitify::Client::Major
+    include Traitify::Client::Locale
   end
 end

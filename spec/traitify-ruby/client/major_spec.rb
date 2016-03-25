@@ -16,7 +16,7 @@ describe Traitify::Client do
       let(:majors) { tom.majors }
 
       before(:each) do
-        stub_it(:get, "/majors", "majors")
+        stub_it(:get, "/majors?locale_key=us-english", "majors")
       end
 
       it "returns majors" do
@@ -28,7 +28,7 @@ describe Traitify::Client do
       let(:majors) { tom.majors(page: 1, majors_per_page: 50) }
 
       before(:each) do
-        stub_it(:get, "/majors?majors_per_page=50&page=1", "majors")
+        stub_it(:get, "/majors?majors_per_page=50&page=1&locale_key=us-english", "majors")
       end
 
       it "returns majors" do
@@ -41,7 +41,7 @@ describe Traitify::Client do
     let(:major) { tom.major("major-id") }
 
     before(:each) do
-      stub_it(:get, "/majors/major-id", "major")
+      stub_it(:get, "/majors/major-id?locale_key=us-english", "major")
     end
 
     it "returns major" do

@@ -6,7 +6,8 @@ module Traitify
       :secret_key,
       :version,
       :deck_id,
-      :image_pack
+      :image_pack,
+      :locale_key
     ]
 
     attr_accessor(*VALID_OPTIONS_KEYS)

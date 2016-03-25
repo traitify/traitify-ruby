@@ -16,7 +16,7 @@ describe Traitify::Client do
       let(:result) { tom.find_results("assessment-uuid") }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/personality_types", "result")
+        stub_it(:get, "/assessments/assessment-uuid/personality_types?locale_key=us-english", "result")
       end
 
       it "returns a result" do
@@ -30,7 +30,7 @@ describe Traitify::Client do
         let(:result) { tom.find_results("assessment-uuid") }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color", "result")
+          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=us-english", "result")
         end
 
         it "returns a result" do
@@ -42,7 +42,7 @@ describe Traitify::Client do
         let(:result) { tom.find_results("assessment-uuid", "full-color") }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color", "result")
+          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=us-english", "result")
         end
 
         it "returns a result" do
@@ -57,7 +57,7 @@ describe Traitify::Client do
       let(:personality_traits) { tom.assessment_personality_traits("assessment-uuid", "personality-type-uuid") }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits", "personality_traits")
+        stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits?locale_key=us-english", "personality_traits")
       end
 
       it "returns a result" do
@@ -69,7 +69,7 @@ describe Traitify::Client do
       let(:personality_traits) { tom.assessment_personality_traits("assessment-uuid") }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/personality_traits", "personality_traits")
+        stub_it(:get, "/assessments/assessment-uuid/personality_traits?locale_key=us-english", "personality_traits")
       end
 
       it "returns a result" do
@@ -82,7 +82,7 @@ describe Traitify::Client do
     let(:careers) { tom.career_matches("assessment-uuid") }
 
     before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid/matches/careers?number_of_matches=10", "careers")
+      stub_it(:get, "/assessments/assessment-uuid/matches/careers?number_of_matches=10&locale_key=us-english", "careers")
     end
 
     it "returns a result" do

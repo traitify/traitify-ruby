@@ -9,10 +9,21 @@ module Traitify
     end
 
     def request(method, path, options = {})
+      options[:locale_key] ||= locale_key || "us-english" unless options.is_a?(Array) || options.delete(:no_locale)
+      path += path_with_params(path, options) if method == :get
       conn(url: host).send(method) do |request|
+        request.body = options.to_json unless method == :get || options.empty?
         request.url [version, path].join
-        request.body = options.to_json if options
       end.body
+    end
+
+    private
+    def path_with_params(path, options)
+      params = ""
+      return params if options.empty?
+      params << (path.include?("?") ? "&" : "?")
+      params << URI.encode_www_form(options)
+      params
     end
   end
 end

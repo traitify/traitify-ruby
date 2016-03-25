@@ -1,3 +1,8 @@
+### 1.9.0
+
+* Features
+  * Added locales
+
 ### 1.8.4
 
 * Bug Fixes

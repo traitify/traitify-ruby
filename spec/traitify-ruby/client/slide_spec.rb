@@ -16,7 +16,7 @@ describe Traitify::Client do
     let(:slides) { tom.find_slides("assessment-uuid") }
 
     before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
+      stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=us-english", "slides")
     end
 
     it "returns each slide's uuid" do
@@ -29,7 +29,7 @@ describe Traitify::Client do
     let(:slides_complete) { tom.update_slides("assessment-uuid", slides) }
 
     before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
+      stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=us-english", "slides")
       stub_it(:put, "/assessments/assessment-uuid/slides", "slides_complete")
       slides.each do |slide|
         slide.response = 0
@@ -52,7 +52,7 @@ describe Traitify::Client do
       })}
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
+        stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=us-english", "slides")
         stub_it(:put, "/assessments/assessment-uuid/slides/slide-uuid", "slide")
       end
 
@@ -66,7 +66,7 @@ describe Traitify::Client do
       let(:slide) { slides.first }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/slides", "slides")
+        stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=us-english", "slides")
         stub_it(:put, "/assessments/assessment-uuid/slides/slide-uuid", "slide")
 
         slide.response = true

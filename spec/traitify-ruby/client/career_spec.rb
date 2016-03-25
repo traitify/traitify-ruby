@@ -16,7 +16,7 @@ describe Traitify::Client do
       let(:careers) { tom.careers }
 
       before(:each) do
-        stub_it(:get, "/careers", "careers")
+        stub_it(:get, "/careers?locale_key=us-english", "careers")
       end
 
       it "returns careers" do
@@ -28,7 +28,7 @@ describe Traitify::Client do
       let(:careers) { tom.careers(page: 1, careers_per_page: 50) }
 
       before(:each) do
-        stub_it(:get, "/careers?careers_per_page=50&page=1", "careers")
+        stub_it(:get, "/careers?careers_per_page=50&page=1&locale_key=us-english", "careers")
       end
 
       it "returns careers" do
@@ -41,7 +41,7 @@ describe Traitify::Client do
     let(:career) { tom.career("career-id") }
 
     before(:each) do
-      stub_it(:get, "/careers/career-id", "career")
+      stub_it(:get, "/careers/career-id?locale_key=us-english", "career")
     end
 
     it "returns career" do
