@@ -27,7 +27,7 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
       traitify.public_key = "public" # Optional
       traitify.deck_id = "deck-uuid"  # Optional
       traitify.image_pack = "image-pack-type"  # Optional
-      traitify.locale = "us-english"  # Optional
+      traitify.locale_key = "en-us"  # Optional
     end
 
 #### With config file:
@@ -69,7 +69,7 @@ You must can specify the deck in your configuration or override it here
 
     assessment = traitify.create_assessment(deck_id: "deck-uuid")
 
-You can optionally specify image_pack or locale
+You can optionally specify image pack or locale
 
     assessment = traitify.create_assessment(image_pack: "full-color")
 

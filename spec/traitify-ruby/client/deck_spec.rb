@@ -17,7 +17,7 @@ describe Traitify::Client do
       let(:decks) { tom.decks }
 
       before(:each) do
-        stub_it(:get, "/decks?locale_key=us-english", "decks")
+        stub_it(:get, "/decks?locale_key=en-us", "decks")
       end
 
       it "returns an array of decks" do

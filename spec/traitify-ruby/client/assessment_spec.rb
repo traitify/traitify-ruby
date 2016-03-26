@@ -54,7 +54,7 @@ describe Traitify::Client do
     let(:assessment) { tom.find_assessment("assessment-uuid") }
 
     before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid?locale_key=us-english", "assessment")
+      stub_it(:get, "/assessments/assessment-uuid?locale_key=en-us", "assessment")
     end
 
     it "returns an assessment" do
@@ -66,7 +66,7 @@ describe Traitify::Client do
     let(:result) { tom.assessment_with_results("assessment-uuid", nil, %w(traits types blend)) }
 
     before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend&locale_key=us-english", "assessment_with_results")
+      stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend&locale_key=en-us", "assessment_with_results")
     end
 
     it "returns an assessment with results" do

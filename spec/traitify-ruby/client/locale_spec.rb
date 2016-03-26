@@ -25,10 +25,10 @@ describe Traitify::Client do
   end
 
   describe ".locale" do
-    let(:locale) { tom.locale("us-english") }
+    let(:locale) { tom.locale("en-us") }
 
     before(:each) do
-      stub_it(:get, "/locales/us-english", "locale")
+      stub_it(:get, "/locales/en-us", "locale")
     end
 
     it "returns a locale" do
