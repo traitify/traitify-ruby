@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.licenses      = ["MIT"]
   spec.summary       = "Traitify Gem"
   spec.description   = "Traitify is a ruby gem wrapper for the Traitify API"
-  spec.authors       = ["Tom Prats", "Eric Fleming"]
+  spec.authors       = ["Tom Prats", "Eric Fleming", "Carson Wright"]
   spec.email         = "tom@traitify.com"
   spec.homepage      = "https://www.traitify.com"
 

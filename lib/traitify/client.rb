@@ -37,5 +37,8 @@ module Traitify
     include Traitify::Client::Career
     include Traitify::Client::Major
     include Traitify::Client::Locale
+    include Traitify::Client::Profile
+    include Traitify::Client::Group
+    include Traitify::Client::Analytics
   end
 end

@@ -1,7 +1,7 @@
-{
-  "id": "assessment-uuid",
+[{
+  "id": "trait-analytics-uuid",
   "deck_id": "deck-uuid",
   "user_id": "toms-uuid",
   "created_at": 1392153790744,
   "completed_at": 1392153790744
-}
+}]
