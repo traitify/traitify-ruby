@@ -1,19 +1,20 @@
 module Traitify
-  class Client
-    module Career
-      # Valid options are
-      # - page
-      # - careers_per_page
-      # - experience_levels
-      def careers(options = {})
-        get("/careers", options).collect { |career| Hashie::Mash.new(career) }
-      end
-      alias_method :find_careers, :careers
+  module Careers
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+        
+        if args && !args.is_a?(Hash)
+          add_path("/careers/#{args}")
+        else
+          add_path("/careers")
+          if args
+            set_params(args)
+          end
+        end
 
-      def career(id, options = {})
-        Hashie::Mash.new get("/careers/#{id}", options)
+        self
       end
-      alias_method :find_career, :career
     end
   end
 end

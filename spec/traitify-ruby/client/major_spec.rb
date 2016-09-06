@@ -2,18 +2,18 @@ require "spec_helper"
 
 describe Traitify::Client do
   before do
-    Traitify.configure do |tom|
-      tom.secret_key = "secret"
-      tom.host = "https://example.com"
-      tom.version = "v1"
+    Traitify.configure do |client|
+      client.secret_key = "secret"
+      client.host = "https://example.com"
+      client.version = "v1"
     end
   end
 
-  let(:tom) { Traitify.new }
+  let(:client) { Traitify }
 
   describe ".majors" do
     context "without params" do
-      let(:majors) { tom.majors }
+      let(:majors) { client.majors }
 
       before(:each) do
         stub_it(:get, "/majors?locale_key=en-us", "majors")
@@ -25,7 +25,7 @@ describe Traitify::Client do
     end
 
     context "with params" do
-      let(:majors) { tom.majors(page: 1, majors_per_page: 50) }
+      let(:majors) { client.majors(page: 1, majors_per_page: 50) }
 
       before(:each) do
         stub_it(:get, "/majors?majors_per_page=50&page=1&locale_key=en-us", "majors")
@@ -38,7 +38,7 @@ describe Traitify::Client do
   end
 
   describe ".major" do
-    let(:major) { tom.major("major-id") }
+    let(:major) { client.majors("major-id") }
 
     before(:each) do
       stub_it(:get, "/majors/major-id?locale_key=en-us", "major")

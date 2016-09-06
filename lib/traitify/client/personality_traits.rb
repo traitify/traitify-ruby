@@ -1,16 +1,15 @@
 module Traitify
-  module Decks
+  module PersonalityTraits
     class Client < Stack
       def root(args = nil)
         set_verb(:get)
         
         if args && args.first
           id = args.first
-          add_path("/decks/#{id}")
+          add_path("/personality_traits/#{id}")
         else
-          add_path("/decks")
+          add_path("/personality_traits")
         end
-
         
         self
       end

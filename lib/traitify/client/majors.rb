@@ -1,19 +1,20 @@
 module Traitify
-  class Client
-    module Major
-      # Valid options are
-      # - page
-      # - majors_per_page
-      # - experience_levels
-      def majors(options = {})
-        get("/majors", options).collect { |major| Hashie::Mash.new(major) }
-      end
-      alias_method :find_majors, :majors
+  module Majors
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+        
+        if args && !args.is_a?(Hash)
+          add_path("/majors/#{args}")
+        else
+          add_path("/majors")
+          if args
+            set_params(args)
+          end
+        end
 
-      def major(id, options = {})
-        Hashie::Mash.new get("/majors/#{id}", options)
+        self
       end
-      alias_method :find_major, :major
     end
   end
 end

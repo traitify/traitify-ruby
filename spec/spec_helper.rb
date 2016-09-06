@@ -1,3 +1,4 @@
+require "json"
 require "Traitify"
 require "webmock/rspec"
 require "pry"

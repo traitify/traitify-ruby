@@ -10,7 +10,7 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client) { Traitify }
 
   describe ".groups" do
     let(:groups) { client.groups }
@@ -24,8 +24,8 @@ describe Traitify::Client do
     end
   end
 
-  describe ".group" do
-    let(:group) { client.group(:uuid) }
+  describe ".group(id)" do
+    let(:group) { client.groups(:uuid) }
 
     before(:each) do
       stub_it(:get, "/groups/uuid?locale_key=en-us", "group")
@@ -36,47 +36,15 @@ describe Traitify::Client do
     end
   end
 
-  describe ".create_group" do
-    let(:group) { client.create_group({first_name: "Carson"}) }
+  describe ".group.create(...)" do
+    let(:group) { client.groups.create({name: "TESTING"}) }
 
     before(:each) do
-      body = {
-        first_name: "Carson",
-        locale_key: "en-us"
-      }
-      stub_it(:post, "/groups", {body: body}, "group")
+      stub_it(:post, "/groups", {body: {name: "TESTING", locale_key: "en-us"}}, "group")
     end
 
     it "returns an array of decks" do
       expect(group.id).to eq("group-uuid")
-    end
-  end
-
-  describe ".update_group" do
-    let(:group) { client.update_group(10, {first_name: "Carson"}) }
-
-    before(:each) do
-      body = {
-        first_name: "Carson",
-        locale_key: "en-us"
-      }
-      stub_it(:put, "/groups/10", {body: body}, "group")
-    end
-
-    it "returns an array of decks" do
-      expect(group.id).to eq("group-uuid")
-    end
-  end
-
-  describe ".remove_group" do
-    let(:group) { client.remove_group(10) }
-
-    before(:each) do
-      stub_it(:delete, "/groups/10", "blank")
-    end
-
-    it "returns an array of decks" do
-      expect(group.id).to eq(nil)
     end
   end
 end

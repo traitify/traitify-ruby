@@ -2,19 +2,19 @@ require "spec_helper"
 
 describe Traitify::Client do
   before do
-    Traitify.configure do |tom|
-      tom.secret = "secret"
-      tom.api_host = "https://example.com"
-      tom.api_version = "v1"
-      tom.deck_id = "deck-uuid"
+    Traitify.configure do |client|
+      client.secret = "secret"
+      client.api_host = "https://example.com"
+      client.api_version = "v1"
+      client.deck_id = "deck-uuid"
     end
   end
 
-  let(:tom) { Traitify.new }
+  let(:client) { Traitify }
 
-  describe ".create_assessment" do
+  describe ".decks" do
     context "without a user" do
-      let(:decks) { tom.decks }
+      let(:decks) { client.decks }
 
       before(:each) do
         stub_it(:get, "/decks?locale_key=en-us", "decks")

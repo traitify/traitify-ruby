@@ -1,22 +1,19 @@
 module Traitify
-  class Client
-    module Analytics
-      def assessment_analytics(deck_id, options = {})
-        get("/analytics/decks/#{deck_id}/assessments", options).collect do |analytic|
-          Hashie::Mash.new analytic
-        end
+  module Analytics
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+        
+        add_path("/analytics")
+
+        self
       end
 
-      def trait_analytics(deck_id, options = {})
-        get("/analytics/decks/#{deck_id}/personality_traits", options).collect do |analytic|
-          Hashie::Mash.new analytic
-        end
-      end
-
-      def type_analytics(deck_id, options = {})
-        get("/analytics/decks/#{deck_id}/personality_types", options).collect do |analytic|
-          Hashie::Mash.new analytic
-        end
+      def decks(deck_id=nil)
+        res = AnalyticsDecks::Client.new
+        res.set_params(@params)
+        res.add_path(@url)
+        res.root(deck_id)
       end
     end
   end

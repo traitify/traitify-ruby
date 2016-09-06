@@ -1,20 +1,24 @@
 module Traitify
-  class Client
-    module Profile
-      def profiles(options = {})
-        get("/profiles", options).collect do |profile|
-          Hashie::Mash.new profile
+  module Profiles
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+        
+        if args && !args.is_a?(Hash)
+          add_path("/profiles/#{args}")
+        else
+          add_path("/profiles")
         end
-      end
-      alias_method :find_profiles, :profiles
 
-      def profile(profile_id, options = {})
-        Hashie::Mash.new get("/profiles/#{profile_id}", options)
+        
+        self
       end
-      alias_method :find_profile, :profile
 
-      def create_profile(options)
-        Hashie::Mash.new post("/profiles", options)
+      def create(options)
+        set_verb(:post)
+
+        set_params(options)
+        request
       end
     end
   end

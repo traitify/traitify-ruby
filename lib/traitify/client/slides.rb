@@ -1,30 +1,24 @@
 module Traitify
-  class Client
-    module Slide
-      def url_for_slides_by(assessment_id)
-        "/assessments/#{assessment_id}/slides"
+  module Slides
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+
+
+        if args && !args.is_a?(Hash)
+          add_path("/slides/#{args}")
+        else
+          add_path("/slides")
+        end
+
+        self
       end
 
-      def find_slides(assessment_id, options = {})
-        url = url_for_slides_by(assessment_id)
-        get(url, options).collect { |slide| Hashie::Mash.new(slide) }
-      end
+      def update(params = {})
+        set_params(params)
+        set_verb(:put)
 
-      def update_slides(assessment_id, slides)
-        url = url_for_slides_by(assessment_id)
-        put(url, slides).collect { |slide| Hashie::Mash.new(slide) }
-      end
-
-      def update_slide(assessment_id, slide, options = {})
-        slide_id = slide[:id] || slide.id
-        options[:no_locale] = true
-        options.merge(
-          response: slide[:response] || slide.response,
-          time_taken: slide[:time_taken] || slide.time_taken,
-        )
-
-        url = [url_for_slides_by(assessment_id), "/", slide_id].join
-        Hashie::Mash.new put(url, options)
+        request
       end
     end
   end

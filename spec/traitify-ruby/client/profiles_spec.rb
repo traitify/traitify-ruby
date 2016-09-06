@@ -10,7 +10,7 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client) { Traitify }
 
   describe ".profiles" do
     let(:profiles) { client.profiles }
@@ -25,7 +25,7 @@ describe Traitify::Client do
   end
 
   describe ".profile" do
-    let(:profile) { client.profile(:uuid) }
+    let(:profile) { client.profiles(:uuid) }
 
     before(:each) do
       stub_it(:get, "/profiles/uuid?locale_key=en-us", "profile")
@@ -37,14 +37,13 @@ describe Traitify::Client do
   end
 
   describe ".create_profile" do
-    let(:profile) { client.create_profile({first_name: "Carson"}) }
+    let(:profile) { client.profiles.create({first_name: "Carson"}) }
 
     before(:each) do
-      body = {
+      stub_it(:post, "/profiles", {body: {
         first_name: "Carson",
         locale_key: "en-us"
-      }
-      stub_it(:post, "/profiles", {body: body}, "profile")
+      }}, "profile")
     end
 
     it "returns an array of decks" do

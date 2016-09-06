@@ -1,28 +1,27 @@
 module Traitify
-  class Client
-    module Group
-      def groups(options = {})
-        get("/groups", options).collect do |group|
-          Hashie::Mash.new group
+  module Groups
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+        
+        if args && !args.is_a?(Hash)
+          add_path("/groups/#{args}")
+        else
+          add_path("/groups")
+          if args
+            set_params(args)
+          end
         end
-      end
-      alias_method :find_groups, :groups
 
-      def group(group_id, options = {})
-        Hashie::Mash.new get("/groups/#{group_id}", options)
-      end
-      alias_method :find_group, :group
-
-      def create_group(options)
-        Hashie::Mash.new post("/groups", options)
+        
+        self
       end
 
-      def remove_group(group_id, options = {})
-        Hashie::Mash.new delete("/groups/#{group_id}", options)
-      end
+      def create(options)
+        set_verb(:post)
 
-      def update_group(group_id, options = {})
-        Hashie::Mash.new put("/groups/#{group_id}", options)
+        set_params(options)
+        request
       end
     end
   end

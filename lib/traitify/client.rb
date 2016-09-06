@@ -29,16 +29,5 @@ module Traitify
     include Traitify::Connection
     include Traitify::Configuration
     include Traitify::Request
-
-    include Traitify::Client::Deck
-    include Traitify::Client::Assessment
-    include Traitify::Client::Slide
-    include Traitify::Client::Result
-    include Traitify::Client::Career
-    include Traitify::Client::Major
-    include Traitify::Client::Locale
-    include Traitify::Client::Profile
-    include Traitify::Client::Group
-    include Traitify::Client::Analytics
   end
 end

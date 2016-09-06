@@ -1,22 +1,55 @@
 module Traitify
-  class Client
-    module Assessment
-      def create_assessment(options = {})
-        options[:deck_id] ||= deck_id
-        Hashie::Mash.new post("/assessments", options)
+  module Assessments
+    class Client < Stack
+      def root(args = nil)
+        set_verb(:get)
+        
+        if args && !args.is_a?(Hash)
+          add_path("/assessments/#{args}")
+        else
+          add_path("/assessments")
+        end
+
+        self
       end
 
-      def assessment(assessment_id, options = {})
-        Hashie::Mash.new get("/assessments/#{assessment_id}", options)
+      def create(options = {})
+        set_verb(:post)
+        if !options.first && Traitify.deck_id
+          options[:deck_id] = Traitify.deck_id
+        end
+        set_params(options)
+        request
       end
-      alias :find_assessment :assessment
 
-      def assessment_with_results(assessment_id, image_pack = nil, data = [], options = {})
-        image_pack ||= self.image_pack
-        options[:image_pack] = image_pack if image_pack
-        options[:data] = data.join(",")
+      def personality_types(options = {})
+        res = Traitify::PersonalityTypes::Client.new
+        res.add_path(*@url)
+        res.root(options)
+      end
 
-        Hashie::Mash.new get("/assessments/#{assessment_id}", options)
+      def personality_traits(options = {})
+        res = Traitify::PersonalityTraits::Client.new
+        res.add_path(*@url)
+        res.root(options)
+      end
+
+      def matches(options = {})
+        res = Traitify::Matches::Client.new
+        res.add_path(*@url)
+        res.root(options)
+      end
+
+
+      def slides(params = {})
+        res = Slides::Client.new
+        res.add_path(*@url)
+        res.root(params)
+      end
+
+      def with_results(options = {})
+        set_params({data: options.join(",")})
+        request
       end
     end
   end

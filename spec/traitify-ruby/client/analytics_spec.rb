@@ -2,50 +2,50 @@ require "spec_helper"
 
 describe Traitify::Client do
   before do
-    Traitify.configure do |tom|
-      tom.secret = "secret"
-      tom.api_host = "https://example.com"
-      tom.api_version = "v1"
-      tom.deck_id = "deck-uuid"
+    Traitify.configure do |client|
+      client.secret = "secret"
+      client.api_host = "https://example.com"
+      client.api_version = "v1"
+      client.deck_id = "deck-uuid"
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client) { Traitify }
 
-  describe "Analytics" do
-    context do 
-      let(:analytics) { client.assessment_analytics(10) }
+  describe ".analytics" do
+    context do
+      let(:assessment) { client.analytics.decks("deck-id").assessments }
 
       before(:each) do
-        stub_it(:get, "/analytics/decks/10/assessments?locale_key=en-us", "assessment_analytics")
+        stub_it(:get, "/analytics/decks/deck-id/assessments?locale_key=en-us", "assessment")
       end
 
-      it "returns an array of decks" do
-        expect(analytics.first.id).to eq("assessment-analytics-uuid")
+      it "returns assessments" do
+        expect(assessment.deck_id).to eq(client.deck_id)
       end
     end
 
-    context do 
-      let(:analytics) { client.trait_analytics(10) }
+    context do
+      let(:personality_traits) { client.analytics.decks("deck-id").personality_traits }
 
       before(:each) do
-        stub_it(:get, "/analytics/decks/10/personality_traits?locale_key=en-us", "trait_analytics")
+        stub_it(:get, "/analytics/decks/deck-id/personality_traits?locale_key=en-us", "assessment")
       end
 
-      it "returns an array of decks" do
-        expect(analytics.first.id).to eq("trait-analytics-uuid")
+      it "returns an personality_traits" do
+        expect(personality_traits.deck_id).to eq(client.deck_id)
       end
     end
 
-    context do 
-      let(:analytics) { client.type_analytics(10) }
+    context do
+      let(:personality_types) { client.analytics.decks("deck-id").personality_types }
 
       before(:each) do
-        stub_it(:get, "/analytics/decks/10/personality_types?locale_key=en-us", "type_analytics")
+        stub_it(:get, "/analytics/decks/deck-id/personality_types?locale_key=en-us", "assessment")
       end
 
-      it "returns an array of decks" do
-        expect(analytics.first.id).to eq("type-analytics-uuid")
+      it "returns an personality_types" do
+        expect(personality_types.deck_id).to eq(client.deck_id)
       end
     end
   end
