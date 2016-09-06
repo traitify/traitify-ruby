@@ -4,7 +4,6 @@ module Traitify
       def root(args = nil)
         set_verb(:get)
 
-
         if args && !args.is_a?(Hash)
           add_path("/slides/#{args}")
         else
