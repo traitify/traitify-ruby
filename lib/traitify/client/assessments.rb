@@ -48,7 +48,8 @@ module Traitify
       end
 
       def with_results(options = {})
-        set_params({data: options.join(",")})
+        options[:data] = (options[:data] || options["data"]).join(",")
+        set_params(options)
         request
       end
     end
