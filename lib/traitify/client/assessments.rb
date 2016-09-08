@@ -23,26 +23,26 @@ module Traitify
       end
 
       def personality_types(options = {})
-        res = Traitify::PersonalityTypes::Client.new
+        res = Traitify::PersonalityTypes::Client.new(self.api)
         res.add_path(*@url)
         res.root(options)
       end
 
       def personality_traits(options = {})
-        res = Traitify::PersonalityTraits::Client.new
+        res = Traitify::PersonalityTraits::Client.new(self.api)
         res.add_path(*@url)
         res.root(options)
       end
 
       def matches(options = {})
-        res = Traitify::Matches::Client.new
+        res = Traitify::Matches::Client.new(self.api)
         res.add_path(*@url)
         res.root(options)
       end
 
 
       def slides(params = {})
-        res = Slides::Client.new
+        res = Slides::Client.new(self.api)
         res.add_path(*@url)
         res.root(params)
       end

@@ -10,7 +10,7 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify }
+  let(:client) { Traitify.new }
 
   describe ".create_assessment" do
     context "without a user" do
@@ -63,7 +63,7 @@ describe Traitify::Client do
   end
 
   describe ".assessment_with_results" do
-    let(:result) { client.assessments("assessment-uuid").with_results(%w(traits types blend)) }
+    let(:result) { client.assessments("assessment-uuid").with_results(data: [:traits, :types, :blend]) }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend&locale_key=en-us", "assessment_with_results")

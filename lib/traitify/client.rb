@@ -29,5 +29,7 @@ module Traitify
     include Traitify::Connection
     include Traitify::Configuration
     include Traitify::Request
+      #Add Root Api Node
+    include Root
   end
 end

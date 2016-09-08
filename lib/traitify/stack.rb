@@ -14,12 +14,14 @@ module Traitify
       end
     end
 
-    def initialize
+    def initialize(api)
       @verb = "get"
       @data = []
       @url = []
       @options = {}
       @params = nil
+      @api = api
+      self
     end
 
     def run(method, args, block)
@@ -64,9 +66,9 @@ module Traitify
       url = @url.join("")
 
       if @params
-        data = Traitify.new.send(@verb, url, @params)
+        data = api.send(@verb, url, @params)
       else
-        data = Traitify.new.send(@verb, url)
+        data = api.send(@verb, url)
       end
       if data.class.name == "Array"
         data.collect do |row|
@@ -75,6 +77,22 @@ module Traitify
       else
         Hashie::Mash.new(data)
       end
+    end
+
+    def paginate
+      url = @url.join("")
+
+      if @params
+        data = api.request_with_pages(@verb, url, @params)
+      else
+        data = api.request_with_pages(@verb, url)
+      end
+
+      Hashie::Mash.new(data)
+    end
+
+    def api
+      @api
     end
   end
 end

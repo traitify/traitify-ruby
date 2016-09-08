@@ -10,7 +10,7 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify }
+  let(:client) { Traitify.new }
 
   describe ".locales" do
     let(:locales) { client.locales }

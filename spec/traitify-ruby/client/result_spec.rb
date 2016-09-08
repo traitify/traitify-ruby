@@ -9,7 +9,7 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify }
+  let(:client) { Traitify.new }
 
   describe ".find_results" do
     context "without an image pack" do
@@ -27,13 +27,13 @@ describe Traitify::Client do
     context "with an image pack" do
       context "set in the configurations" do
         let(:client) do
-          Traitify
+          Traitify.new
         end
         let(:result) do
           Traitify.configure do |c|
             c.image_pack = "full-color"
           end 
-          res = Traitify.assessments("assessment-uuid").personality_types
+          res = Traitify.new.assessments("assessment-uuid").personality_types
           Traitify.configure do |c|
             c.image_pack = nil
           end 

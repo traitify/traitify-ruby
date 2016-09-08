@@ -10,7 +10,7 @@ module Traitify
       end
 
       def decks(deck_id=nil)
-        res = AnalyticsDecks::Client.new
+        res = AnalyticsDecks::Client.new(self.api)
         res.set_params(@params)
         res.add_path(@url)
         res.root(deck_id)

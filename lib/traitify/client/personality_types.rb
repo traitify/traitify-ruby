@@ -24,7 +24,7 @@ module Traitify
       end
 
       def personality_traits(options = {})
-        res = Traitify::PersonalityTraits::Client.new
+        res = Traitify::PersonalityTraits::Client.new(self.api)
         res.add_path(*@url)
         res.set_params(@params)
         res.root(options)
