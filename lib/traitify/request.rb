@@ -27,6 +27,7 @@ module Traitify
         request.body = options.to_json unless method == :get || options.empty?
         request.url [version, path].join
       end
+      
       prev = ""
       nex = ""
       if req.env.response_headers["link"]
@@ -43,6 +44,7 @@ module Traitify
       end
       data = {
         page: {},
+        total: req.env.response_headers["x-total-count"],
         data: req.body
       }
 
