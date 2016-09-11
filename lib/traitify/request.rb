@@ -3,7 +3,7 @@ require 'uri'
 module Traitify
   module Request
     def method_missing(meth, *args, &block)
-      if [:get, :post, :put, :delete].include? meth
+      if [:get, :post, :put, :delete, :patch].include? meth
         request(meth, *args)
       else
         super
