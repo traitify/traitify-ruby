@@ -22,26 +22,29 @@ module Traitify
     def request_with_pages(method, path, options = {})
       options[:locale_key] ||= locale_key || "en-us" unless options.is_a?(Array) || options.delete(:no_locale)
       path += path_with_params(path, options) if method == :get
-      
+
       req = conn(url: host).send(method) do |request|
         request.body = options.to_json unless method == :get || options.empty?
         request.url [version, path].join
       end
-      
+
       prev = ""
       nex = ""
+
       if req.env.response_headers["link"]
         rels = req.env.response_headers["link"]
-        if rels.include?("prev")
-          prev_url = rels.split(",").first 
+        url = rels.split(",")
+        if url.select { |a| a.include?('rel="prev"') }[0]
+          prev_url = url.select { |a| a.include?('rel="prev"') }[0]
           prev = prev_url.gsub(/rel\=\"prev\"/, " ").gsub(/</, "").to_s.split(" ").to_a[0].to_s.gsub(/\>;/, "")
         end
-        
-        if rels.include?("next")
-          next_url = rels.split(",").last
+
+        if url.select { |a| a.include?('rel="next"') }[0]
+          next_url = url.select { |a| a.include?('rel="next"') }[0]
           nex = next_url.gsub(/rel\=\"next\"/, " ").gsub(/</, "").to_s.split(" ").to_a[0].to_s.gsub(/\>;/, "")
         end
       end
+
       data = {
         page: {},
         total: req.env.response_headers["x-total-count"],
