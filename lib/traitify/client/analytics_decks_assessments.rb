@@ -10,8 +10,9 @@ module Traitify
       end
     end
     def groups(params)
-      add_params(params)
-      request
+      add_params({group_ids: params})
+
+      self
     end
   end
 end
