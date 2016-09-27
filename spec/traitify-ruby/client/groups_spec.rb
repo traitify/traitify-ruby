@@ -37,10 +37,22 @@ describe Traitify::Client do
   end
 
   describe ".group.create(...)" do
-    let(:group) { client.groups.create({name: "TESTING"}) }
+    let(:group) { client.groups.create({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"]}) }
 
     before(:each) do
-      stub_it(:post, "/groups", {body: {name: "TESTING", locale_key: "en-us"}}, "group")
+      stub_it(:post, "/groups", {body: {name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], locale_key: "en-us"}}, "group")
+    end
+
+    it "returns an array of decks" do
+      expect(group.id).to eq("group-uuid")
+    end
+  end
+
+  describe ".group.update(...)" do
+    let(:group) { client.groups.update({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"]}) }
+
+    before(:each) do
+      stub_it(:patch, "/groups", {body: {name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"], locale_key: "en-us"}}, "group")
     end
 
     it "returns an array of decks" do
