@@ -8,11 +8,16 @@ module Traitify
 
         self
       end
-    end
-    def groups(params)
-      add_params({group_ids: params})
+      def groups(params)
+        add_params({group_ids: params})
 
-      self
+        self
+      end
+      def profiles(params)
+        add_params({profile_ids: params})
+
+        self
+      end
     end
   end
 end
