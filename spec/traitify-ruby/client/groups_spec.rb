@@ -59,4 +59,28 @@ describe Traitify::Client do
       expect(group.id).to eq("group-uuid")
     end
   end
+
+  describe ".matches.profiles(...)" do
+    let(:group) { client.groups(:uuid).matches.profiles(:profile_id) }
+
+    before(:each) do
+      stub_it(:get, "/groups/uuid/matches/profiles/profile_id?locale_key=en-us", "group")
+    end
+
+    it "returns an array of decks" do
+      expect(group.id).to eq("group-uuid")
+    end
+  end
+
+  describe ".matches.groups(...)" do
+    let(:group) { client.groups(:uuid).matches.groups(:group_id) }
+
+    before(:each) do
+      stub_it(:get, "/groups/uuid/matches/groups/group_id?locale_key=en-us", "group")
+    end
+
+    it "returns an array of decks" do
+      expect(group.id).to eq("group-uuid")
+    end
+  end
 end

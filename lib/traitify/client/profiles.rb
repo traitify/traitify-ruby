@@ -27,6 +27,13 @@ module Traitify
         request
       end
 
+      def matches
+        res = ProfilesMatches::Client.new(self.api)
+        res.set_params(@params)
+        res.add_path(@url)
+        res.root
+      end
+
       def update(params)
         set_verb(:put)
 

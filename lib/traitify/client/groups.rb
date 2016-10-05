@@ -24,6 +24,13 @@ module Traitify
         request
       end
 
+      def matches
+        res = GroupsMatches::Client.new(self.api)
+        res.set_params(@params)
+        res.add_path(@url)
+        res.root
+      end
+
       def update(options)
         set_verb(:patch)
 
