@@ -188,7 +188,7 @@ Returns a results object:
 
 #### Getting groups
 
-    group = traitify.groups
+    groups = traitify.groups
 
 #### Getting a group
 
