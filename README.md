@@ -33,7 +33,7 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
 #### With config file:
 
     traitify = Traitify.new
-    traitify.create_assessment
+    traitify.assessments.create
 
 #### Without config file:
 
@@ -43,7 +43,7 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
       secret_key: "secret",
       deck_id: "deck-uuid"
     )
-    traitify.create_assessment
+    traitify.assessments.create
 
 ### Decks
 
@@ -63,15 +63,15 @@ Returns an array of Deck objects:
 
 #### Creating an assessment:
 
-    assessment = traitify.create_assessment
+    assessment = traitify.assessments.create
 
 You must can specify the deck in your configuration or override it here
 
-    assessment = traitify.create_assessment(deck_id: "deck-uuid")
+    assessment = traitify.assessments.create(deck_id: "deck-uuid")
 
 You can optionally specify image pack or locale
 
-    assessment = traitify.create_assessment(image_pack: "full-color")
+    assessment = traitify.assessments.create(image_pack: "full-color")
 
 Returns an assessment object:
 
@@ -82,7 +82,7 @@ Returns an assessment object:
 
 #### Finding an assessment:
 
-    assessment = traitify.find_assessment("assessment-uuid")
+    assessment = traitify.assessments("assessment-uuid").first
 
 Returns an assessment object as seen above
 
@@ -92,7 +92,7 @@ An assessment can be taken through our javascript plugin or by getting the slide
 
 #### Finding an assessment's slides:
 
-    slides = traitify.find_slides("assessment-uuid")
+    slides = traitify.assessments("assessment-uuid").slides.to_a
 
 Returns an array of slides
 
@@ -106,20 +106,20 @@ Returns an array of slides
       slide
     end
 
-    traitify.update_slides("assessment-uuid", slides)
+    traitify.assessments("assessment-uuid").slides.update(slides)
 
 #### Updating a single assessment slide:
 
     slide = assessment.slides.first
     slide.response = true
     slide.time_taken = 600
-    traitify.update_slide(assessment.id, slide)
+    traitify.assessments(assessment.id).slides(slide.id).update(slide)
 
 ### Results
 
 #### Getting an assessment's results
 
-    results = traitify.find_results("assessment-uuid")
+    results = traitify.assessments("assessment-uuid").personality_types
 
 Returns a results object:
 
@@ -148,13 +148,20 @@ Returns a results object:
 
 #### Getting an assessment's personality traits
 
-    traits = traitify.raw_personality_traits("assessment-uuid")
+    traits = traitify.assessments("assessment-uuid").personality_traits
     trait = traits.first
     trait.score #=> 100
     personality_trait = trait.personality_trait
     personality_trait.name        #=> "Imaginative"
     personality_trait.definition  #=> "Able to think symbolically and play with ideas."
     personality_trait.description #=> "Coming Soon"
+
+
+#### Getting an assessment's analytics
+
+    traits = traitify.analytics.decks("deck-uuid").personality_traits
+    traits = traitify.analytics.decks("deck-uuid").personality_types
+    traits = traitify.analytics.decks("deck-uuid").assessments
 
 #### More results
 
