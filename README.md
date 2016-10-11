@@ -163,6 +163,44 @@ Returns a results object:
     traits = traitify.analytics.decks("deck-uuid").personality_types
     traits = traitify.analytics.decks("deck-uuid").assessments
 
+
+#### Getting a profile
+
+    profile = traitify.profiles("profile-uuid")
+    
+    profile.first_name        #=> "John"
+    profile.last_name         #=> "Doe"
+    profile.email             #=> "johndoe@example.com"
+
+
+#### Getting a profile create
+
+    profile = traitify.profiles.create({
+        first_name: "John",
+        last_name: "Doe",
+        email: "johndoe@example.com"
+    })
+    
+
+    profile.first_name        #=> "John"
+    profile.last_name         #=> "Doe"
+    profile.email             #=> "johndoe@example.com"
+
+#### Getting a group
+
+    profile = traitify.groups("group-uuid")
+
+#### Getting a group create
+
+    profile = traitify.groups.create({
+        name: "Example Group",
+        category: "Organization",
+        profile_ids: ["profile-uuid"],
+        group_ids: ["group-uuid"]
+    })
+        
+        
+
 #### More results
 
 More API endpoints may be available. You can find more at [developer.traitify.com](http://developer.traitify.com/documentation).
