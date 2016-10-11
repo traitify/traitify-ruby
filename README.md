@@ -186,13 +186,17 @@ Returns a results object:
     profile.last_name         #=> "Doe"
     profile.email             #=> "johndoe@example.com"
 
+#### Getting groups
+
+    group = traitify.groups
+
 #### Getting a group
 
-    profile = traitify.groups("group-uuid")
+    group = traitify.groups("group-uuid")
 
 #### Getting a group create
 
-    profile = traitify.groups.create({
+    groups = traitify.groups.create({
         name: "Example Group",
         category: "Organization",
         profile_ids: ["profile-uuid"],
