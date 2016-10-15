@@ -2,18 +2,18 @@ require "spec_helper"
 
 describe Traitify::Client do
   before do
-    Traitify.configure do |c|
-      c.secret = "secret"
-      c.api_host = "https://example.com"
-      c.api_version = "v1"
-      c.deck_id = "deck-uuid"
+    Traitify.configure do |client|
+      client.secret_key = "secret"
+      client.host = "https://example.com"
+      client.version = "v1"
+      client.deck_id = "deck-uuid"
     end
   end
 
   let(:client) { Traitify.new }
 
   describe ".groups" do
-    let(:groups) { client.groups }
+    let(:groups) { client.groups.all }
 
     before(:each) do
       stub_it(:get, "/groups?locale_key=en-us", "groups")
@@ -25,7 +25,7 @@ describe Traitify::Client do
   end
 
   describe ".group(id)" do
-    let(:group) { client.groups(:uuid) }
+    let(:group) { client.groups(:uuid).find }
 
     before(:each) do
       stub_it(:get, "/groups/uuid?locale_key=en-us", "group")
@@ -49,7 +49,7 @@ describe Traitify::Client do
   end
 
   describe ".group.update(...)" do
-    let(:group) { client.groups.update({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"]}) }
+    let(:group) { client.groups.update({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"]}, :patch) }
 
     before(:each) do
       stub_it(:patch, "/groups", {body: {name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"], locale_key: "en-us"}}, "group")
@@ -61,7 +61,7 @@ describe Traitify::Client do
   end
 
   describe ".matches.profiles(...)" do
-    let(:group) { client.groups(:uuid).matches.profiles(:profile_id) }
+    let(:group) { client.groups(:uuid).matches.profiles(:profile_id).find }
 
     before(:each) do
       stub_it(:get, "/groups/uuid/matches/profiles/profile_id?locale_key=en-us", "group")
@@ -73,7 +73,7 @@ describe Traitify::Client do
   end
 
   describe ".matches.groups(...)" do
-    let(:group) { client.groups(:uuid).matches.groups(:group_id) }
+    let(:group) { client.groups(:uuid).matches.groups(:group_id).find }
 
     before(:each) do
       stub_it(:get, "/groups/uuid/matches/groups/group_id?locale_key=en-us", "group")

@@ -1,20 +1,15 @@
-def require_folder(folder)
-  Dir["./#{folder}/*.rb"].each {|file| require file }
-end
-
-
-require "traitify/version"
-require "traitify/configuration"
-require "traitify/stack"
-require "traitify/client"
+require "faraday_middleware"
+require "hashie"
+require "uri"
+require "pry"
+Dir["./lib/traitify/**/*.rb"].each { |file| require file }
 
 module Traitify
   extend Configuration
 
-  #Defaults
-  self.api_host = "http://api-sandbox.traitify.com"
+  self.host = "http://api-sandbox.traitify.com"
   self.version = "v1"
-
+  self.locale_key = "en-us"
 
   class << self
     def new(options = {})

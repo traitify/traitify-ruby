@@ -3,9 +3,9 @@ require "spec_helper"
 describe Traitify::Client do
   before do
     Traitify.configure do |client|
-      client.secret = "secret"
-      client.api_host = "https://example.com"
-      client.api_version = "v1"
+      client.secret_key = "secret"
+      client.host = "https://example.com"
+      client.version = "v1"
       client.deck_id = "deck-uuid"
     end
   end
@@ -51,7 +51,7 @@ describe Traitify::Client do
   end
 
   describe ".find_assessment" do
-    let(:assessment) { client.assessments("assessment-uuid") }
+    let(:assessment) { client.assessments("assessment-uuid").find }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?locale_key=en-us", "assessment")
@@ -63,7 +63,7 @@ describe Traitify::Client do
   end
 
   describe ".assessment_with_results" do
-    let(:result) { client.assessments("assessment-uuid").with_results(data: [:traits, :types, :blend]) }
+    let(:result) { client.assessments("assessment-uuid").find(data: [:traits, :types, :blend]) }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend&locale_key=en-us", "assessment_with_results")

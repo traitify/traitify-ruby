@@ -13,7 +13,7 @@ describe Traitify::Client do
 
   describe ".careers" do
     context "without params" do
-      let(:careers) { client.careers }
+      let(:careers) { client.careers.all }
 
       before(:each) do
         stub_it(:get, "/careers?locale_key=en-us", "careers")
@@ -25,7 +25,7 @@ describe Traitify::Client do
     end
 
     context "with params" do
-      let(:careers) { client.careers(page: 1, careers_per_page: 50) }
+      let(:careers) { client.careers(page: 1, careers_per_page: 50).all }
 
       before(:each) do
         stub_it(:get, "/careers?careers_per_page=50&page=1&locale_key=en-us", "careers")
@@ -38,7 +38,7 @@ describe Traitify::Client do
   end
 
   describe ".career" do
-    let(:career) { client.careers("career-id") }
+    let(:career) { client.careers("career-id").find }
 
     before(:each) do
       stub_it(:get, "/careers/career-id?locale_key=en-us", "career")

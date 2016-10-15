@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    traitify (2.0.3)
+    traitify (2.0.0)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
       hashie (~> 3.0)
@@ -89,4 +89,4 @@ DEPENDENCIES
   webmock (~> 1.13)
 
 BUNDLED WITH
-   1.12.5
+   1.13.2

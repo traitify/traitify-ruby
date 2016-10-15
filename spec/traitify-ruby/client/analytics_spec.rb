@@ -3,9 +3,9 @@ require "spec_helper"
 describe Traitify::Client do
   before do
     Traitify.configure do |client|
-      client.secret = "secret"
-      client.api_host = "https://example.com"
-      client.api_version = "v1"
+      client.secret_key = "secret"
+      client.host = "https://example.com"
+      client.version = "v1"
       client.deck_id = "deck-uuid"
     end
   end
@@ -14,19 +14,19 @@ describe Traitify::Client do
 
   describe ".analytics" do
     context do
-      let(:assessment) { client.analytics.decks("deck-id").assessments }
+      let(:assessments) { client.analytics.decks("deck-id").assessments.all }
 
       before(:each) do
         stub_it(:get, "/analytics/decks/deck-id/assessments?locale_key=en-us", "assessment")
       end
 
       it "returns assessments" do
-        expect(assessment.deck_id).to eq(client.deck_id)
+        expect(assessments.deck_id).to eq(client.deck_id)
       end
     end
 
     context do
-      let(:personality_traits) { client.analytics.decks("deck-id").personality_traits }
+      let(:personality_traits) { client.analytics.decks("deck-id").personality_traits.all }
 
       before(:each) do
         stub_it(:get, "/analytics/decks/deck-id/personality_traits?locale_key=en-us", "assessment")
@@ -38,7 +38,7 @@ describe Traitify::Client do
     end
 
     context do
-      let(:personality_types) { client.analytics.decks("deck-id").personality_types }
+      let(:personality_types) { client.analytics.decks("deck-id").personality_types.all }
 
       before(:each) do
         stub_it(:get, "/analytics/decks/deck-id/personality_types?locale_key=en-us", "assessment")

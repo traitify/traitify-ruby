@@ -1,9 +1,6 @@
-require "faraday_middleware"
-require "traitify/error"
-
 module Traitify
   module Connection
-    def conn(options = {})
+    def connection(options = {})
       Faraday::Utils.default_params_encoder = Faraday::FlatParamsEncoder
 
       Faraday.new(options) do |faraday|

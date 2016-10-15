@@ -12,21 +12,12 @@ module Traitify
 
     attr_accessor(*VALID_OPTIONS_KEYS)
 
-    alias_method :api_host, :host
-    alias_method :api_host=, :host=
-
-    alias_method :api_version, :version
-    alias_method :api_version=, :version=
-
-    alias_method :secret, :secret_key
-    alias_method :secret=, :secret_key=
-
     def configure
       yield self
     end
 
     def options
-      VALID_OPTIONS_KEYS.inject({}){|o,k| o.merge!(k => send(k)) }
+      Hash[VALID_OPTIONS_KEYS.collect { |key| [key, send(key)] }]
     end
   end
 end

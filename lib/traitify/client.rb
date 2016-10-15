@@ -1,35 +1,23 @@
-# require base modules
-require "traitify/connection"
-require "traitify/request"
-require "hashie"
-# require client modules in lib/Traitify/client
-Dir[File.expand_path("../client/*.rb", __FILE__)].each {|f| require f }
-
 module Traitify
   class Client
     attr_accessor(*Configuration::VALID_OPTIONS_KEYS)
-
-    alias_method :api_host, :host
-    alias_method :api_host=, :host=
-
-    alias_method :api_version, :version
-    alias_method :api_version=, :version=
-
-    alias_method :secret, :secret_key
-    alias_method :secret=, :secret_key=
+    attr_reader :type, :verb, :path, :params
 
     def initialize(options = {})
-      options = Traitify.options.merge(options)
-
-      options.each do |key, value|
+      Traitify.options.merge(options).each do |key, value|
         send("#{key}=", value) unless value.nil?
       end
+
+      set(verb: :get, path: "", params: {})
     end
 
-    include Traitify::Connection
-    include Traitify::Configuration
-    include Traitify::Request
-      #Add Root Api Node
-    include Root
+    def method_missing(method, *args, &block)
+      base(method, *args)
+    end
+
+    Dir["./lib/traitify/client/*.rb"].each do |file|
+      name = File.basename(file, ".rb").capitalize
+      include Object.const_get("Traitify::#{name}")
+    end
   end
 end
