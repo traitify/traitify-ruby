@@ -1,3 +1,9 @@
+require "faraday_middleware"
+require "hashie"
+require "uri"
+require "pry"
+Dir[File.expand_path("../client/*.rb", __FILE__)].each { |f| require f }
+
 module Traitify
   class Client
     attr_accessor(*Configuration::VALID_OPTIONS_KEYS)
@@ -20,9 +26,11 @@ module Traitify
     end
     alias_method :to_h, :to_hash
 
-    Dir["./lib/traitify/client/*.rb"].each do |file|
-      name = File.basename(file, ".rb").capitalize
-      include Object.const_get("Traitify::#{name}")
-    end
+    include Traitify::Configuration
+    include Traitify::Client::Connection
+    include Traitify::Client::Model
+    include Traitify::Client::Overrides
+    include Traitify::Client::Request
+    include Traitify::Client::Setup
   end
 end

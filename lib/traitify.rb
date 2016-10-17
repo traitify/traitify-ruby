@@ -1,8 +1,6 @@
-require "faraday_middleware"
-require "hashie"
-require "uri"
-require "pry"
-Dir["./lib/traitify/**/*.rb"].each { |file| require file }
+require "traitify/configuration"
+require "traitify/client"
+require "traitify/error"
 
 module Traitify
   extend Configuration
