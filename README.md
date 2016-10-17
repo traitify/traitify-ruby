@@ -92,7 +92,7 @@ An assessment can be taken through our javascript plugin or by getting the slide
 
 #### Finding an assessment's slides:
 
-    slides = traitify.assessments("assessment-uuid").slides.to_a
+    slides = traitify.assessments("assessment-uuid").slides.fetch
 
 Returns an array of slides
 
@@ -148,7 +148,7 @@ Returns a results object:
 
 #### Getting an assessment's personality traits
 
-    traits = traitify.assessments("assessment-uuid").personality_traits
+    traits = traitify.assessments("assessment-uuid").personality_traits.fetch
     trait = traits.first
     trait.score #=> 100
     personality_trait = trait.personality_trait
@@ -156,18 +156,15 @@ Returns a results object:
     personality_trait.definition  #=> "Able to think symbolically and play with ideas."
     personality_trait.description #=> "Coming Soon"
 
-
 #### Getting an assessment's analytics
 
-    traits = traitify.analytics.decks("deck-uuid").personality_traits
-    traits = traitify.analytics.decks("deck-uuid").personality_types
-    traits = traitify.analytics.decks("deck-uuid").assessments
-
+    traits = traitify.analytics.decks("deck-uuid").personality_traits.fetch
+    types = traitify.analytics.decks("deck-uuid").personality_types.fetch
+    assessments = traitify.analytics.decks("deck-uuid").assessments.fetch
 
 #### Getting a profile
 
-    profile = traitify.profiles("profile-uuid")
-    
+    profile = traitify.profiles("profile-uuid").fetch
     profile.first_name        #=> "John"
     profile.last_name         #=> "Doe"
     profile.email             #=> "johndoe@example.com"
@@ -180,7 +177,6 @@ Returns a results object:
         last_name: "Doe",
         email: "johndoe@example.com"
     })
-    
 
     profile.first_name        #=> "John"
     profile.last_name         #=> "Doe"
@@ -188,11 +184,11 @@ Returns a results object:
 
 #### Getting groups
 
-    groups = traitify.groups
+    groups = traitify.groups.fetch
 
 #### Getting a group
 
-    group = traitify.groups("group-uuid")
+    group = traitify.groups("group-uuid").fetch
 
 #### Getting a group create
 
@@ -202,8 +198,6 @@ Returns a results object:
         profile_ids: ["profile-uuid"],
         group_ids: ["group-uuid"]
     })
-        
-        
 
 #### More results
 

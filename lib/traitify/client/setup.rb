@@ -8,18 +8,6 @@ module Traitify
       perform_overrides
     end
 
-    def set_verb(verb)
-      set(verb: verb)
-    end
-
-    def set_path(path)
-      set(path: path)
-    end
-
-    def set_params(new_params)
-      set(params: new_params)
-    end
-
     def set_param(key, value)
       set(params: params.merge(key => value))
     end

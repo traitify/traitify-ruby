@@ -15,6 +15,11 @@ module Traitify
       base(method, *args)
     end
 
+    def to_hash
+      Hash[instance_variables.collect { |key| [key.to_s.delete("@"), instance_variable_get(key)] }]
+    end
+    alias_method :to_h, :to_hash
+
     Dir["./lib/traitify/client/*.rb"].each do |file|
       name = File.basename(file, ".rb").capitalize
       include Object.const_get("Traitify::#{name}")

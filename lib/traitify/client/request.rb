@@ -9,6 +9,7 @@ module Traitify
     def request
       @data = hashify base_request.body
     end
+    alias_method :fetch, :request
 
     def paginate
       @data = hashify base_request_with_pages
