@@ -21,7 +21,7 @@ module Traitify
       def base(name, params = {})
         client = copy.set(type: name, verb: :get).add_path("/#{name}")
 
-        if params.nil? || params.is_a?(Hash)
+        if [NilClass, Hash, Array].include? params.class
           client.set(params: params)
         else
           client.add_path("/#{params}")
