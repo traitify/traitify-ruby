@@ -1,7 +1,6 @@
 require "faraday_middleware"
 require "hashie"
 require "uri"
-require "pry"
 Dir[File.expand_path("../client/*.rb", __FILE__)].each { |f| require f }
 
 module Traitify
