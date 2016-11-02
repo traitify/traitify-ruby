@@ -20,3 +20,4 @@ def stub_it(http_method = :any, endpoint = "/", options = {}, status = 200, resp
     headers: { 'Content-type' => "application/json" }
   )
 end
+
