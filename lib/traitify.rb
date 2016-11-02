@@ -22,5 +22,16 @@ module Traitify
         log.progname = self.name
       end
     end
+
+    def log(level, message)
+      message = "[traitify-ruby] #{message}"
+      case level
+      when :debug
+        logger.debug message
+      else
+        logger.info message
+      end
+    end
+
   end
 end

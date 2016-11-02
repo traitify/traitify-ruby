@@ -32,17 +32,17 @@ module Traitify
           set_param(:locale_key, locale_key)
         end
 
-        Traitify.logger.info "#{verb.to_s.upcase}: #{host}/#{version}#{path}"
-        Traitify.logger.debug "Authentication: #{self.secret_key}"
+        Traitify.log :info, "#{verb.to_s.upcase}: #{host}/#{version}#{path}"
+        Traitify.log :debug, "AUTH: #{self.secret_key}"
 
         connection(url: host).send(verb) do |request|
           unless params.empty?
             if verb == :get
               request.params = params
-              Traitify.logger.info "PARAMS: #{request.params}"
+              Traitify.log :info, "PARAMS: #{request.params}"
             else
               request.body = params.to_json
-              Traitify.logger.info "BODY: #{request.body}"
+              Traitify.log :info, "BODY: #{request.body}"
             end
           end
           request.url [version, path].join
