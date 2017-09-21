@@ -33,7 +33,7 @@ module Traitify
         end
 
         Traitify.log :info, "#{verb.to_s.upcase}: #{host}/#{version}#{path}"
-        Traitify.log :debug, "AUTH: #{self.secret_key}"
+        Traitify.log :debug, "AUTH: #{self.secret_key || self.public_key}"
 
         connection(url: host).send(verb) do |request|
           unless params.empty?
