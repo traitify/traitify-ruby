@@ -51,21 +51,6 @@ module Traitify
 
       def base_request_with_pages
         request = base_request
-        nex = prev = ""
-
-        if request.env.response_headers["link"]
-          rels = request.env.response_headers["link"]
-          url = rels.split(",")
-          if url.select { |a| a.include?('rel="prev"') }[0]
-            prev_url = url.select { |a| a.include?('rel="prev"') }[0]
-            prev = prev_url.gsub(/rel\=\"prev\"/, " ").gsub(/</, "").to_s.split(" ").to_a[0].to_s.gsub(/\>;/, "")
-          end
-
-          if url.select { |a| a.include?('rel="next"') }[0]
-            next_url = url.select { |a| a.include?('rel="next"') }[0]
-            nex = next_url.gsub(/rel\=\"next\"/, " ").gsub(/</, "").to_s.split(" ").to_a[0].to_s.gsub(/\>;/, "")
-          end
-        end
 
         data = {
           page: {},
@@ -73,8 +58,24 @@ module Traitify
           data: request.body
         }
 
-        data[:page][:previous] = CGI::parse(URI(prev).query)["paging_cursor"].first unless prev.empty?
-        data[:page][:next] = CGI::parse(URI(nex).query)["paging_cursor"].first unless nex.empty?
+        if request.env.response_headers["link"]
+          links = request.env.response_headers["link"].split(",")
+          if prevLink = links.find { |link| link.include?("rel=\"prev\"") }
+            prevLink = prevLink.split(/>|</)[1]
+            data[:page][:previous] = {
+              url: prevLink,
+              params: CGI::parse(prevLink.split("?")[1..-1].join("?"))
+            }
+          end
+
+          if nextLink = links.find { |link| link.include?("rel=\"next\"") }
+            nextLink = nextLink.split(/>|</)[1]
+            data[:page][:next] = {
+              url: nextLink,
+              params: CGI::parse(nextLink.split("?")[1..-1].join("?"))
+            }
+          end
+        end
 
         data
       end
