@@ -8,12 +8,12 @@ module Traitify
       end
 
       def request
-        @data = hashify base_request.body
+        @data = objectify base_request.body
       end
       alias_method :fetch, :request
 
       def paginate
-        @data = hashify base_request_with_pages
+        @data = objectify base_request_with_pages
       end
 
       def data
@@ -21,10 +21,13 @@ module Traitify
       end
 
       private
-      def hashify(data)
-        return Hashie::Mash.new(data) unless data.is_a? Array
-
-        data.collect { |row| Hashie::Mash.new(row) }
+      def objectify(data)
+        case data
+        when Array then data.collect { |row| objectify row }
+        when Hash then
+          OpenStruct.new data.transform_values { |value| objectify value }
+        else data
+        end
       end
 
       def base_request
