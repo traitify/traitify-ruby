@@ -1,4 +1,5 @@
-require "json"
+require "active_support/core_ext/object/conversions"
+require "active_support/core_ext/object/json"
 require "Traitify"
 require "webmock/rspec"
 require "pry"

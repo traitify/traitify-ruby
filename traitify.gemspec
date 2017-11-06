@@ -17,15 +17,18 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.required_ruby_version = ">= 2.4.0"
+
   spec.add_dependency "faraday", "~> 0.9"
   spec.add_dependency "faraday_middleware", "~> 0.9"
 
+  spec.add_development_dependency "activesupport", "~> 5.1"
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake", "~> 10.1"
   spec.add_development_dependency "rspec", "~> 2.14"
   spec.add_development_dependency "pry", "~> 0.10"
   spec.add_development_dependency "binding_of_caller", "~> 0.7"
   spec.add_development_dependency "webmock", "~> 1.13"
-  spec.add_development_dependency 'guard', '~> 2.14', '>= 2.14.0'
-  spec.add_development_dependency 'guard-rspec', '~> 4.7', '>= 4.7.2'
+  spec.add_development_dependency "guard", "~> 2.14", ">= 2.14.0"
+  spec.add_development_dependency "guard-rspec", "~> 4.7", ">= 4.7.2"
 end

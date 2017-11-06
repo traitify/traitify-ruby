@@ -1,7 +1,9 @@
 require "traitify/configuration"
 require "traitify/client"
+require "traitify/data"
 require "traitify/error"
-require 'logger'
+require "traitify/response"
+require "logger"
 
 module Traitify
   extend Configuration
@@ -32,6 +34,5 @@ module Traitify
         logger.info message
       end
     end
-
   end
 end
