@@ -4,6 +4,7 @@ require "traitify/data"
 require "traitify/error"
 require "traitify/response"
 require "logger"
+require "active_support/core_ext/hash/transform_values"
 
 module Traitify
   extend Configuration
