@@ -13,7 +13,7 @@ describe Traitify::Client do
   let(:client) { Traitify.new }
 
   describe ".find_slides" do
-    let(:slides) { client.assessments("assessment-uuid").slides.all }
+    let(:slides) { client.assessments("assessment-uuid").slides.data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")
@@ -25,8 +25,8 @@ describe Traitify::Client do
   end
 
   describe ".update_slides" do
-    let(:slides) { client.assessments("assessment-uuid").slides.all }
-    let(:slides_complete) { client.assessments("assessment-uuid").slides.update(slides) }
+    let(:slides) { client.assessments("assessment-uuid").slides.data }
+    let(:slides_complete) { client.assessments("assessment-uuid").slides.update(slides).data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")
@@ -46,7 +46,7 @@ describe Traitify::Client do
 
   describe ".update_slide" do
     context "with hash" do
-      let(:slides) { client.assessments("assessment-uuid").slides.all }
+      let(:slides) { client.assessments("assessment-uuid").slides.data }
       let(:slide_params) do
         {
           id:         slides.first.id,
@@ -54,7 +54,7 @@ describe Traitify::Client do
           time_taken: 1000
         }
       end
-      let(:slide) { client.assessments("assessment-uuid").slides(slide_params[:id]).update(slide_params)}
+      let(:slide) { client.assessments("assessment-uuid").slides(slide_params[:id]).update(slide_params).data }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")
@@ -68,7 +68,7 @@ describe Traitify::Client do
     end
 
     context "with slide" do
-      let(:slides) { client.assessments("assessment-uuid").slides.all }
+      let(:slides) { client.assessments("assessment-uuid").slides.data }
       let(:slide) { slides.first }
 
       before(:each) do
@@ -77,7 +77,7 @@ describe Traitify::Client do
 
         slide.response = true
         slide.time_taken = 1000
-        client.assessments("assessment-uuid").slides("slide-uuid").update(slide)
+        client.assessments("assessment-uuid").slides("slide-uuid").update(slide.to_h)
       end
 
       it "returns a slide" do

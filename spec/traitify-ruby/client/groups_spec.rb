@@ -13,7 +13,7 @@ describe Traitify::Client do
   let(:client) { Traitify.new }
 
   describe ".groups" do
-    let(:groups) { client.groups.all }
+    let(:groups) { client.groups.data }
 
     before(:each) do
       stub_it(:get, "/groups?locale_key=en-us", "groups")
@@ -25,7 +25,7 @@ describe Traitify::Client do
   end
 
   describe ".group(id)" do
-    let(:group) { client.groups(:uuid).find }
+    let(:group) { client.groups(:uuid).data }
 
     before(:each) do
       stub_it(:get, "/groups/uuid?locale_key=en-us", "group")
@@ -37,7 +37,7 @@ describe Traitify::Client do
   end
 
   describe ".group.create(...)" do
-    let(:group) { client.groups.create({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"]}) }
+    let(:group) { client.groups.create({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"]}).data }
 
     before(:each) do
       stub_it(:post, "/groups", {body: {name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], locale_key: "en-us"}}, "group")
@@ -49,7 +49,7 @@ describe Traitify::Client do
   end
 
   describe ".group.update(...)" do
-    let(:group) { client.groups.update({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"]}, :patch) }
+    let(:group) { client.groups.update({name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"]}, :patch).data }
 
     before(:each) do
       stub_it(:patch, "/groups", {body: {name: "TESTING", add_group_ids: ["a", "b"], add_profile_ids: ["a", "b"], remove_group_ids: ["c"], remove_profile_ids: ["d"], locale_key: "en-us"}}, "group")
@@ -61,7 +61,7 @@ describe Traitify::Client do
   end
 
   describe ".matches.profiles(...)" do
-    let(:group) { client.groups(:uuid).matches.profiles(:profile_id).find }
+    let(:group) { client.groups(:uuid).matches.profiles(:profile_id).data }
 
     before(:each) do
       stub_it(:get, "/groups/uuid/matches/profiles/profile_id?locale_key=en-us", "group")
@@ -73,7 +73,7 @@ describe Traitify::Client do
   end
 
   describe ".matches.groups(...)" do
-    let(:group) { client.groups(:uuid).matches.groups(:group_id).find }
+    let(:group) { client.groups(:uuid).matches.groups(:group_id).data }
 
     before(:each) do
       stub_it(:get, "/groups/uuid/matches/groups/group_id?locale_key=en-us", "group")

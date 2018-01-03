@@ -13,7 +13,7 @@ describe Traitify::Client do
 
   describe ".find_results" do
     context "without an image pack" do
-      let(:result) { client.assessments("assessment-uuid").personality_types.all }
+      let(:result) { client.assessments("assessment-uuid").personality_types.data }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/personality_types?locale_key=en-us", "result")
@@ -29,7 +29,7 @@ describe Traitify::Client do
         let(:client) { Traitify.new }
         let(:result) do
           Traitify.image_pack = "full-color"
-          res = Traitify.new.assessments("assessment-uuid").personality_types.all
+          res = Traitify.new.assessments("assessment-uuid").personality_types.data
           Traitify.image_pack = nil
           res
         end
@@ -44,7 +44,7 @@ describe Traitify::Client do
       end
 
       context "set in the call" do
-        let(:result) { client.assessments("assessment-uuid").personality_types({image_pack: "full-color"}).all }
+        let(:result) { client.assessments("assessment-uuid").personality_types({image_pack: "full-color"}).data }
 
         before(:each) do
           stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=en-us", "result")
@@ -59,7 +59,7 @@ describe Traitify::Client do
 
   describe ".assessment_personality_type" do
     context "with a personality type" do
-      let(:personality_traits) { client.assessments("assessment-uuid").personality_types("personality-type-uuid").personality_traits.all }
+      let(:personality_traits) { client.assessments("assessment-uuid").personality_types("personality-type-uuid").personality_traits.data }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits?locale_key=en-us", "personality_traits")
@@ -71,7 +71,7 @@ describe Traitify::Client do
     end
 
     context "without a personality type" do
-      let(:personality_traits) { client.assessments("assessment-uuid").personality_traits.all }
+      let(:personality_traits) { client.assessments("assessment-uuid").personality_traits.data }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/personality_traits?locale_key=en-us", "personality_traits")
@@ -84,7 +84,7 @@ describe Traitify::Client do
   end
 
   describe ".career_matches" do
-    let(:careers) { client.assessments("assessment-uuid").matches.careers.all }
+    let(:careers) { client.assessments("assessment-uuid").matches.careers.data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid/matches/careers?locale_key=en-us", "careers")

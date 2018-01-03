@@ -14,7 +14,7 @@ describe Traitify::Client do
 
   describe ".decks" do
     context "without a user" do
-      let(:decks) { client.decks.all }
+      let(:decks) { client.decks.data }
 
       before(:each) do
         stub_it(:get, "/decks?locale_key=en-us", "decks")

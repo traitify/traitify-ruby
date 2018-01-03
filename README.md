@@ -14,11 +14,13 @@ Or install it yourself with:
 
 ## Usage
 
-First, it is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration
+The Traitify Client supports dynamically creating resource routes as seen in the examples below. Alternatively, HTTP methods (get, post, put, delete, path) can be used directly.
+
+It is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration options.
 
 ### Configuration
 
-All the configuration options can be found in `lib/Traitify/configuration.rb`
+All the configuration options can be found in `lib/traitify/configuration.rb`
 
     Traitify.configure do |traitify|
       traitify.host = "https://api-sandbox.traitify.com"
@@ -49,7 +51,7 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
 
 #### Getting all the decks:
 
-    decks = traitify.decks
+    decks = traitify.decks.data
 
 Returns an array of Deck objects:
 
@@ -75,14 +77,15 @@ You can optionally specify image pack or locale
 
 Returns an assessment object:
 
-    assessment.id           #=> "assessment-uuid"
-    assessment.deck_id      #=> "deck-uuid"
-    assessment.created_at   #=> Returns time in Epoch format
-    assessment.completed_at #=> nil
+    data = assessment.data
+    data.id           #=> "assessment-uuid"
+    data.deck_id      #=> "deck-uuid"
+    data.created_at   #=> Returns time in Epoch format
+    data.completed_at #=> nil
 
 #### Finding an assessment:
 
-    assessment = traitify.assessments("assessment-uuid").first
+    assessment = traitify.assessments("assessment-uuid").data
 
 Returns an assessment object as seen above
 
@@ -92,7 +95,7 @@ An assessment can be taken through our javascript plugin or by getting the slide
 
 #### Finding an assessment's slides:
 
-    slides = traitify.assessments("assessment-uuid").slides.fetch
+    slides = traitify.assessments("assessment-uuid").slides.data
 
 Returns an array of slides
 
@@ -110,16 +113,16 @@ Returns an array of slides
 
 #### Updating a single assessment slide:
 
-    slide = assessment.slides.first
+    slide = assessment.slides.data.first
     slide.response = true
     slide.time_taken = 600
-    traitify.assessments(assessment.id).slides(slide.id).update(slide)
+    traitify.assessments(assessment.id).slides(slide.id).update(slide.to_h)
 
 ### Results
 
 #### Getting an assessment's results
 
-    results = traitify.assessments("assessment-uuid").personality_types
+    results = traitify.assessments("assessment-uuid").personality_types.data
 
 Returns a results object:
 
@@ -148,7 +151,7 @@ Returns a results object:
 
 #### Getting an assessment's personality traits
 
-    traits = traitify.assessments("assessment-uuid").personality_traits.fetch
+    traits = traitify.assessments("assessment-uuid").personality_traits.data
     trait = traits.first
     trait.score #=> 100
     personality_trait = trait.personality_trait
@@ -158,25 +161,24 @@ Returns a results object:
 
 #### Getting an assessment's analytics
 
-    traits = traitify.analytics.decks("deck-uuid").personality_traits.fetch
-    types = traitify.analytics.decks("deck-uuid").personality_types.fetch
-    assessments = traitify.analytics.decks("deck-uuid").assessments.fetch
+    traits = traitify.analytics.decks("deck-uuid").personality_traits.data
+    types = traitify.analytics.decks("deck-uuid").personality_types.data
+    assessments = traitify.analytics.decks("deck-uuid").assessments.data
 
 #### Getting a profile
 
-    profile = traitify.profiles("profile-uuid").fetch
+    profile = traitify.profiles("profile-uuid").data
     profile.first_name        #=> "John"
     profile.last_name         #=> "Doe"
     profile.email             #=> "johndoe@example.com"
 
-
-#### Getting a profile create
+#### Creating a profile
 
     profile = traitify.profiles.create({
         first_name: "John",
         last_name: "Doe",
         email: "johndoe@example.com"
-    })
+    }).data
 
     profile.first_name        #=> "John"
     profile.last_name         #=> "Doe"
@@ -184,25 +186,21 @@ Returns a results object:
 
 #### Getting groups
 
-    groups = traitify.groups.fetch
+    groups = traitify.groups.data
 
 #### Getting a group
 
-    group = traitify.groups("group-uuid").fetch
+    group = traitify.groups("group-uuid").data
 
-#### Getting a group create
+#### Creating a group
 
     groups = traitify.groups.create({
         name: "Example Group",
         category: "Organization",
         profile_ids: ["profile-uuid"],
         group_ids: ["group-uuid"]
-    })
+    }).data
 
 #### More results
 
-More API endpoints may be available. You can find more at [developer.traitify.com](http://developer.traitify.com/documentation).
-To make authenticated calls to new endpoints use the syntax below:
-
-    traitify.get("/new/endpoint")
-    traitify.post("/new/endpoint", { ready: true })
+More API endpoints may be available. You can find more at [app.traitify.com/developer](https://app.traitify.com/developer).

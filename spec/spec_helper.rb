@@ -8,7 +8,7 @@ Dir[File.expand_path("spec/support/**/*.rb", __FILE__)].each{|f| require f}
 
 RSpec.configure do |config|
   config.color = true
-  # config.order = "random"
+  config.order = "random"
 end
 
 def stub_it(http_method = :any, endpoint = "/", options = {}, status = 200, response)
@@ -21,4 +21,3 @@ def stub_it(http_method = :any, endpoint = "/", options = {}, status = 200, resp
     headers: { 'Content-type' => "application/json" }
   )
 end
-

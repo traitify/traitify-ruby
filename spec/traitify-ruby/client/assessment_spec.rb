@@ -14,7 +14,7 @@ describe Traitify::Client do
 
   describe ".create_assessment" do
     context "without a user" do
-      let(:assessment) { client.assessments.create }
+      let(:assessment) { client.assessments.create.data }
 
       before(:each) do
         stub_it(:post, "/assessments", {deck_id: "deck-uuid", loacle_key: "en-us"}, "assessment")
@@ -26,7 +26,7 @@ describe Traitify::Client do
     end
 
     context "with a user" do
-      let(:assessment) { client.assessments.create(user_id: "clients-uuid") }
+      let(:assessment) { client.assessments.create(user_id: "clients-uuid").data }
 
       before(:each) do
         stub_it(:post, "/assessments", "assessment")
@@ -38,7 +38,7 @@ describe Traitify::Client do
     end
 
     context "with a deck" do
-      let(:assessment) { client.assessments.create(deck_id: "other-deck-uuid") }
+      let(:assessment) { client.assessments.create(deck_id: "other-deck-uuid").data }
 
       before(:each) do
         stub_it(:post, "/assessments", "assessment")
@@ -51,7 +51,7 @@ describe Traitify::Client do
   end
 
   describe ".find_assessment" do
-    let(:assessment) { client.assessments("assessment-uuid").find }
+    let(:assessment) { client.assessments("assessment-uuid").data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?locale_key=en-us", "assessment")
@@ -63,7 +63,7 @@ describe Traitify::Client do
   end
 
   describe ".assessment_with_results" do
-    let(:result) { client.assessments("assessment-uuid").find(data: [:traits, :types, :blend]) }
+    let(:result) { client.assessments("assessment-uuid").find(data: [:traits, :types, :blend]).data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend&locale_key=en-us", "assessment_with_results")
