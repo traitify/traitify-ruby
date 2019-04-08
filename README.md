@@ -21,7 +21,7 @@ First, it is helpful to configure Traitify, otherwise everytime you create a Tra
 All the configuration options can be found in `lib/Traitify/configuration.rb`
 
     Traitify.configure do |traitify|
-      traitify.host = "https://api-sandbox.traitify.com"
+      traitify.host = "https://api.traitify.com"
       traitify.version = "v1"
       traitify.secret_key = "secret"
       traitify.public_key = "public" # Optional
@@ -38,7 +38,7 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
 #### Without config file:
 
     traitify = Traitify.new(
-      host: "https://api-sandbox.traitify.com",
+      host: "https://api.traitify.com",
       version: "v1",
       secret_key: "secret",
       deck_id: "deck-uuid"
