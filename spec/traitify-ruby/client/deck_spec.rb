@@ -10,11 +10,11 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".decks" do
     context "without a user" do
-      let(:decks) { client.decks.data }
+      let(:decks){ client.decks.data }
 
       before(:each) do
         stub_it(:get, "/decks?locale_key=en-us", "decks")

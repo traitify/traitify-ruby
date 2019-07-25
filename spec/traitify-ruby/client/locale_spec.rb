@@ -10,10 +10,10 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".locales" do
-    let(:locales) { client.locales.data }
+    let(:locales){ client.locales.data }
 
     before(:each) do
       stub_it(:get, "/locales", "locales")
@@ -25,7 +25,7 @@ describe Traitify::Client do
   end
 
   describe ".locale" do
-    let(:locale) { client.locales("en-us").data }
+    let(:locale){ client.locales("en-us").data }
 
     before(:each) do
       stub_it(:get, "/locales/en-us", "locale")

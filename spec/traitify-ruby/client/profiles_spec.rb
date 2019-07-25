@@ -10,10 +10,10 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".profiles" do
-    let(:profiles) { client.profiles.data }
+    let(:profiles){ client.profiles.data }
 
     before(:each) do
       stub_it(:get, "/profiles?locale_key=en-us", "profiles")
@@ -25,7 +25,7 @@ describe Traitify::Client do
   end
 
   describe ".profile" do
-    let(:profile) { client.profiles(:uuid).data }
+    let(:profile){ client.profiles(:uuid).data }
 
     before(:each) do
       stub_it(:get, "/profiles/uuid?locale_key=en-us", "profile")
@@ -37,13 +37,13 @@ describe Traitify::Client do
   end
 
   describe ".create_profile" do
-    let(:profile) { client.profiles.create({first_name: "Carson"}).data }
+    let(:profile){ client.profiles.create({first_name: "Carson"}).data }
 
     before(:each) do
-      stub_it(:post, "/profiles", {body: {
+      stub_it(:post, "/profiles", "profile", body: {
         first_name: "Carson",
         locale_key: "en-us"
-      }}, "profile")
+      })
     end
 
     it "returns an array of decks" do
@@ -52,7 +52,7 @@ describe Traitify::Client do
   end
 
   describe ".matches.profiles(...)" do
-    let(:group) { client.profiles(:uuid).matches.groups(:group_id).data }
+    let(:group){ client.profiles(:uuid).matches.groups(:group_id).data }
 
     before(:each) do
       stub_it(:get, "/profiles/uuid/matches/groups/group_id?locale_key=en-us", "group")
@@ -64,7 +64,7 @@ describe Traitify::Client do
   end
 
   describe ".matches.groups(...)" do
-    let(:group) { client.profiles(:uuid).matches.profiles(:profile_id).data }
+    let(:group){ client.profiles(:uuid).matches.profiles(:profile_id).data }
 
     before(:each) do
       stub_it(:get, "/profiles/uuid/matches/profiles/profile_id?locale_key=en-us", "group")

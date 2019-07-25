@@ -16,19 +16,19 @@ module Traitify
 
         if request.env.response_headers["link"]
           links = request.env.response_headers["link"].split(",")
-          if prevLink = links.find { |link| link.include?("rel=\"prev\"") }
-            prevLink = prevLink.split(/>|</)[1]
+          if prev_link = links.find{ |link| link.include?("rel=\"prev\"") }
+            prev_link = prev_link.split(/>|</)[1]
             page[:previous] = {
-              url: prevLink,
-              params: CGI::parse(prevLink.split("?")[1..-1].join("?"))
+              url: prev_link,
+              params: CGI.parse(prev_link.split("?")[1..-1].join("?"))
             }
           end
 
-          if nextLink = links.find { |link| link.include?("rel=\"next\"") }
-            nextLink = nextLink.split(/>|</)[1]
+          if next_link = links.find{ |link| link.include?("rel=\"next\"") }
+            next_link = next_link.split(/>|</)[1]
             page[:next] = {
-              url: nextLink,
-              params: CGI::parse(nextLink.split("?")[1..-1].join("?"))
+              url: next_link,
+              params: CGI.parse(next_link.split("?")[1..-1].join("?"))
             }
           end
         end

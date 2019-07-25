@@ -9,11 +9,11 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".majors" do
     context "without params" do
-      let(:majors) { client.majors.data }
+      let(:majors){ client.majors.data }
 
       before(:each) do
         stub_it(:get, "/majors?locale_key=en-us", "majors")
@@ -25,7 +25,7 @@ describe Traitify::Client do
     end
 
     context "with params" do
-      let(:majors) { client.majors(page: 1, majors_per_page: 50).data }
+      let(:majors){ client.majors(page: 1, majors_per_page: 50).data }
 
       before(:each) do
         stub_it(:get, "/majors?majors_per_page=50&page=1&locale_key=en-us", "majors")
@@ -38,7 +38,7 @@ describe Traitify::Client do
   end
 
   describe ".major" do
-    let(:major) { client.majors("major-id").data }
+    let(:major){ client.majors("major-id").data }
 
     before(:each) do
       stub_it(:get, "/majors/major-id?locale_key=en-us", "major")

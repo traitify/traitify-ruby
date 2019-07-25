@@ -1,0 +1,11 @@
+inherit_gem:
+  rubocop-traitify: .rubocop_traitify.yml
+
+Rails:
+  Enabled: false
+
+# Requires breaking change
+Airbnb/OptArgParameters:
+  Enabled: true
+  Exclude:
+    - lib/traitify/client/model.rb

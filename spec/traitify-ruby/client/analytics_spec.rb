@@ -10,11 +10,11 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".analytics" do
-    context do
-      let(:assessments) { client.analytics.decks("deck-id").assessments.data }
+    context ".assessments" do
+      let(:assessments){ client.analytics.decks("deck-id").assessments.data }
 
       before(:each) do
         stub_it(:get, "/analytics/decks/deck-id/assessments?locale_key=en-us", "assessment")
@@ -25,8 +25,8 @@ describe Traitify::Client do
       end
     end
 
-    context do
-      let(:personality_traits) { client.analytics.decks("deck-id").personality_traits.data }
+    context ".personality_traits" do
+      let(:personality_traits){ client.analytics.decks("deck-id").personality_traits.data }
 
       before(:each) do
         stub_it(:get, "/analytics/decks/deck-id/personality_traits?locale_key=en-us", "assessment")
@@ -37,8 +37,8 @@ describe Traitify::Client do
       end
     end
 
-    context do
-      let(:personality_types) { client.analytics.decks("deck-id").personality_types.data }
+    context ".personality_types" do
+      let(:personality_types){ client.analytics.decks("deck-id").personality_types.data }
 
       before(:each) do
         stub_it(:get, "/analytics/decks/deck-id/personality_types?locale_key=en-us", "assessment")

@@ -31,17 +31,14 @@ module Traitify
       end
 
       private
+
       def copy
         Traitify.new(options).set(
-          type: marshall_copy(type),
-          verb: marshall_copy(verb),
-          path: marshall_copy(path),
-          params: marshall_copy(params)
+          type: type.deep_dup,
+          verb: verb.deep_dup,
+          path: path.deep_dup,
+          params: params.deep_dup
         )
-      end
-
-      def marshall_copy(value)
-        Marshal.load(Marshal.dump(value))
       end
     end
   end

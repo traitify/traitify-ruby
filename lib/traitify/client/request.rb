@@ -17,13 +17,14 @@ module Traitify
       end
 
       private
+
       def base_request
         unless params.is_a?(Array) || params[:locale_key] || locale_key.nil?
           set_param(:locale_key, locale_key)
         end
 
         Traitify.log :info, "#{verb.to_s.upcase}: #{host}/#{version}#{path}"
-        Traitify.log :debug, "AUTH: #{self.secret_key || self.public_key}"
+        Traitify.log :debug, "AUTH: #{secret_key || public_key}"
 
         connection(url: host).send(verb) do |request|
           unless params.empty?

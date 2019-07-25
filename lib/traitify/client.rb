@@ -1,6 +1,6 @@
 require "faraday_middleware"
 require "uri"
-Dir[File.expand_path("../client/*.rb", __FILE__)].each { |f| require f }
+Dir[File.expand_path("../client/*.rb", __FILE__)].each{ |f| require f }
 
 module Traitify
   class Client
@@ -20,7 +20,7 @@ module Traitify
     end
 
     def to_hash
-      Hash[instance_variables.collect { |key| [key.to_s.delete("@"), instance_variable_get(key)] }]
+      Hash[instance_variables.collect{ |key| [key.to_s.delete("@"), instance_variable_get(key)] }]
     end
     alias_method :to_h, :to_hash
 

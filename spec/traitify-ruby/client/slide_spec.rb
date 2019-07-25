@@ -10,10 +10,10 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".find_slides" do
-    let(:slides) { client.assessments("assessment-uuid").slides.data }
+    let(:slides){ client.assessments("assessment-uuid").slides.data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")
@@ -25,8 +25,8 @@ describe Traitify::Client do
   end
 
   describe ".update_slides" do
-    let(:slides) { client.assessments("assessment-uuid").slides.data }
-    let(:slides_complete) { client.assessments("assessment-uuid").slides.update(slides).data }
+    let(:slides){ client.assessments("assessment-uuid").slides.data }
+    let(:slides_complete){ client.assessments("assessment-uuid").slides.update(slides).data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")
@@ -36,7 +36,7 @@ describe Traitify::Client do
         slide
       end
 
-      stub_it(:put, "/assessments/assessment-uuid/slides", {body: body}, "slides_complete")
+      stub_it(:put, "/assessments/assessment-uuid/slides", "slides_complete", body: body)
     end
 
     it "returns an assessment" do
@@ -46,20 +46,26 @@ describe Traitify::Client do
 
   describe ".update_slide" do
     context "with hash" do
-      let(:slides) { client.assessments("assessment-uuid").slides.data }
+      let(:slides){ client.assessments("assessment-uuid").slides.data }
       let(:slide_params) do
         {
-          id:         slides.first.id,
-          response:   true,
+          id: slides.first.id,
+          response: true,
           time_taken: 1000
         }
       end
-      let(:slide) { client.assessments("assessment-uuid").slides(slide_params[:id]).update(slide_params).data }
+      let(:slide){
+        client.assessments("assessment-uuid").slides(slide_params[:id]).update(slide_params).data
+      }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")
-
-        stub_it(:put, "/assessments/assessment-uuid/slides/slide-uuid", {body: slide_params.merge({locale_key: "en-us"})}, "slide")
+        stub_it(
+          :put,
+          "/assessments/assessment-uuid/slides/slide-uuid",
+          "slide",
+          body: slide_params.merge({locale_key: "en-us"})
+        )
       end
 
       it "returns a slide" do
@@ -68,8 +74,8 @@ describe Traitify::Client do
     end
 
     context "with slide" do
-      let(:slides) { client.assessments("assessment-uuid").slides.data }
-      let(:slide) { slides.first }
+      let(:slides){ client.assessments("assessment-uuid").slides.data }
+      let(:slide){ slides.first }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/slides?locale_key=en-us", "slides")

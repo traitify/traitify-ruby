@@ -3,11 +3,11 @@ module Traitify
     def self.new(data)
       case data
       when Array
-        return data.collect { |row| self.new row }
+        data.collect{ |row| new row }
       when Hash
-        super data.transform_values { |value| self.new value }
-      else data
-        return data
+        super data.transform_values{ |value| new value }
+      else
+        data
       end
     end
 

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Traitify::Client do
-  let(:tom) { Traitify.new }
+  let(:tom){ Traitify.new }
 
   context "config setters" do
     before do

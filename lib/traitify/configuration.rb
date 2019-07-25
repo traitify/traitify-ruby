@@ -8,7 +8,7 @@ module Traitify
       :deck_id,
       :image_pack,
       :locale_key
-    ]
+    ].freeze
 
     attr_accessor(*VALID_OPTIONS_KEYS)
 
@@ -17,7 +17,7 @@ module Traitify
     end
 
     def options
-      Hash[VALID_OPTIONS_KEYS.collect { |key| [key, send(key)] }]
+      Hash[VALID_OPTIONS_KEYS.collect{ |key| [key, send(key)] }]
     end
   end
 end

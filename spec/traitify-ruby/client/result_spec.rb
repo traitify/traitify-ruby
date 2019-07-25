@@ -9,11 +9,12 @@ describe Traitify::Client do
     end
   end
 
-  let(:client) { Traitify.new }
+  let(:client){ Traitify.new }
+  let(:base_image_url){ "https://traitify-api.s3.amazonaws.com/traitify-api" }
 
   describe ".find_results" do
     context "without an image pack" do
-      let(:result) { client.assessments("assessment-uuid").personality_types.data }
+      let(:result){ client.assessments("assessment-uuid").personality_types.data }
 
       before(:each) do
         stub_it(:get, "/assessments/assessment-uuid/personality_types?locale_key=en-us", "result")
@@ -26,7 +27,7 @@ describe Traitify::Client do
 
     context "with an image pack" do
       context "set in the configurations" do
-        let(:client) { Traitify.new }
+        let(:client){ Traitify.new }
         let(:result) do
           Traitify.image_pack = "full-color"
           res = Traitify.new.assessments("assessment-uuid").personality_types.data
@@ -35,23 +36,37 @@ describe Traitify::Client do
         end
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=en-us", "result")
+          stub_it(
+            :get,
+            "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=en-us",
+            "result"
+          )
         end
 
         it "returns a result" do
-          expect(result.personality_blend.personality_type_1.badge.image_large).to eq("https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/large")
+          expect(result.personality_blend.personality_type_1.badge.image_large).to(
+            eq("#{base_image_url}/badges/analayzer/full-color/large")
+          )
         end
       end
 
       context "set in the call" do
-        let(:result) { client.assessments("assessment-uuid").personality_types({image_pack: "full-color"}).data }
+        let(:result){
+          client.assessments("assessment-uuid").personality_types({image_pack: "full-color"}).data
+        }
 
         before(:each) do
-          stub_it(:get, "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=en-us", "result")
+          stub_it(
+            :get,
+            "/assessments/assessment-uuid/personality_types?image_pack=full-color&locale_key=en-us",
+            "result"
+          )
         end
 
         it "returns a result" do
-          expect(result.personality_blend.personality_type_1.badge.image_large).to eq("https://traitify-api.s3.amazonaws.com/traitify-api/badges/analayzer/full-color/large")
+          expect(result.personality_blend.personality_type_1.badge.image_large).to(
+            eq("#{base_image_url}/badges/analayzer/full-color/large")
+          )
         end
       end
     end
@@ -59,10 +74,22 @@ describe Traitify::Client do
 
   describe ".assessment_personality_type" do
     context "with a personality type" do
-      let(:personality_traits) { client.assessments("assessment-uuid").personality_types("personality-type-uuid").personality_traits.data }
+      let(:personality_traits){
+        client.assessments("assessment-uuid")
+          .personality_types("personality-type-uuid")
+          .personality_traits.data
+      }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/personality_types/personality-type-uuid/personality_traits?locale_key=en-us", "personality_traits")
+        stub_it(
+          :get,
+          [
+            "/assessments/assessment-uuid",
+            "/personality_types/personality-type-uuid",
+            "/personality_traits?locale_key=en-us"
+          ].join,
+          "personality_traits"
+        )
       end
 
       it "returns a result" do
@@ -71,10 +98,14 @@ describe Traitify::Client do
     end
 
     context "without a personality type" do
-      let(:personality_traits) { client.assessments("assessment-uuid").personality_traits.data }
+      let(:personality_traits){ client.assessments("assessment-uuid").personality_traits.data }
 
       before(:each) do
-        stub_it(:get, "/assessments/assessment-uuid/personality_traits?locale_key=en-us", "personality_traits")
+        stub_it(
+          :get,
+          "/assessments/assessment-uuid/personality_traits?locale_key=en-us",
+          "personality_traits"
+        )
       end
 
       it "returns a result" do
@@ -84,7 +115,7 @@ describe Traitify::Client do
   end
 
   describe ".career_matches" do
-    let(:careers) { client.assessments("assessment-uuid").matches.careers.data }
+    let(:careers){ client.assessments("assessment-uuid").matches.careers.data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid/matches/careers?locale_key=en-us", "careers")

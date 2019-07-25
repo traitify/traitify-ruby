@@ -6,7 +6,7 @@ module Traitify
 
         Faraday.new(options) do |faraday|
           faraday.request :url_encoded
-          faraday.request :basic_auth, self.secret_key || self.public_key, "x"
+          faraday.request :basic_auth, secret_key || public_key, "x"
           faraday.headers["Accept"] = "application/json"
           faraday.headers["Content-Type"] = "application/json"
           faraday.use ErrorMiddleware
@@ -15,7 +15,6 @@ module Traitify
         end
       end
 
-      private
       class ErrorMiddleware < Faraday::Middleware
         def initialize(app)
           @app = app

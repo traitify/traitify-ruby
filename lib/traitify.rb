@@ -6,6 +6,7 @@ require "traitify/response"
 require "logger"
 require "active_support"
 require "active_support/core_ext/hash/transform_values"
+require "active_support/core_ext/object/deep_dup.rb"
 
 module Traitify
   extend Configuration
@@ -23,7 +24,7 @@ module Traitify
 
     def logger
       @logger ||= Logger.new($stdout).tap do |log|
-        log.progname = self.name
+        log.progname = name
       end
     end
 
