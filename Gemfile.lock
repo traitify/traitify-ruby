@@ -77,7 +77,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rainbow (3.0.0)
-    rake (10.4.2)
+    rake (12.3.3)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -125,7 +125,7 @@ DEPENDENCIES
   guard (~> 2.14, >= 2.14.0)
   guard-rspec (~> 4.7, >= 4.7.2)
   pry (~> 0.10)
-  rake (~> 10.1)
+  rake (~> 12.3.3)
   rspec (~> 2.14)
   rubocop-airbnb!
   rubocop-traitify
