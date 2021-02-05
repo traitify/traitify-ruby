@@ -5,8 +5,7 @@ require "traitify/error"
 require "traitify/response"
 require "logger"
 require "active_support"
-require "active_support/core_ext/hash/transform_values"
-require "active_support/core_ext/object/deep_dup.rb"
+require "active_support/core_ext/object/deep_dup"
 
 module Traitify
   extend Configuration
