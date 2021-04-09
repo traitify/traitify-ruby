@@ -62,6 +62,18 @@ describe Traitify::Client do
     end
   end
 
+  describe ".find_assessment with nil params" do
+    let(:assessment){ client.assessments("assessment-uuid").find(recommendation_id: nil, image_pack: "linear").data }
+
+    before(:each) do
+      stub_it(:get, "/assessments/assessment-uuid?image_pack=linear&locale_key=en-us", "assessment")
+    end
+
+    it "ignores nil params and returns an assessment" do
+      expect(assessment.id).to eq("assessment-uuid")
+    end
+  end
+
   describe ".assessment_with_results" do
     let(:result){ client.assessments("assessment-uuid").find(data: [:traits, :types, :blend]).data }
 
