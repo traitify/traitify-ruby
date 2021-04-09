@@ -29,7 +29,7 @@ module Traitify
         connection(url: host).send(verb) do |request|
           unless params.empty?
             if verb == :get
-              request.params = params
+              request.params = params.select {|k, v| !v.nil? }
               Traitify.log :info, "PARAMS: #{request.params}"
             else
               request.body = params.to_json
