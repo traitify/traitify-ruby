@@ -63,7 +63,9 @@ describe Traitify::Client do
   end
 
   describe ".find_assessment with nil params" do
-    let(:assessment){ client.assessments("assessment-uuid").find(recommendation_id: nil, image_pack: "linear").data }
+    let(:assessment){
+      client.assessments("assessment-uuid").find(recommendation_id: nil, image_pack: "linear").data
+    }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?image_pack=linear&locale_key=en-us", "assessment")

@@ -22,12 +22,12 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "faraday", "~> 0.9"
   spec.add_runtime_dependency "faraday_middleware", "~> 0.9"
 
-  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "bundler", "~> 2.2"
   spec.add_development_dependency "rake", "~> 12.3.3"
   spec.add_development_dependency "rspec", "~> 2.14"
   spec.add_development_dependency "pry", "~> 0.10"
   spec.add_development_dependency "binding_of_caller", "~> 0.7"
   spec.add_development_dependency "webmock", "~> 1.13"
-  spec.add_development_dependency "guard", "~> 2.14", ">= 2.14.0"
+  spec.add_development_dependency "guard", "~> 2.16", ">= 2.16.0"
   spec.add_development_dependency "guard-rspec", "~> 4.7", ">= 4.7.2"
 end

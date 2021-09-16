@@ -12,7 +12,7 @@ module Traitify
     end
 
     def as_json(*args)
-      super.as_json["table"]
+      @table.as_json(*args)
     end
   end
 end

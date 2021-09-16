@@ -85,5 +85,21 @@ describe Traitify::Data do
         expect(data.as_json.symbolize_keys).to eq({traitify: {}})
       end
     end
+
+    context "with options" do
+      context "with hash" do
+        it "returns array data" do
+          data = Traitify::Data.new({
+            burritos: [{meat: "chicken"}],
+            tacos: [{meat: "chicken"}, {meat: "steak"}]
+          })
+
+          # Rails' as_json passes full options down to nested objects
+          expect(data.as_json(only: [:meat, :tacos]).deep_symbolize_keys).to(
+            eq({tacos: [{meat: "chicken"}, {meat: "steak"}]})
+          )
+        end
+      end
+    end
   end
 end
