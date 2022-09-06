@@ -2,11 +2,8 @@
   {
     "id": "deck-uuid",
     "name": "Career Deck",
-    "personality_group_id": "personality-group-uuid",
-    "personality_group_name": null,
     "created_at": 1396230166317,
     "active": true,
-    "slide_count": null,
-    "personality_group": null
+    "slide_count": null
   }
 ]
