@@ -2,31 +2,32 @@ require "spec_helper"
 
 describe Traitify::Client do
   before do
-    Traitify.configure do |tom|
-      tom.secret = "secret"
-      tom.api_host = "https://example.com"
-      tom.api_version = "v1"
-      tom.deck_id = "deck-uuid"
+    Traitify.configure do |client|
+      client.secret_key = "secret"
+      client.host = "https://example.com"
+      client.version = "v1"
+      client.deck_id = "deck-uuid"
+      client.logger = Logger.new("/dev/null")
     end
   end
 
-  let(:tom) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".create_assessment" do
     context "without a user" do
-      let(:assessment) { tom.create_assessment }
+      let(:assessment){ client.assessments.create.data }
 
       before(:each) do
         stub_it(:post, "/assessments", "assessment")
       end
 
       it "returns an assessment" do
-        expect(assessment.deck_id).to eq(tom.deck_id)
+        expect(assessment.deck_id).to eq(client.deck_id)
       end
     end
 
     context "with a user" do
-      let(:assessment) { tom.create_assessment(user_id: "toms-uuid") }
+      let(:assessment){ client.assessments.create(user_id: "clients-uuid").data }
 
       before(:each) do
         stub_it(:post, "/assessments", "assessment")
@@ -38,7 +39,7 @@ describe Traitify::Client do
     end
 
     context "with a deck" do
-      let(:assessment) { tom.create_assessment(deck_id: "other-deck-uuid") }
+      let(:assessment){ client.assessments.create(deck_id: "other-deck-uuid").data }
 
       before(:each) do
         stub_it(:post, "/assessments", "assessment")
@@ -51,7 +52,7 @@ describe Traitify::Client do
   end
 
   describe ".find_assessment" do
-    let(:assessment) { tom.find_assessment("assessment-uuid") }
+    let(:assessment){ client.assessments("assessment-uuid").data }
 
     before(:each) do
       stub_it(:get, "/assessments/assessment-uuid?locale_key=en-us", "assessment")
@@ -63,10 +64,14 @@ describe Traitify::Client do
   end
 
   describe ".assessment_with_results" do
-    let(:result) { tom.assessment_with_results("assessment-uuid", nil, %w(traits types blend)) }
+    let(:result){ client.assessments("assessment-uuid").find(data: [:traits, :types, :blend]).data }
 
     before(:each) do
-      stub_it(:get, "/assessments/assessment-uuid?data=traits,types,blend&locale_key=en-us", "assessment_with_results")
+      stub_it(
+        :get,
+        "/assessments/assessment-uuid?data=traits,types,blend&locale_key=en-us",
+        "assessment_with_results"
+      )
     end
 
     it "returns an assessment with results" do

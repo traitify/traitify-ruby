@@ -2,18 +2,19 @@ require "spec_helper"
 
 describe Traitify::Client do
   before do
-    Traitify.configure do |tom|
-      tom.secret = "secret"
-      tom.api_host = "https://example.com"
-      tom.api_version = "v1"
-      tom.deck_id = "deck-uuid"
+    Traitify.configure do |client|
+      client.secret_key = "secret"
+      client.host = "https://example.com"
+      client.version = "v1"
+      client.deck_id = "deck-uuid"
+      client.logger = Logger.new("/dev/null")
     end
   end
 
-  let(:tom) { Traitify.new }
+  let(:client){ Traitify.new }
 
   describe ".locales" do
-    let(:locales) { tom.locales }
+    let(:locales){ client.locales.data }
 
     before(:each) do
       stub_it(:get, "/locales", "locales")
@@ -25,7 +26,7 @@ describe Traitify::Client do
   end
 
   describe ".locale" do
-    let(:locale) { tom.locale("en-us") }
+    let(:locale){ client.locales("en-us").data }
 
     before(:each) do
       stub_it(:get, "/locales/en-us", "locale")

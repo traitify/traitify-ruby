@@ -1,0 +1,1352 @@
+paths:
+  /assessments:
+    post:
+      tags:
+      - "Assessments"
+      summary: "Create a new assessment"
+      description: "This method allows you to create a new assessment. The only parameter\
+        \ is a deck_id."
+      operationId: "create"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateAssessment"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Assessment"
+  /assessments/{assessment_id}/matches/careers:
+    get:
+      tags:
+      - "Assessments"
+      summary: "Find matching careers for an assessment"
+      description: ""
+      operationId: "match"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "career_ids"
+        in: "query"
+        description: "Filter matches on a comma separated list of career_ids."
+        required: false
+        type: "string"
+      - name: "number_of_matches"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 20
+        format: "int32"
+      - name: "experience_levels"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "search"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "score"
+      - name: "paged"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: false
+      - name: "page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 1
+        format: "int32"
+      - name: "careers_per_page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 25
+        format: "int32"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ScoredCareer"
+    post:
+      tags:
+      - "Assessments"
+      summary: "Get the match score for an assessment and a list of CareerIds"
+      description: ""
+      operationId: "getCareerScoresByList"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          type: "array"
+          items:
+            type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ScoredCareer"
+  /assessments/{assessment_id}/matches/careers/{career_id}:
+    get:
+      tags:
+      - "Assessments"
+      summary: "Get the match score for an assessment and specific career"
+      description: ""
+      operationId: "getScore"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "career_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ScoredCareer"
+  /assessments/{assessment_id}/personality_traits:
+    get:
+      tags:
+      - "Personality Traits"
+      summary: "Get personality traits for the assessment as a dichotomy"
+      description: ""
+      operationId: "personality_trait"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentPersonalityTraitDichotomy"
+  /assessments/{assessment_id}/personality_traits/dichotomy:
+    get:
+      tags:
+      - "Personality Traits"
+      summary: "Get personality traits for the assessment as a dichotomy"
+      description: ""
+      operationId: "personality_trait_dichotomy"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentPersonalityTraitDichotomy"
+  /assessments/{assessment_id}/personality_traits/raw:
+    get:
+      tags:
+      - "Personality Traits"
+      summary: "Get personality traits for the assessment"
+      description: ""
+      operationId: "personality_traits_raw"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+        default: "linear"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentPersonalityTrait"
+  /assessments/{assessment_id}/personality_traits/top:
+    get:
+      tags:
+      - "Personality Traits"
+      summary: "Get the top personality trait for the assessment as a dichotomy"
+      description: "Only the top trait is returned however multiple traits are returned\
+        \ in the event of a tie."
+      operationId: "personality_traits_top"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentPersonalityTrait"
+  /assessments/{assessment_id}/personality_types:
+    get:
+      tags:
+      - "Personality Types"
+      summary: "Get the assessment results"
+      description: "This resource can be used to retrieve the results of an assessment\
+        \ that has been completed. If the assessment has not been completed you will\
+        \ get a 404 in response. The results contain two nodes. personality_blend\
+        \ will be populated if the top two personality types can be combined into\
+        \ a blend. personality_types will contain a list of all the personality types\
+        \ for the assessment and they will be sorted by score."
+      operationId: "personality_types"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+        default: "flat"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AssessmentResults"
+  /assessments/{assessment_id}/personality_types/top:
+    get:
+      tags:
+      - "Personality Types"
+      summary: "Get the top personality type for  an assessment"
+      description: "This resource can be used to retrieve the top personality type\
+        \ of an assessment that has been completed. If the assessment has not been\
+        \ completed you will get a 404 in response."
+      operationId: "top_personality_types"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+        default: "flat"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AssessmentPersonalityType"
+  /assessments/{assessment_id}/personality_types/{id}/personality_traits:
+    get:
+      tags:
+      - "Personality Types"
+      summary: "Get personality traits for assessment and personality type"
+      description: ""
+      operationId: "personality_traits_by_personality_type"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentPersonalityTrait"
+  /assessments/{assessment_id}/slides:
+    get:
+      tags:
+      - "Slides"
+      summary: "Get list of slides for an assessment"
+      description: "This method allows you to get a list of the slides for this assessment.\
+        \ It includes the images for each slide and the position that the slides should\
+        \ be presented to the user."
+      operationId: "list"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "complete"
+        in: "query"
+        required: false
+        type: "boolean"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentSlide"
+    post:
+      tags:
+      - "Slides"
+      operationId: "bulkUpdatePost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/UpdateAssessmentSlide"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentSlide"
+          headers: {}
+    put:
+      tags:
+      - "Slides"
+      summary: "Bulk insert the slides for an assessment"
+      description: "This method allows you to insert an assessment's slide responses\
+        \ in bulk. id is a required field. The only acceptable attributes that you\
+        \ can insert are response and time_taken. response should be a true for \"\
+        me\" or false for \"not me\". The time_taken should be the time it took for\
+        \ the user to answer the question in milliseconds."
+      operationId: "bulkUpdate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/UpdateAssessmentSlide"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentSlide"
+  /assessments/{assessment_id}/slides/{slide_id}:
+    post:
+      tags:
+      - "Slides"
+      operationId: "updatePost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "slide_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/UpdateAssessmentSlide"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AssessmentSlide"
+          headers: {}
+    put:
+      tags:
+      - "Slides"
+      summary: "Update a slide for an assessment"
+      description: "Alternatively, you can insert one slide at a time. The only acceptable\
+        \ attributes that you can insert are response and time_taken. response should\
+        \ be a true for \"me\" or false for \"not me\". The time_taken should be the\
+        \ time it took for the user to answer the question in milliseconds."
+      operationId: "update"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "slide_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateAssessmentSlide"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AssessmentSlide"
+  /assessments/{assessment_id}/tags:
+    post:
+      tags:
+      - "Tags"
+      summary: "Add tags to an assessment"
+      description: "Adds new tags to the assessment.  No tags will be removed."
+      operationId: "add"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/AssessmentTags"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Assessment"
+    put:
+      tags:
+      - "Tags"
+      summary: "Update the tags for an assessment"
+      description: "Adds or removes tags from the assessment as necessary to match\
+        \ the tag list provided."
+      operationId: "update"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/AssessmentTags"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Assessment"
+    delete:
+      tags:
+      - "Tags"
+      summary: "Delete tags from an assessment"
+      description: "Removes existing tags from the assessment.  No tags will be added."
+      operationId: "delete"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "assessment_id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/AssessmentTags"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Assessment"
+  /assessments/{id}:
+    get:
+      tags:
+      - "Assessments"
+      summary: "Get assessment by ID"
+      description: "This method allows you to get an assessment and/or slides, blend,\
+        \ types, traits, or career matches by its unique ID."
+      operationId: "get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "data"
+        in: "query"
+        description: "CSV of data to be returned (slides, personality_blend, personality_types,\
+          \ personality_traits, career_matches)"
+        required: false
+        type: "string"
+        default: ""
+      - name: "image_pack"
+        in: "query"
+        description: "Default: linear"
+        required: false
+        type: "string"
+        default: "linear"
+      - name: "number_of_matches"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "experience_levels"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "search"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "score"
+      - name: "paged"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: false
+      - name: "page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 1
+        format: "int32"
+      - name: "careers_per_page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 25
+        format: "int32"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AssessmentResponse"
+  /assessments/{id}/matches/assessments:
+    get:
+      tags:
+      - "Assessments"
+      summary: "Get matching assessments"
+      description: "This method allows you to get assessments IDs that match the given\
+        \ assessment ID."
+      operationId: "matchAssessments"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "number_of_matches"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentMatchScore"
+  /assessments/{id}/status:
+    get:
+      tags:
+      - "Assessments"
+      summary: "Get the slides or results for an assessment depending on its status"
+      description: "This method allows you to get the slides for incomplete assessments\
+        \ and the results for completed assessments."
+      operationId: "status"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+        default: "linear"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AssessmentStatus"
+  /careers:
+    get:
+      tags:
+      - "Careers"
+      summary: "List all careers"
+      description: ""
+      operationId: "find"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 1
+        format: "int32"
+      - name: "careers_per_page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 25
+        format: "int32"
+      - name: "paged"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: true
+      - name: "list_page"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: false
+      - name: "experience_levels"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "active"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: true
+      - name: "modified_after"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Career"
+  /careers/{career_id}:
+    get:
+      tags:
+      - "Careers"
+      summary: "Get a career by ID"
+      description: ""
+      operationId: "get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "career_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Career"
+  /decks:
+    get:
+      tags:
+      - "Decks"
+      summary: "Get a list of decks"
+      description: "This method allows you to get a list of all decks ordered by name. "
+      operationId: "list"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+        default: "flat"
+      - name: "validated"
+        in: "query"
+        required: false
+        type: "boolean"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "data"
+        in: "query"
+        description: "CSV of data to be returned (badges, personality_traits, personality_types,\
+          \ types_with_traits)  Default: badges"
+        required: false
+        type: "string"
+        default: "badges"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Deck"
+  /decks/{deck_id}:
+    get:
+      tags:
+      - "Decks"
+      summary: "Get a deck"
+      description: "This method allows you to get a deck."
+      operationId: "getDeck"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "deck_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+        default: "flat"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "data"
+        in: "query"
+        description: "CSV of data to be returned (badges, personality_traits, personality_types,\
+          \ types_with_traits)  Default: badges"
+        required: false
+        type: "string"
+        default: "badges"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Deck"
+  /decks/{deck_id}/personality_types:
+    get:
+      tags:
+      - "Decks"
+      summary: "Get a list of personality types"
+      description: "This method allows you to get a list of all personality types\
+        \ by deck ordered by name."
+      operationId: "personality_types"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "deck_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "image_pack"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "localeKey"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PersonalityType"
+  /environments/personality_types/{personality_type_id}:
+    get:
+      tags:
+      - "Environments"
+      summary: "Get an environment for a personality type"
+      description: "This method allows you to get an environment for a personality\
+        \ type."
+      operationId: "list"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "personality_type_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Environment"
+  /famous_people/personality_types/{personality_type_id}:
+    get:
+      tags:
+      - "Famous People"
+      summary: "Get famous people for a personality type"
+      description: "This method allows you to get famous people for a personality\
+        \ type."
+      operationId: "list"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "personality_type_id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/FamousPerson"
+  /locales:
+    get:
+      tags:
+      - "Locales"
+      summary: "List all the Locales"
+      description: ""
+      operationId: "listLocales"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/I18nLocale"
+  /locales/{key_or_id}:
+    get:
+      tags:
+      - "Locales"
+      summary: "Get a locale by it's key or ID"
+      description: ""
+      operationId: "findLocale"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "key_or_id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/I18nLocale"
+  /majors:
+    get:
+      tags:
+      - "Majors"
+      summary: "List all majors"
+      description: ""
+      operationId: "find"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 1
+        format: "int32"
+      - name: "majors_per_page"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 25
+        format: "int32"
+      - name: "paged"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: true
+      - name: "list_page"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: true
+      - name: "active"
+        in: "query"
+        required: false
+        type: "boolean"
+        default: true
+      - name: "modified_after"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Major"
+  /majors/{major_id}:
+    get:
+      tags:
+      - "Majors"
+      summary: "Get a major by ID"
+      description: ""
+      operationId: "get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "major_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "locale_key"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Major"
+  /profiles/{profile_id}:
+    get:
+      tags:
+      - "Profiles"
+      summary: "get a profile by id"
+      description: ""
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        required: true
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: "#/definitions/Profile"
+    delete:
+      tags:
+      - "Profiles"
+      summary: "delete a profile by id"
+      description: ""
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        required: true
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: ok
+
+  /profiles:
+    get:
+      tags:
+      - "Profiles"
+      summary: "Get a list of, or search profiles using different attributes"
+      description: "Listing or searching profiles"
+      parameters:
+        - name: "query"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "order_columns"
+          in: "query"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+        - name: "ordering"
+          in: "query"
+          required: false
+          type: "string"
+          enum: [
+            "ASC",
+            "DESC"]
+        - name: "paging_cursor"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "per_page"
+          in: "query"
+          required: false
+          type: "integer"
+          default: 50
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: ok
+          headers: 
+            Link:
+                type: "string"
+                description: "Contains RFC 5988 compliant link header with urls for paging results. Provided urls for first, next, prev, and last.\n Example:\n
+                <https://api.traitify.com/v1/profiles?per_page=30&paging_cursor=V2hhdGV2ZXI>; rel=\"next\",
+                <https://api.traitify.com/v1/profiles?per_page=30&paging_cursor=SGVsbG8>; rel=\"prev\""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Profile"
+  /analytics/decks/{deck_id}/assessments:
+    get:
+      tags:
+      - "Analytics"
+      summary: ""
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+        - name: "deck_id"
+          in: "path"
+          required: true
+          type: "string"
+          description: "The deck_id that you want to analyze assessments of"
+        - name: "stats"
+          in: "query"
+          required: false
+          description: "a list of statistics to return TODO: Describe stats"
+          type: "array"
+          items:
+            type: "string"
+            enum: [
+              "created_count",
+              "started_count",
+              "completed_count"
+            ]
+        - name: "order_by"
+          in: "query"
+          type: "string"
+          enum: [
+              "created_count",
+              "started_count",
+              "completed_count"
+          ]
+          default: "completed_count"
+        - name: "ordering"
+          in: "query"
+          required: false
+          type: "string"
+          enum: [
+            "ASC",
+            "DESC"]
+          default: "DESC"
+      responses:
+        200:
+          description: ok
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentStatsResponse"
+  /analytics/decks/{deck_id}/personality_traits:
+    get:
+      tags:
+      - "Analytics"
+      summary: "Retrieve various aggregate statistics about personality traits"
+      description: "Retrieve trait statistics"
+      parameters:
+        - name: "deck_id"
+          in: "path"
+          required: true
+          type: "string"
+          description: "The deck_id that you want to analyze assessments of"
+        - name: "stats"
+          in: "query"
+          required: false
+          description: "a list of statistics to return TODO: Describe stats"
+          type: "array"
+          items:
+            type: "string"
+            enum: [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "iqr",
+              "outlier",
+              "sum",
+              "quartiles"
+            ]
+        - name: "personality_trait_ids"
+          in: "query"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+          description: "Return only provided traits. Defaults to returning all traits"
+        - name: "profile_ids"
+          in: "query"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+        - name: "order_by"
+          type: "string"
+          in: "query"
+          enum: [
+            "avg",
+            "min",
+            "max",
+            "stdev",
+            "iqr",
+            "outlier",
+            "sum",
+            "quartiles",
+            "top_count"
+          ]
+          default: "avg"
+        - name: "ordering"
+          in: "query"
+          required: false
+          type: "string"
+          enum: [
+            "ASC",
+            "DESC"]
+          default: "DESC"
+        - name: "locale_key"
+          in: "query"
+          required: false
+          type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: ok
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentStatsResponse"
+  /analytics/decks/{deck_id}/personality_types:
+    get:
+      tags:
+      - "Analytics"
+      summary: "Retrieve various statistics about personality types"
+      description: "Retrieve type statistics"
+      parameters:
+        - name: "deck_id"
+          in: "path"
+          required: true
+          type: "string"
+          description: "The deck_id that you want to analyze assessments of"
+        - name: "stats"
+          in: "query"
+          required: false
+          description: "a list of statistics to return"
+          type: "array"
+          items:
+            type: "string"
+            enum: [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "iqr",
+              "outlier",
+              "sum",
+              "quartiles",
+              "top_count"
+            ]
+        - name: "personality_type_ids"
+          in: "query"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+          description: "Return only provided types. Defaults to returning all types"
+        - name: "profile_ids"
+          in: "query"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+        - name: "order_by"
+          type: "string"
+          in: "query"
+          enum: [
+            "avg",
+            "min",
+            "max",
+            "stdev",
+            "iqr",
+            "outlier",
+            "sum",
+            "quartiles",
+            "top_count"
+          ]
+        - name: "ordering"
+          in: "query"
+          required: false
+          type: "string"
+          enum: [
+            "ASC",
+            "DESC"]
+        - name: "image_pack"
+          in: "query"
+          required: false
+          type: "string"
+          default: "flat"
+        - name: "locale_key"
+          in: "query"
+          required: false
+          type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: ok
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/AssessmentStatsResponse"
+  /profiles/{profile_id}/matches/profiles/{to_profile_id}:
+    get:
+      tags:
+      - "Profiles"
+      summary: "Get the match score for a profile to another profile"
+      description: ""
+      operationId: "getProfileToProfileMatchScore"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "to_profile_id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "deck_id"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/ScoredProfile"

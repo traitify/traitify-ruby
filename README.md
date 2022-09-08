@@ -14,14 +14,16 @@ Or install it yourself with:
 
 ## Usage
 
-First, it is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration
+The Traitify Client supports dynamically creating resource routes as seen in the examples below. Alternatively, HTTP methods (get, post, put, delete, path) can be used directly.
+
+It is helpful to configure Traitify, otherwise everytime you create a Traitify object you must add the configuration options.
 
 ### Configuration
 
-All the configuration options can be found in `lib/Traitify/configuration.rb`
+All the configuration options can be found in `lib/traitify/configuration.rb`
 
     Traitify.configure do |traitify|
-      traitify.host = "https://api.traitify.com"
+      traitify.host = "https://api-sandbox.traitify.com"
       traitify.version = "v1"
       traitify.secret_key = "secret"
       traitify.public_key = "public" # Optional
@@ -33,23 +35,23 @@ All the configuration options can be found in `lib/Traitify/configuration.rb`
 #### With config file:
 
     traitify = Traitify.new
-    traitify.create_assessment
+    traitify.assessments.create
 
 #### Without config file:
 
     traitify = Traitify.new(
-      host: "https://api.traitify.com",
+      host: "https://api-sandbox.traitify.com",
       version: "v1",
       secret_key: "secret",
       deck_id: "deck-uuid"
     )
-    traitify.create_assessment
+    traitify.assessments.create
 
 ### Decks
 
 #### Getting all the decks:
 
-    decks = traitify.decks
+    decks = traitify.decks.data
 
 Returns an array of Deck objects:
 
@@ -63,26 +65,27 @@ Returns an array of Deck objects:
 
 #### Creating an assessment:
 
-    assessment = traitify.create_assessment
+    assessment = traitify.assessments.create
 
 You must can specify the deck in your configuration or override it here
 
-    assessment = traitify.create_assessment(deck_id: "deck-uuid")
+    assessment = traitify.assessments.create(deck_id: "deck-uuid")
 
 You can optionally specify image pack or locale
 
-    assessment = traitify.create_assessment(image_pack: "full-color")
+    assessment = traitify.assessments.create(image_pack: "full-color")
 
 Returns an assessment object:
 
-    assessment.id           #=> "assessment-uuid"
-    assessment.deck_id      #=> "deck-uuid"
-    assessment.created_at   #=> Returns time in Epoch format
-    assessment.completed_at #=> nil
+    data = assessment.data
+    data.id           #=> "assessment-uuid"
+    data.deck_id      #=> "deck-uuid"
+    data.created_at   #=> Returns time in Epoch format
+    data.completed_at #=> nil
 
 #### Finding an assessment:
 
-    assessment = traitify.find_assessment("assessment-uuid")
+    assessment = traitify.assessments("assessment-uuid").data
 
 Returns an assessment object as seen above
 
@@ -92,7 +95,7 @@ An assessment can be taken through our javascript plugin or by getting the slide
 
 #### Finding an assessment's slides:
 
-    slides = traitify.find_slides("assessment-uuid")
+    slides = traitify.assessments("assessment-uuid").slides.data
 
 Returns an array of slides
 
@@ -106,20 +109,20 @@ Returns an array of slides
       slide
     end
 
-    traitify.update_slides("assessment-uuid", slides)
+    traitify.assessments("assessment-uuid").slides.update(slides)
 
 #### Updating a single assessment slide:
 
-    slide = assessment.slides.first
+    slide = assessment.slides.data.first
     slide.response = true
     slide.time_taken = 600
-    traitify.update_slide(assessment.id, slide)
+    traitify.assessments(assessment.id).slides(slide.id).update(slide.to_h)
 
 ### Results
 
 #### Getting an assessment's results
 
-    results = traitify.find_results("assessment-uuid")
+    results = traitify.assessments("assessment-uuid").personality_types.data
 
 Returns a results object:
 
@@ -148,7 +151,7 @@ Returns a results object:
 
 #### Getting an assessment's personality traits
 
-    traits = traitify.raw_personality_traits("assessment-uuid")
+    traits = traitify.assessments("assessment-uuid").personality_traits.data
     trait = traits.first
     trait.score #=> 100
     personality_trait = trait.personality_trait
@@ -156,10 +159,31 @@ Returns a results object:
     personality_trait.definition  #=> "Able to think symbolically and play with ideas."
     personality_trait.description #=> "Coming Soon"
 
+#### Getting an assessment's analytics
+
+    traits = traitify.analytics.decks("deck-uuid").personality_traits.data
+    types = traitify.analytics.decks("deck-uuid").personality_types.data
+    assessments = traitify.analytics.decks("deck-uuid").assessments.data
+
+#### Getting a profile
+
+    profile = traitify.profiles("profile-uuid").data
+    profile.first_name        #=> "John"
+    profile.last_name         #=> "Doe"
+    profile.email             #=> "johndoe@example.com"
+
+#### Creating a profile
+
+    profile = traitify.profiles.create({
+        first_name: "John",
+        last_name: "Doe",
+        email: "johndoe@example.com"
+    }).data
+
+    profile.first_name        #=> "John"
+    profile.last_name         #=> "Doe"
+    profile.email             #=> "johndoe@example.com"
+
 #### More results
 
-More API endpoints may be available. You can find more at [developer.traitify.com](http://developer.traitify.com/documentation).
-To make authenticated calls to new endpoints use the syntax below:
-
-    traitify.get("/new/endpoint")
-    traitify.post("/new/endpoint", { ready: true })
+More API endpoints may be available. You can find more at [app.traitify.com/developer](https://app.traitify.com/developer).

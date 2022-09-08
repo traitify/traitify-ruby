@@ -6,8 +6,7 @@
     {
       "id": "major-id",
       "title": "Major Title",
-      "description": "Major Description",
-      "group_id": "Major Group ID"
+      "description": "Major Description"
     }
   ]
 }
