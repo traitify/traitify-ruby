@@ -15,10 +15,14 @@ describe Traitify::Client do
 
   describe ".analytics" do
     context ".aggregate" do
-      let(:data){ client.analytics.decks("big-five").aggregate(stats: [:created_count, :started_count, :completed_count]).data }
+      let(:data){
+        client.analytics.decks("big-five")
+          .aggregate(stats: [:created_count, :started_count, :completed_count]).data
+      }
 
       before(:each) do
-        stub_it(:get, "/analytics/decks/big-five/aggregate?locale_key=en-us&stats=created_count&stats=started_count&stats=completed_count", "aggregate")
+        query = "locale_key=en-us&stats=created_count&stats=started_count&stats=completed_count"
+        stub_it(:get, "/analytics/decks/big-five/aggregate?#{query}", "aggregate")
       end
 
       it "returns assessments" do
