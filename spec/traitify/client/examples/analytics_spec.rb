@@ -14,6 +14,18 @@ describe Traitify::Client do
   let(:client){ Traitify.new }
 
   describe ".analytics" do
+    context ".aggregate" do
+      let(:data){ client.analytics.decks("big-five").aggregate(stats: [:created_count, :started_count, :completed_count]).data }
+
+      before(:each) do
+        stub_it(:get, "/analytics/decks/big-five/aggregate?locale_key=en-us&stats=created_count&stats=started_count&stats=completed_count", "aggregate")
+      end
+
+      it "returns assessments" do
+        expect(data.assessments.started_count).to eq(10)
+      end
+    end
+
     context ".assessments" do
       let(:assessments){ client.analytics.decks("deck-id").assessments.data }
 
