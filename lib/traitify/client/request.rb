@@ -7,13 +7,20 @@ module Traitify
         end
       end
 
+      def data
+        @data ||= request.data
+      end
+
       def request
         @request = Traitify::Response.new(base_request)
       end
       alias_method :fetch, :request
 
-      def data
-        @data ||= request.data
+      def retriable(**options)
+        copy.tap do |client|
+          client.auto_retry = true
+          client.retry_options = options unless options.blank?
+        end
       end
 
       private

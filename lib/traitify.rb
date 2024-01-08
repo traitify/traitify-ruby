@@ -1,3 +1,5 @@
+require "active_support"
+require "active_support/core_ext/object/deep_dup"
 require "traitify/configuration"
 require "traitify/client"
 require "traitify/data"
@@ -5,8 +7,6 @@ require "traitify/error"
 require "traitify/response"
 require "traitify/version"
 require "logger"
-require "active_support"
-require "active_support/core_ext/object/deep_dup"
 
 module Traitify
   extend Configuration

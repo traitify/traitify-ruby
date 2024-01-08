@@ -1,3 +1,24 @@
+### 2.1.0
+
+* Features
+  * Added automatic retries
+
+### 2.0.1
+
+* Bug Fixes
+  * Fixed an issue with nested params
+
+### 2.0.0
+
+* Features
+  * Refactored everything
+  * Added dynamic system to build a request
+  * Added overrides for specific resources
+  * Added dynamic system to interact with a response
+
+* Breaking Changes
+  * Removed custom methods for resources
+
 ### 1.9.0
 
 * Features
@@ -81,6 +102,3 @@
   * Get/Create Assessments
   * Get/Update Slides
   * Get Personality Blend, Types, and Traits
-
-  [@cpreisinger]:https://github.com/cpreisinger
-  [@tomprats]:https://github.com/tomprats
