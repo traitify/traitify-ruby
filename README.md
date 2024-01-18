@@ -47,6 +47,50 @@ All the configuration options can be found in `lib/traitify/configuration.rb`
     )
     traitify.assessments.create
 
+### Auto Retry
+
+Requests that fail can be automatically retried.
+
+#### Retry Configuration
+
+Retrying can be configured in multiple ways.
+
+Through the general config:
+
+    Traitify.configure do |traitify|
+      traitify.auto_retry = true
+      traitify.retry_options = retry_options
+    end
+
+    traitify = Traitify.new
+    assessment = traitify.assessments("assessment-uuid").data
+
+On a specific request:
+
+    traitify = Traitify.new
+    assessment = traitify.retriable(retry_options).assessments("assessment-uuid").data
+
+Or with both:
+
+    Traitify.configure do |traitify|
+      traitify.auto_retry = false
+      traitify.retry_options = retry_options
+    end
+
+    traitify = Traitify.new
+    assessment = traitify.retriable.assessments("assessment-uuid").data
+
+This allows fine tuned control when and what to retry.
+
+#### Retry Options
+
+The options are passed to the [Faraday Retry](https://github.com/lostisland/faraday-retry) middleware. Supported options can be found in their documentation.
+
+    retry_options = {
+      methods: [:get, :post],
+      retry_statuses: [429, 500]
+    }
+
 ### Decks
 
 #### Getting all the decks:

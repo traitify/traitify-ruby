@@ -1,3 +1,4 @@
+require "active_support"
 require "active_support/core_ext/object/conversions"
 require "active_support/core_ext/object/json"
 require "webmock/rspec"

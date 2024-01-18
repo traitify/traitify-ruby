@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Traitify Gem"
   spec.description   = "Traitify is a ruby gem wrapper for the Traitify API"
   spec.authors       = ["Tom Prats", "Eric Fleming", "Carson Wright"]
-  spec.email         = "tom@traitify.com"
+  spec.email         = "tom.prats@paradox.ai"
   spec.homepage      = "https://www.traitify.com"
 
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "activesupport", ">= 5.1", "< 8.x"
   spec.add_runtime_dependency "faraday", "~> 2.5"
   spec.add_runtime_dependency "faraday-net_http", "~> 3.0"
+  spec.add_runtime_dependency "faraday-retry", "~> 2.2"
 
   spec.add_development_dependency "binding_of_caller", "~> 1.0"
   spec.add_development_dependency "bundler", "~> 2.2"

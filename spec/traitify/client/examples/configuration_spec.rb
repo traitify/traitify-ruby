@@ -14,15 +14,15 @@ describe Traitify::Client do
       end
     end
 
+    it "assigns host" do
+      expect(traitify.host).to eq("https://example.com")
+    end
+
     it "assigns secret" do
       expect(traitify.secret_key).to eq("secret")
     end
 
-    it "assigns api_host" do
-      expect(traitify.host).to eq("https://example.com")
-    end
-
-    it "assigns api_version" do
+    it "assigns version" do
       expect(traitify.version).to eq("v1")
     end
   end

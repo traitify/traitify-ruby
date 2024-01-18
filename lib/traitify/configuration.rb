@@ -5,9 +5,11 @@ module Traitify
       :public_key,
       :secret_key,
       :version,
+      :auto_retry,
       :deck_id,
       :image_pack,
-      :locale_key
+      :locale_key,
+      :retry_options
     ].freeze
 
     attr_accessor(*VALID_OPTIONS_KEYS)
