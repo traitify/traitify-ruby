@@ -1,11 +1,20 @@
 require "active_support"
 require "active_support/core_ext/object/conversions"
 require "active_support/core_ext/object/json"
+require "active_support/core_ext/numeric/time"
 require "webmock/rspec"
 require "pry"
 require "simplecov"
 
 SimpleCov.start :test_frameworks
+
+module Rails
+  class << self
+    def logger
+      @logger ||= Logger.new($stdout)
+    end
+  end
+end
 
 require "Traitify"
 
