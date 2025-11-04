@@ -5,7 +5,6 @@ require "jwt"
 require "openssl"
 require "traitify/configuration"
 require "traitify/client"
-require "traitify/concerns/token_authenticatable"
 require "traitify/data"
 require "traitify/error"
 require "traitify/response"
@@ -44,7 +43,9 @@ module Traitify
 
     def valid_jwt_token?(token)
       algorithm = "RS256"
-      public_keys = jwt_public_keys.each { |key| OpenSSL::PKey::RSA.new(key) }
+      return false unless jwt_public_keys && jwt_public_keys.any?
+
+      public_keys = jwt_public_keys.map { |key| OpenSSL::PKey::RSA.new(key) }
 
       public_keys.each do |public_key|
         decoded_token = JWT.decode(token, public_key, true, {
