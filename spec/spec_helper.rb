@@ -8,14 +8,6 @@ require "simplecov"
 
 SimpleCov.start :test_frameworks
 
-module Rails
-  class << self
-    def logger
-      @logger ||= Logger.new($stdout)
-    end
-  end
-end
-
 require "Traitify"
 
 Dir[File.expand_path("spec/support/**/*.rb", __FILE__)].each{ |f| require f }

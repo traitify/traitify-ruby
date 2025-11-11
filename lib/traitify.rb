@@ -36,6 +36,10 @@ module Traitify
       case level
       when :debug
         logger.debug message
+      when :warn
+        logger.warn message
+      when :error
+        logger.error message
       else
         logger.info message
       end
@@ -61,10 +65,10 @@ module Traitify
         validate_claims(payload)
         return true
       rescue JWT::ExpiredSignature, JWT::DecodeError, JWT::VerificationError => e
-        Traitify.logger.warn("[JWT] #{e.class.name}: #{e.message}")
+        log(:warn, "[JWT] #{e.class.name}: #{e.message}")
         next
       rescue => e
-        Traitify.logger.error("[JWT] Unexpected error: #{e.class} - #{e.message}")
+        log(:error, "[JWT] Unexpected error: #{e.class} - #{e.message}")
         next
       end
 
