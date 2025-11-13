@@ -1,15 +1,16 @@
 module Traitify
   module Configuration
     VALID_OPTIONS_KEYS = [
-      :host,
-      :public_key,
-      :secret_key,
-      :version,
       :auto_retry,
       :deck_id,
+      :host,
       :image_pack,
+      :jwt_public_keys,
       :locale_key,
-      :retry_options
+      :public_key,
+      :retry_options,
+      :secret_key,
+      :version
     ].freeze
 
     attr_accessor(*VALID_OPTIONS_KEYS)

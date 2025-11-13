@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "faraday", "~> 2.5"
   spec.add_runtime_dependency "faraday-net_http", "~> 3.0"
   spec.add_runtime_dependency "faraday-retry", "~> 2.2"
+  spec.add_runtime_dependency "jwt", "~> 2.0"
 
   spec.add_development_dependency "binding_of_caller", "~> 1.0"
   spec.add_development_dependency "bundler", "~> 2.2"
