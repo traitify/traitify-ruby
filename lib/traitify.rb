@@ -49,7 +49,7 @@ module Traitify
       algorithm = "ES256"
       return false unless jwt_public_keys && jwt_public_keys.any?
 
-      public_keys = jwt_public_keys.map { |key| OpenSSL::PKey::RSA.new(key) }
+      public_keys = jwt_public_keys.map { |key| OpenSSL::PKey::EC.new(key) }
 
       public_keys.each do |public_key|
         decoded_token = JWT.decode(token, public_key, true, {
