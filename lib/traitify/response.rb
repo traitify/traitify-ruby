@@ -1,3 +1,5 @@
+require "cgi"
+
 module Traitify
   class Response
     attr_reader :request

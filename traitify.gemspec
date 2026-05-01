@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "activesupport", ">= 5.1", "< 8.x"
+  spec.add_runtime_dependency "activesupport", ">= 5.1", "< 9"
   spec.add_runtime_dependency "faraday", "~> 2.5"
   spec.add_runtime_dependency "faraday-net_http", "~> 3.0"
   spec.add_runtime_dependency "faraday-retry", "~> 2.2"

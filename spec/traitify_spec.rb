@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe Traitify do
   describe ".valid_jwt_token?" do
-    let(:private_key){ OpenSSL::PKey::RSA.new(2048) }
-    let(:public_key){ private_key.public_key }
+    let(:private_key){ OpenSSL::PKey::EC.generate("prime256v1") }
+    let(:public_key_pem){ private_key.public_to_pem }
     let(:valid_payload) do
       {
         iss: "Traitify by Paradox",
@@ -14,7 +14,7 @@ describe Traitify do
     end
 
     before do
-      Traitify.jwt_public_keys = [public_key.to_pem]
+      Traitify.jwt_public_keys = [public_key_pem]
     end
 
     after do
@@ -23,7 +23,7 @@ describe Traitify do
 
     context "with valid token" do
       let(:valid_token) do
-        JWT.encode(valid_payload, private_key, "RS256")
+        JWT.encode(valid_payload, private_key, "ES256")
       end
 
       it "returns true" do
@@ -33,8 +33,8 @@ describe Traitify do
 
     context "with invalid signature" do
       let(:invalid_token) do
-        other_private_key = OpenSSL::PKey::RSA.new(2048)
-        JWT.encode(valid_payload, other_private_key, "RS256")
+        other_private_key = OpenSSL::PKey::EC.generate("prime256v1")
+        JWT.encode(valid_payload, other_private_key, "ES256")
       end
 
       it "returns false" do
@@ -55,7 +55,7 @@ describe Traitify do
         valid_payload.merge(iat: 1.hour.ago.to_i, exp: 1.hour.ago.to_i)
       end
       let(:expired_token) do
-        JWT.encode(expired_payload, private_key, "RS256")
+        JWT.encode(expired_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -68,7 +68,7 @@ describe Traitify do
         valid_payload.merge(iss: "Wrong Issuer")
       end
       let(:wrong_issuer_token) do
-        JWT.encode(wrong_issuer_payload, private_key, "RS256")
+        JWT.encode(wrong_issuer_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -77,16 +77,16 @@ describe Traitify do
     end
 
     context "with multiple public keys" do
-      let(:legacy_private_key){ OpenSSL::PKey::RSA.new(2048) }
-      let(:legacy_public_key){ legacy_private_key.public_key }
+      let(:legacy_private_key){ OpenSSL::PKey::EC.generate("prime256v1") }
+      let(:legacy_public_key_pem){ legacy_private_key.public_to_pem }
 
       before do
-        Traitify.jwt_public_keys = [public_key.to_pem, legacy_public_key.to_pem]
+        Traitify.jwt_public_keys = [public_key_pem, legacy_public_key_pem]
       end
 
       context "when token is signed with current key" do
         let(:current_token) do
-          JWT.encode(valid_payload, private_key, "RS256")
+          JWT.encode(valid_payload, private_key, "ES256")
         end
 
         it "returns true" do
@@ -96,7 +96,7 @@ describe Traitify do
 
       context "when token is signed with legacy key" do
         let(:legacy_token) do
-          JWT.encode(valid_payload, legacy_private_key, "RS256")
+          JWT.encode(valid_payload, legacy_private_key, "ES256")
         end
 
         it "returns true" do
@@ -115,7 +115,7 @@ describe Traitify do
         }
       end
       let(:future_iat_token) do
-        JWT.encode(future_iat_payload, private_key, "RS256")
+        JWT.encode(future_iat_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -133,7 +133,7 @@ describe Traitify do
         }
       end
       let(:future_nbf_token) do
-        JWT.encode(future_nbf_payload, private_key, "RS256")
+        JWT.encode(future_nbf_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -150,7 +150,7 @@ describe Traitify do
         }
       end
       let(:missing_jti_token) do
-        JWT.encode(missing_jti_payload, private_key, "RS256")
+        JWT.encode(missing_jti_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -168,7 +168,7 @@ describe Traitify do
         }
       end
       let(:blank_jti_token) do
-        JWT.encode(blank_jti_payload, private_key, "RS256")
+        JWT.encode(blank_jti_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -186,7 +186,7 @@ describe Traitify do
         }
       end
       let(:nil_jti_token) do
-        JWT.encode(nil_jti_payload, private_key, "RS256")
+        JWT.encode(nil_jti_payload, private_key, "ES256")
       end
 
       it "returns false" do
@@ -203,7 +203,7 @@ describe Traitify do
         }
       end
       let(:missing_iat_token) do
-        JWT.encode(missing_iat_payload, private_key, "RS256")
+        JWT.encode(missing_iat_payload, private_key, "ES256")
       end
 
       it "returns true" do
@@ -220,7 +220,7 @@ describe Traitify do
         }
       end
       let(:missing_nbf_token) do
-        JWT.encode(missing_nbf_payload, private_key, "RS256")
+        JWT.encode(missing_nbf_payload, private_key, "ES256")
       end
 
       it "returns true" do
